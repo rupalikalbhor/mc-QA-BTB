@@ -8,5 +8,6 @@ gem 'yajl-ruby', '1.1.0'
 gem 'mysql','2.8.1'
 gem 'net-ssh-gateway', '1.1.0'
 gem 'mysql2', '0.3.11'
+gem 'selenium-webdriver'
 
 $: << File.dirname(__FILE__)
