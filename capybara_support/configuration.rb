@@ -4,7 +4,7 @@ require 'selenium/webdriver'
 module CapybaraSupport
   class Configuration
     @default_env = :stage
-    @default_browser = :firefox
+    @default_browser = :chrome
 
     def self.reset_capybara
       Capybara.reset!
