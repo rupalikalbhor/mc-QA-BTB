@@ -3,8 +3,11 @@
 require 'rspec'
 require 'capybara/dsl'
 require 'capybara_support/configuration'
+require 'screenshot_support/screenshot_helper'
+
 
 RSpec.configure do |config|
+
   config.before(:each) do
       CapybaraSupport::Configuration.reset_capybara
       puts "capybara reset"
@@ -12,5 +15,7 @@ RSpec.configure do |config|
   config.include Capybara::DSL
 
   CapybaraSupport::Configuration.configure_environment
-end
+  ScreenshotSupport::ScreenshotHelper.install_formatter(config)
+
+  end
 

@@ -9,5 +9,8 @@ gem 'yajl-ruby', '1.1.0'
 #gem 'net-ssh-gateway', '1.1.0'
 #gem 'mysql2', '0.3.11'
 gem 'selenium-webdriver'
+gem 'capybara-screenshot'
+
 
 $: << File.dirname(__FILE__)
+

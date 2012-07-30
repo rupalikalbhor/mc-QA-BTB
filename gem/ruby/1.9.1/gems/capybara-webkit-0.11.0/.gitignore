@@ -1,0 +1,17 @@
+*.swp
+bin/webkit_server
+*.swo
+*~
+*.o
+*.moc
+Makefile*
+qrc_*
+*.xcodeproj
+*.app
+moc_*.cpp
+.bundle
+pkg
+src/webkit_server
+.DS_Store
+tmp
+.rvmrc
