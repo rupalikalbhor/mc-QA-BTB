@@ -5,6 +5,7 @@ module CapybaraSupport
   class Configuration
     @default_env = :stage
     @default_browser = :chrome
+    $environment                   #Declaring global variable
 
     def self.reset_capybara
       Capybara.reset!
@@ -17,7 +18,7 @@ module CapybaraSupport
     end
 
     def self.configure_environment
-      @environment = ENV.fetch('ENV_NAME', @default_env).to_sym
+      $environment = ENV.fetch('ENV_NAME', @default_env).to_sym
       @browser_name = ENV.fetch('BROWSER_NAME', @default_browser).to_sym
 
       Capybara.app_host = self.get_environment_url
@@ -25,13 +26,13 @@ module CapybaraSupport
 
       Capybara.default_driver = :selenium
       puts "Set the Capybara default driver to #{Capybara.default_driver}"
-      puts "Tests are running on environment: #{@environment}"
+      puts "Tests are running on environment: #{$environment}"
 
       self.get_browser
     end
 
     def self.get_environment_url
-      case @environment
+      case $environment
         when :demo
           'http://social-ecomm.demo.modcloth.com'
         when :stage
@@ -62,7 +63,6 @@ module CapybaraSupport
           Capybara.register_driver :selenium do |app|
             Capybara::Selenium::Driver.new(app, :browser => :chrome, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate])
           end
-
         else
           puts 'Invalid browser name..Running on default browser FIREFOX !!!!'
       end
