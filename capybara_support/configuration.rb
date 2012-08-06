@@ -3,8 +3,8 @@ require 'selenium/webdriver'
 
 module CapybaraSupport
   class Configuration
-    @default_env = :stage
-    @default_browser = :chrome
+    @default_env = :demo
+    @default_browser = :firefox
     $environment                   #Declaring global variable
 
     def self.reset_capybara
@@ -34,9 +34,9 @@ module CapybaraSupport
     def self.get_environment_url
       case $environment
         when :demo
-          'http://social-ecomm.demo.modcloth.com'
+          'http://BTB.demo.modcloth.com/samples'
         when :stage
-          'http://www.stage.modcloth.com'
+          'http://BTB.stage.modcloth.com/samples'
         when :preview
           'http://preview.prod.modcloth.com'
         when :production
