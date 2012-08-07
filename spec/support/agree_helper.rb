@@ -1,0 +1,3 @@
+def verify_agree_comment
+
+end

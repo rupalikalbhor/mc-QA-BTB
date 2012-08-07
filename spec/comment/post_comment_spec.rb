@@ -1,4 +1,4 @@
-require 'support/post_comment'
+require 'support/post_comment_helper'
 require 'support/common_helper'
 
 describe 'Posting comment on a sample for a logged-in user' do
@@ -17,16 +17,17 @@ describe 'Posting comment on a sample for a logged-in user' do
     end
 
     it '3. Verify when user clicks inside the text-box, the "Comment" button is visible and still disabled' do
+      verify_comment_button_visible
     end
 
     it '4. Verify when user clicks inside the text-box, the tooltip becomes visible with valid text' do
     end
 
     it '5. Verify after user types at least one character, the comment button gets enabled' do
+      verify_comment_button_enabled
     end
 
   context "No voting"
-
     it '1. Verify user is able to submit a valid comment' do
 
     end
