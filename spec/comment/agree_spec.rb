@@ -1,4 +1,5 @@
 require 'support/agree_helper'
+require 'support/common_helper'
 
 describe 'Posting comment on a sample for a logged-in user' do
   before(:each) do
@@ -7,6 +8,8 @@ describe 'Posting comment on a sample for a logged-in user' do
   end
 
   it '1. Verify user can agree to a comment by other users', :type => :request do
-   verify_agree_comment
+    verify_agree
   end
 end
+
+

@@ -21,6 +21,7 @@ describe 'Posting comment on a sample for a logged-in user' do
     end
 
     it '4. Verify when user clicks inside the text-box, the tooltip becomes visible with valid text' do
+      verify_tooltip
     end
 
     it '5. Verify after user types at least one character, the comment button gets enabled' do
