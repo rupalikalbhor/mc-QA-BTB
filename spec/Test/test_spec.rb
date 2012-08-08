@@ -10,7 +10,8 @@ describe 'Testing' do
     #puts 'Site exit !!!!!!!'
     #page.should have_content ("Sign out")
 
-    connection
+    url = connection
+    puts url
 
     #visit '/'
     #sign_in('stage_sign_in')
