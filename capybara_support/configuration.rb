@@ -53,7 +53,6 @@ module CapybaraSupport
           puts "Running tests using Firefox browser"
           profile = Selenium::WebDriver::Firefox::Profile.new
           profile.assume_untrusted_certificate_issuer = false
-          puts "Registering selenium driver with profile=#{profile.inspect}"
           Capybara.register_driver :selenium do |app|
             Capybara::Selenium::Driver.new(app, :profile => profile)
           end
