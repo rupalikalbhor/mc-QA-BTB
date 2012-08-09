@@ -1,6 +1,7 @@
 require 'spec/spec_helper'
 require 'database_support/database_helper'
 require 'support/common_helper'
+require 'support/query_helper'
 
 describe 'Testing' do
   it 'Visit to homepage.', :type => :request do
@@ -10,8 +11,9 @@ describe 'Testing' do
     #puts 'Site exit !!!!!!!'
     #page.should have_content ("Sign out")
 
-    url = connection
-    puts url
+    puts get_comment_id(123)
+    #url = connection(:SDP)
+    #puts url
 
     #visit '/'
     #sign_in('stage_sign_in')

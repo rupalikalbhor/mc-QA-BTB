@@ -1,12 +1,17 @@
 require "spec_helper"
 require 'support/data_helper'
+require 'support/query_helper'
 
 def go_to_BTB_page
   visit '/'
 end
 
-def go_to_SDP_page
-  visit 'http://btb.demo.modcloth.com/samples/56608-sample-2048'
+def go_to_SDP_page_non_login_user
+  visit get_SDP_page_non_login_user
+end
+
+def go_to_SDP_page_for_login_user
+  visit get_SDP_page_login_user
 end
 
 def wait_for_script
