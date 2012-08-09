@@ -6,12 +6,11 @@ def connection()
   @port_number = 5432
   @conn = PGconn.connect(@ip_address, @port_number, '', '', @database_name, @user_name, @password)
 
-  puts "ip address is #{@ip_address}"
-
   sql = query_result(@database_name, :SDP)
   if sql.nil?
     return ""
   end
+
   query_resultset = @conn.exec(sql)
   output = result_set(:SDP, query_resultset)
   @conn.close()
