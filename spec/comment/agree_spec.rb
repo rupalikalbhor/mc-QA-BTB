@@ -3,7 +3,7 @@ require 'support/common_helper'
 require 'support/query_helper'
 
 describe 'Posting comment on a sample for a logged-in user' do
-  before(:each) do
+  before(:all) do
     go_to_BTB_page
     sign_in
     wait_for_script
@@ -28,7 +28,7 @@ describe 'Posting comment on a sample for a logged-in user' do
     end
 
     it 'Verify after user undoes agree, the number of agrees decrement.' do
-      find(:xpath, "//div[@data-comment-id=#{$comment_id}]/div/span/span").text.should eq('0')
+      page.should_not have_xpath("//div[@data-comment-id=#{$comment_id}]/div/span/span")
     end
   end
 

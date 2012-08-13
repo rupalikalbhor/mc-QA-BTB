@@ -6,7 +6,7 @@ require 'screenshot_support/screenshot_helper'
 
 RSpec.configure do |config|
 
-  config.before(:each) do
+  config.before(:all) do
     CapybaraSupport::Configuration.reset_capybara
     puts "capybara reset"
   end
