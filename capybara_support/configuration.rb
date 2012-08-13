@@ -1,5 +1,6 @@
 require 'capybara'
 require 'selenium/webdriver'
+require 'support/data_helper'
 
 module CapybaraSupport
   class Configuration
@@ -22,12 +23,15 @@ module CapybaraSupport
       @browser_name = ENV.fetch('BROWSER_NAME', @default_browser).to_sym
 
       Capybara.app_host = self.get_environment_url
+
       Capybara.default_driver = ENV.fetch('DEFAULT_DRIVER', 'selenium').to_sym
 
       Capybara.default_driver = :selenium
       puts "Set the Capybara default driver to #{Capybara.default_driver}"
       puts "Tests are running on environment: #{$environment}"
 
+      self.set_user #Set user email for the environment
+      self.user_info
       self.get_browser
     end
 
@@ -44,6 +48,28 @@ module CapybaraSupport
         else
           puts 'Invalid environment name..Running on default environment STAGE !!!!'
       end
+    end
+    def self.set_user
+      case $environment
+        when :demo
+          $user = 'demo_sign_in'
+        when :stage
+          $user = 'stage_sign_in'
+        when :preview
+          $user = 'preview_sign_in'
+        when :production
+          $user = 'prod_sign_in'
+        else
+          puts 'Invalid environment name..Running on default environment STAGE !!!!'
+      end
+    end
+
+    def self.user_info
+      user_data = get_user_data[$user]
+      $email = user_data['email']
+      $password = user_data['password']
+      $first_name = user_data['first-name']
+      $last_name = user_data['last_name']
     end
 
     def self.get_browser

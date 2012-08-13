@@ -1,5 +1,23 @@
 {
+    "demo_sign_in":{
+        "email":"qa@modcloth.com",
+        "password":"testing",
+        "first-name":"firstname1234567890",
+        "last-name":"lastname"
+    },
     "stage_sign_in":{
+        "email":"qa@modcloth.com",
+        "password":"testing",
+        "first-name":"firstname1234567890",
+        "last-name":"lastname"
+    },
+    "preview_sign_in":{
+        "email":"qa@modcloth.com",
+        "password":"testing",
+        "first-name":"firstname1234567890",
+        "last-name":"lastname"
+    },
+    "prod_sign_in":{
         "email":"qa@modcloth.com",
         "password":"testing",
         "first-name":"firstname1234567890",

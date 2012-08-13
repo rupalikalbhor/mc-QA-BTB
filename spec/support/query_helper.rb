@@ -1,18 +1,19 @@
 require 'database_support/database_helper'
 
 #Get Sample detail page method
-def get_SDP_page_non_login_user
-  connection(:SDP, '')
+def go_to_SDP
+  url = connection({:query_name => :SDP})
+  visit url
 end
 
 def get_SDP_page_login_user
-  connection(:SDP_loginuser, '')
-end
-
-def get_comment_id(sample_id)
-  connection(:comment_with_no_agree, sample_id)
+  connection({:query_name =>:SDP_loginuser})
 end
 
 def get_comment_id_for_login_user()
-  connection(:commentid_for_login_user, sample_id)
+  connection({:query_name =>:commentid_for_login_user})
+end
+
+def get_SDP_page_agree
+  connection({:query_name => :comment_with_agree})
 end

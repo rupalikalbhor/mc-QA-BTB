@@ -11,7 +11,7 @@ describe 'Testing' do
     #puts 'Site exit !!!!!!!'
     #page.should have_content ("Sign out")
 
-    puts get_comment_id(123)
+    puts get_comment_id('123')
     #url = connection(:SDP)
     #puts url
 

@@ -1,8 +1,0 @@
-{
-  "constant":{
-    "host_name":"",
-    "host_port":"3306",
-    "username": "qa",
-    "password": "1234TdxEw"
-  }
-}
