@@ -1,4 +1,3 @@
-require 'support/agree_helper'
 require 'support/common_helper'
 require 'support/query_helper'
 
@@ -14,6 +13,8 @@ describe 'Posting comment on a sample for a logged-in user' do
       go_to_SDP
       find(:xpath, "//div[@data-comment-id=#{$comment_id}]/div/span/a").click
       page.driver.browser.navigate.refresh
+      puts "**********"
+      page.should have_xpath("//div[@data-comment-id=#{$comment_id}]/div/span/span/a[@text = 'Agree']")
       find(:xpath, "//div[@data-comment-id=#{$comment_id}]/div/span/a").text.should eq('You Agree')
     end
 
