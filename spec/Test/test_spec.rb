@@ -6,16 +6,11 @@ require 'support/query_helper'
 describe 'Testing' do
   it 'Visit to homepage.', :type => :request do
 
-    #puts 'Enter into test Yay!!!'
-    #visit 'http://www.modcloth.com'
-    #puts 'Site exit !!!!!!!'
-    #page.should have_content ("Sign out")
+    go_to_BTB_page
+    visit 'http://btb.demo.modcloth.com/in-progress'
 
-    puts get_comment_id('123')
-    #url = connection(:SDP)
-    #puts url
-
-    #visit '/'
-    #sign_in('stage_sign_in')
+    #within ('#data-product-id = 55605')do
+    page.should have_link('Pick')
+    #end
   end
 end

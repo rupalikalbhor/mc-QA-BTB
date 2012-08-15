@@ -24,19 +24,19 @@ def sign_in()
   end
   visit '/'
   wait_for_script
-  should_be_signed_in_as_user($user)
+  should_be_signed_in_as_user()
 end
 
-def should_be_signed_in_as_user(user)
+def should_be_signed_in_as_user()
   name = $first_name
-  #name = user_data['first-name'].to_s
   short_name = get_short_name(name)
   should_be_signed_in_with_name(short_name)
 end
 
 def get_short_name(name)
   if (name == '')
-    email = user_data['email'].to_s
+    email = $email
+    #email = user_data['email'].to_s
     name = email.match(/([\S]+)@/)[1]
   elsif (name.length > 15)
     name = "#{name[0..14]}..."

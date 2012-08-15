@@ -3,10 +3,98 @@
   <component name="ChangeListManager">
     <list default="true" id="6682fde1-b658-49b7-ba04-4a173cb53270" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/spec/support/agree_helper.rb" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mc-QA-BTB.iml" afterPath="$PROJECT_DIR$/.idea/mc-QA-BTB.iml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spec/support/post_comment_helper.rb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-11-33-41.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-11-36-31.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-11-38-37.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-12-03-21.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-12-03-56.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-12-03-57.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-12-05-06.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-12-49-47.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-13-55-37.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-07-04.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-09-00.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-11-04.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-27-38.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-29-00.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-29-28.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-30-26.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-31-32.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-32-25.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-33-43.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-34-34.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-38-04.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-40-41.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-40-52.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-41-31.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-41-51.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-45-19.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-45-34.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-45-45.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-46-30.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-46-40.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-48-02.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-48-13.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-49-05.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-49-16.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-50-08.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-50-18.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-51-21.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-51-32.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-52-45.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-52-55.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-55-25.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-55-36.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-57-26.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-57-37.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-57-55.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-58-05.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-59-02.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-59-12.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-14-59-52.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-00-06.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-00-40.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-01-50.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-13-05.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-14-25.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-22-34.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-22-44.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-22-54.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-38-48.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-38-52.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-39-39.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-42-15.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-46-25.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-47-43.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-53-05.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-56-45.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-15-59-13.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-00-40.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-02-56.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-04-16.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-04-59.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-05-16.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-06-39.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-09-19.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-10-42.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-12-56.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-17-50.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-19-08.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-20-41.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-22-44.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-26-17.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-37-39.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-39-01.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-13-16-39-58.png" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/spec/comment/chromedriver.log" afterPath="$PROJECT_DIR$/spec/comment/pagination_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database_support/database_helper.rb" afterPath="$PROJECT_DIR$/database_support/database_helper.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/Test/test_spec.rb" afterPath="$PROJECT_DIR$/spec/Test/test_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/comment/agree_spec.rb" afterPath="$PROJECT_DIR$/spec/comment/agree_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/comment/post_comment_spec.rb" afterPath="$PROJECT_DIR$/spec/comment/post_comment_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/support/post_comment_helper.rb" afterPath="$PROJECT_DIR$/spec/support/post_comment_helper.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/support/common_helper.rb" afterPath="$PROJECT_DIR$/spec/support/common_helper.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/support/query_helper.rb" afterPath="$PROJECT_DIR$/spec/support/query_helper.rb" />
     </list>
     <ignored path="mc-QA-BTB.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,7 +119,25 @@
       <file leaf-file-name="post_comment_spec.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spec/comment/post_comment_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="30" selection-start="3836" selection-end="3836" vertical-scroll-proportion="0.42028984">
+            <state line="23" column="50" selection-start="624" selection-end="624" vertical-scroll-proportion="0.69433963">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pagination_spec.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/comment/pagination_spec.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="43" selection-start="325" selection-end="325" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_spec.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/Test/test_spec.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="18" selection-start="373" selection-end="373" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -40,7 +146,7 @@
       <file leaf-file-name="configuration.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/capybara_support/configuration.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="95" selection-start="1960" selection-end="1960" vertical-scroll-proportion="0.0">
+            <state line="24" column="26" selection-start="1028" selection-end="1028" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -49,7 +155,7 @@
       <file leaf-file-name="agree_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/comment/agree_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="17" selection-start="366" selection-end="366" vertical-scroll-proportion="0.0">
+            <state line="12" column="0" selection-start="349" selection-end="364" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -58,7 +164,16 @@
       <file leaf-file-name="database_helper.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database_support/database_helper.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="39" selection-start="2095" selection-end="2095" vertical-scroll-proportion="0.0">
+            <state line="47" column="23" selection-start="1066" selection-end="1066" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="query_helper.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/support/query_helper.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="4" selection-start="79" selection-end="79" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -77,21 +192,21 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/spec/spec_helper.rb" />
         <option value="$PROJECT_DIR$/screenshot_support/screenshot_formatter.rb" />
         <option value="$PROJECT_DIR$/spec/support/database_helper.rb" />
         <option value="$PROJECT_DIR$/spec/support/data/database_constant.json" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/spec/comment/no_comment_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/Test/test_spec.rb" />
         <option value="$PROJECT_DIR$/spec/support/data/users.json" />
         <option value="$PROJECT_DIR$/capybara_support/configuration.rb" />
-        <option value="$PROJECT_DIR$/spec/support/common_helper.rb" />
         <option value="$PROJECT_DIR$/spec/support/agree_helper.rb" />
-        <option value="$PROJECT_DIR$/spec/support/query_helper.rb" />
-        <option value="$PROJECT_DIR$/database_support/database_helper.rb" />
         <option value="$PROJECT_DIR$/spec/support/post_comment_helper.rb" />
+        <option value="$PROJECT_DIR$/spec/Test/test_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/support/common_helper.rb" />
+        <option value="$PROJECT_DIR$/spec/comment/pagination_spec.rb" />
+        <option value="$PROJECT_DIR$/database_support/database_helper.rb" />
         <option value="$PROJECT_DIR$/spec/comment/agree_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/support/query_helper.rb" />
         <option value="$PROJECT_DIR$/spec/comment/post_comment_spec.rb" />
       </list>
     </option>
@@ -158,6 +273,10 @@
               <option name="myItemId" value="tmp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="screenshots" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -170,6 +289,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mc-QA-BTB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mc-QA-BTB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -188,6 +325,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="support" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mc-QA-BTB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mc-QA-BTB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="support" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -263,7 +422,7 @@
       <recent name="$PROJECT_DIR$/tmp" />
     </key>
   </component>
-  <component name="RunManager" selected="RSpec.agree_spec">
+  <component name="RunManager" selected="RSpec.pagination_spec">
     <configuration default="false" name="test_spec" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda/Minitest" temporary="true">
       <predefined_log_file id="RUBY_TESTUNIT" enabled="true" />
       <module name="mc-QA-BTB" />
@@ -343,6 +502,38 @@
       </EXTENSION>
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/comment/agree_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="pagination_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
+      <module name="mc-QA-BTB" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$/spec/comment" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="JRUBY_OPTS" value="-X+O" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/comment/pagination_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
@@ -441,10 +632,11 @@
         <option name="RakeTask" enabled="false" />
       </method>
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Test::Unit/Shoulda/Minitest.test_spec" />
       <item index="1" class="java.lang.String" itemvalue="RSpec.All specs in: Test" />
       <item index="2" class="java.lang.String" itemvalue="RSpec.agree_spec" />
+      <item index="3" class="java.lang.String" itemvalue="RSpec.pagination_spec" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -457,7 +649,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1280" height="687" extended-state="6" />
+    <frame x="0" y="22" width="1280" height="687" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -543,62 +735,70 @@
         <state line="17" column="0" selection-start="501" selection-end="501" vertical-scroll-proportion="0.6505102" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/Test/test_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="20" selection-start="371" selection-end="371" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/support/data/users.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="19" selection-start="97" selection-end="107" vertical-scroll-proportion="0.1724138" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/support/data_helper.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="4" selection-start="242" selection-end="242" vertical-scroll-proportion="0.5540541" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/support/query_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="4" selection-start="79" selection-end="79" vertical-scroll-proportion="0.15306123" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/support/common_helper.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="37" selection-start="1092" selection-end="1092" vertical-scroll-proportion="2.6020408" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/capybara_support/configuration.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="95" selection-start="1960" selection-end="1960" vertical-scroll-proportion="0.0">
+        <state line="12" column="25" selection-start="207" selection-end="207" vertical-scroll-proportion="0.35359117">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/support/post_comment_helper.rb">
+    <entry file="file://$PROJECT_DIR$/spec/support/data/users.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="0" selection-start="1278" selection-end="1278" vertical-scroll-proportion="0.7734513">
+        <state line="13" column="54" selection-start="362" selection-end="362" vertical-scroll-proportion="0.3830571">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/capybara_support/configuration.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="26" selection-start="1028" selection-end="1028" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/Test/test_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="18" selection-start="373" selection-end="373" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/comment/pagination_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="43" selection-start="325" selection-end="325" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/database_support/database_helper.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="39" selection-start="2095" selection-end="2095" vertical-scroll-proportion="0.0">
+        <state line="47" column="23" selection-start="1066" selection-end="1066" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/comment/agree_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="17" selection-start="366" selection-end="366" vertical-scroll-proportion="0.0">
+        <state line="12" column="0" selection-start="349" selection-end="364" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/support/query_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="4" selection-start="79" selection-end="79" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/comment/post_comment_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="30" selection-start="3836" selection-end="3836" vertical-scroll-proportion="0.42028984">
+        <state line="23" column="50" selection-start="624" selection-end="624" vertical-scroll-proportion="0.69433963">
           <folding />
         </state>
       </provider>

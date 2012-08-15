@@ -1,7 +1,7 @@
 require 'support/common_helper'
 require 'support/query_helper'
 
-describe 'Posting comment on a sample for a logged-in user' do
+describe 'Perform Agree operations  for a logged-in user' do
   before(:all) do
     go_to_BTB_page
     sign_in
@@ -13,8 +13,6 @@ describe 'Posting comment on a sample for a logged-in user' do
       go_to_SDP
       find(:xpath, "//div[@data-comment-id=#{$comment_id}]/div/span/a").click
       page.driver.browser.navigate.refresh
-      puts "**********"
-      page.should have_xpath("//div[@data-comment-id=#{$comment_id}]/div/span/span/a[@text = 'Agree']")
       find(:xpath, "//div[@data-comment-id=#{$comment_id}]/div/span/a").text.should eq('You Agree')
     end
 
@@ -33,13 +31,7 @@ describe 'Posting comment on a sample for a logged-in user' do
     end
   end
 
-
-  #it '4. Verify user does not see "Agree" link on his own comment/reply.' do
-  #go_to_SDP_page_for_login_user
-  #verify_no_agree_link
-  #end
-
-  #it ' 5. Verify user can see number of agrees on his comment/reply.' do
+  #it ' 5. Verify user can see number of agrees on others comment/reply.' do
   # go_to_SDP_page_agree
   # verify_agree_count_others
   #end
