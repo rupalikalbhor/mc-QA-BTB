@@ -3,8 +3,6 @@ require 'capybara_support/configuration'
 
 def connection(options)
   query_name = options[:query_name] || :SDP
-  sample_id = options[:sample_id] || :sample_id
-  user_email = options[:user_email] || $email
 
   get_environment()
   @port_number = 5432

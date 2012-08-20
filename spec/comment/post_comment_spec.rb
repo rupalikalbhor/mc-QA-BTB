@@ -94,7 +94,9 @@ describe 'Posting comment on a sample for a logged-in user' do
       end
     end
 
-  #it '7. Verify user should see her name next to her own comment' do
+  it '7. Verify user should see her name next to her own comment' do
+    name = page.evaluate_script("$('div.comment:contains(@@comment) .commenter').text()").to_s;
+    puts name.should == $first_name
   #  puts "First name is ,,,,, #{$first_name}"
   #  page.find(:xpath, "//div[@class = 'comments all']/div/div").text.should eq(@@comment)
   #
@@ -102,7 +104,7 @@ describe 'Posting comment on a sample for a logged-in user' do
   #  within ('.comment .content') do
   #    page.should have_content(@@comment)
   #    puts page.find('.commenter').text
-  #  end
+    end
 
     #page.should have_xpath("//div[@class = 'commenter' and text()='firstname123456...']")
     #within (page.find(:xpath, "//div[@data-comment-id=#{$comment_id}]"))do
