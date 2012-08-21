@@ -7,8 +7,6 @@ describe 'voting in progress page' do
   let(:page_title) {'Voting In Progress'}
 
   before(:all) do
-
-    page.driver.browser.manage.window.maximize
       go_to_BTB_page
       wait_for_script
   end

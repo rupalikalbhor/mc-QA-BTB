@@ -1,6 +1,6 @@
-require "spec_helper"
-require 'support/data_helper'
-require 'support/query_helper'
+require "spec/spec_helper"
+require 'spec/support/data_helper'
+require 'spec/support/query_helper'
 require 'capybara_support/window_resize'
 
 def go_to_BTB_page
