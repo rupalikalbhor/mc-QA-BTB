@@ -1,9 +1,11 @@
 require "spec_helper"
 require 'support/data_helper'
 require 'support/query_helper'
+require 'capybara_support/window_resize'
 
 def go_to_BTB_page
   visit '/'
+  set_window_size
 end
 
 def wait_for_script

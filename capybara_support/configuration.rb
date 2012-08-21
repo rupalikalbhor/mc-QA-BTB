@@ -6,6 +6,7 @@ module CapybaraSupport
   class Configuration
     @default_env = :demo
     @default_browser = :firefox
+    @default_device = :desktop
     $environment                   #Declaring global variable
 
     def self.reset_capybara
@@ -21,6 +22,7 @@ module CapybaraSupport
     def self.configure_environment
       $environment = ENV.fetch('ENV_NAME', @default_env).to_sym
       @browser_name = ENV.fetch('BROWSER_NAME', @default_browser).to_sym
+      $device_name = ENV.fetch('DEVICE_NAME', @default_device).to_sym
 
       Capybara.app_host = self.get_environment_url
 
@@ -78,8 +80,7 @@ module CapybaraSupport
       puts "browser name is: #{@browser_name}"
       case @browser_name
         when :firefox
-          puts "Running tests using Firefox browser"
-          driver.manage().window().maximize()
+          puts "Running tests using Firefox browser..."
           profile = Selenium::WebDriver::Firefox::Profile.new
           profile.assume_untrusted_certificate_issuer = false
           Capybara.register_driver :selenium do |app|
@@ -87,7 +88,7 @@ module CapybaraSupport
           end
 
         when :chrome
-          puts "Running tests using Chrome browser"
+          puts "Running tests using Chrome browser..."
           Capybara.register_driver :selenium do |app|
             Capybara::Selenium::Driver.new(app, :browser => :chrome, :switches => %w[--ignore-certificate-errors --disable-popup-blocking --disable-translate])
           end
