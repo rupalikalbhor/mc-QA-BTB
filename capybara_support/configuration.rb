@@ -33,12 +33,14 @@ module CapybaraSupport
       self.set_user #Set user email for the environment
       self.user_info
       self.get_browser
+
     end
 
     def self.get_environment_url
       case $environment
         when :demo
-          'http://BTB.demo.modcloth.com/samples'
+          'http://BTB.demo.modcloth.com'
+          #'http://BTB.demo.modcloth.com/samples'
         when :stage
           'http://BTB.stage.modcloth.com/samples'
         when :preview
@@ -77,6 +79,7 @@ module CapybaraSupport
       case @browser_name
         when :firefox
           puts "Running tests using Firefox browser"
+          driver.manage().window().maximize()
           profile = Selenium::WebDriver::Firefox::Profile.new
           profile.assume_untrusted_certificate_issuer = false
           Capybara.register_driver :selenium do |app|
