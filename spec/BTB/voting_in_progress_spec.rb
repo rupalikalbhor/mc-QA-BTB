@@ -11,18 +11,26 @@ describe 'voting in progress page' do
       wait_for_script
   end
 
-  it 'Verify Voting In Progress link is loading correct url and title.' , :type => :request do
-
+  it 'Verify "Voting In Progress" link is loading correct url and title.' do
     expected_path = current_url + path
     page.find(:xpath, "//div[@class='title']").click
     page.driver.browser.navigate.refresh
-    #click_link('Voting In Progress')
-    page.current_url.should == expected_path
 
-    wait_for_script
-    sleep (40)
-    page.find(:xpath, "//div[@class='in-progress']").text.should == page_title
+    page.current_url.should == expected_path
+    page.find(:xpath, "//div[@class='in-progress title']").text.should == page_title
   end
+
+  it 'Verify pagination displays correctly' do
+    sample_count = page.body.match(/of (\d+)/)[1]
+    page.find(:xpath, "//div[@class = 'pagination']").text.should == 'Showing 1 - '+sample_count+ ' of ' + sample_count
+  end
+
+  it 'Verify user sees "Your Sample" section with correct title' do
+    page.find(:xpath, "//div[@id = 'your-samples-header']").text.should == 'YOUR SAMPLES'
+  end
+
+
+
 
   #it 'is accessible' do
   #  visit root_path

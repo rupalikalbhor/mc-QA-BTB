@@ -76,9 +76,7 @@ def query_result(query_name, res)
       commentable_id = res.getvalue(0, 0)
       commentable_name = res.getvalue(0, 1)
       $comment_id = res.getvalue(0, 2)
-      puts "Comment id is: #{$comment_id}"
-      @url = @url + '/' + commentable_id+'-sample-'+ commentable_name
-      puts @url
+      @url = @url + '/samples/' + commentable_id+'-sample-'+ commentable_name
       return @url
 
     when :DeleteComments
