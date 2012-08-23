@@ -3,12 +3,12 @@ require 'spec/support/common_helper'
 
 describe 'voting in progress page' do
 
-  let(:path) {'in-progress'}
-  let(:page_title) {'Voting In Progress'}
+  let(:path) { 'in-progress' }
+  let(:page_title) { 'Voting In Progress' }
 
   before(:all) do
-      go_to_BTB_page
-      wait_for_script
+    go_to_BTB_page
+    wait_for_script
   end
 
   it 'Verify "Voting In Progress" link is loading correct url and title.' do
@@ -29,7 +29,53 @@ describe 'voting in progress page' do
     page.find(:xpath, "//div[@id = 'your-samples-header']").text.should == 'YOUR SAMPLES'
   end
 
+  it 'Verify breadcrumb displays correct sequence with text' do
 
+  end
+
+  it 'Verify clicking on breadcrumb links load relevant pages.' do
+
+  end
+
+  context 'Sample Box' do
+    it 'Verify correct sample is displaying' do
+
+    end
+
+    it 'Verify sample number is displaying correctly' do
+      page.find(:xpath, "//div[@class = 'name']").text.should == "Sample 2133"
+    end
+
+    it 'Verify pin icon is displaying in sample box' do
+      page.should have_xpath("//div[@class = 'pin']")
+    end
+
+    it 'Verify correct dollar amount appears above each sample' do
+      page.find(:xpath, "//div[@class = 'price']").text.should == "$22.22"
+    end
+
+    it 'Verify all the samples on this page have "Pick" and "Skip" buttons.' do
+      page.find(:xpath, "//a[@class = 'pick']").text.should == "Pick"
+      page.find(:xpath, "//a[@class = 'skip']").text.should == "Skip"
+
+    end
+
+    it 'Verify sample displays Vote count' do
+      page.find(:xpath, "//div[@class = 'vote-count']").text.should == "2"
+    end
+
+    it 'Verify sample displays comment count' do
+      page.find(:xpath, "//div[@class = 'comments-count']").text.should == "0"
+    end
+
+    it 'Verify sample displays "Voting End date" with clock icon.' do
+      page.find(:xpath, "//div[@class = 'time-remaining']").text.should == "10h"
+    end
+
+    it 'Verify when user clicks on sample image then user navigates to SDP' do
+
+    end
+  end
 
 
   #it 'is accessible' do
