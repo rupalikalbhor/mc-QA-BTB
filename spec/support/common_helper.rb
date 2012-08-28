@@ -36,7 +36,6 @@ end
 def get_short_name(name)
   if (name == '')
     email = $email
-    #email = user_data['email'].to_s
     name = email.match(/([\S]+)@/)[1]
   elsif (name.length > 15)
     name = "#{name[0..14]}..."
