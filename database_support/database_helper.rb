@@ -132,7 +132,7 @@ def query_collection(query_name)
       sql = "delete from comments where account_email =" + "'" + $email + "'" + ""
 
     when :Voting_in_progress_SampleDetails
-      sql = "SELECT s.name, s.price, s.voting_starts_at,date_trunc('hour',s.voting_ends_at - now()), count(v.product_id)
+      sql = "SELECT s.name, s.price, s.voting_starts_at,date_trunc('hour',s.voting_ends_at - now()) as voting_time, count(v.product_id)
              FROM samples s FULL OUTER JOIN votes v ON s.product_id = v.product_id
              WHERE s.product_id =" +@product_id+
              "GROUP BY v.product_id, s.name, s.voting_starts_at, s.price, s.voting_starts_at,s.voting_ends_at
@@ -173,7 +173,7 @@ def query_result(query_name, res)
     when :Voting_in_progress_SampleDetails
       $sample_name = res.getvalue(0, 0)
       $sample_price = res.getvalue(0, 1)
-      $voting_time =  res.getvalue(0, 2)
+      $voting_time =  res.getvalue(0, 3)
       $vote_count = res.getvalue(0, 4)
       puts "Sample name is ****************- #{$sample_name}"
       puts "Sample price is ****************- #{$sample_price}"

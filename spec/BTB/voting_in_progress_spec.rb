@@ -77,9 +77,8 @@ describe 'voting in progress page' do
     end
 
     it 'Verify sample displays "Voting End date" with clock icon.' do
-
-      expected_voting_time = $voting_time
-      puts "**************Time now is&&&&&&&&&&&&&&&&&&: #{Time.now - (expected_voting_time).to_i}"
+      voting_time_from_db = $voting_time
+      expected_voting_time = get_voting_date_time(voting_time_from_db)
       page.find(:xpath, "//div[@data-product-id="+@@first_sample_product_id+"]/div[@class = 'status voting-in-progress']").text.should == expected_voting_time
     end
 
@@ -88,8 +87,6 @@ describe 'voting in progress page' do
     end
   end
 end
-
-
 
 
 #it 'is accessible' do
@@ -143,3 +140,45 @@ end
 #  page.evaluate_script("$('.sample-data').attr('data-product-id')").to_s
 #end
 
+def get_voting_date_time(expected_voting_time)
+  strlength = expected_voting_time.length
+  days = expected_voting_time[0, 1]+"d"+" "
+  if (strlength > 8)
+    hours = expected_voting_time[7, 2]
+    if (hours != "00")
+      hours_first_number = hours[0, 1]
+
+      if (hours_first_number == '0')
+        hours = hours[1, 2]+"h"
+      else
+        hours+"h"
+      end
+      voting_days = days + hours
+
+    else
+      voting_days = days
+    end
+  else
+    hours = expected_voting_time[0, 2]
+    if (hours != "00")
+      hours_first_number = hours[0, 1]
+
+      if (hours_first_number == '0')
+        hours = hours[1, 2]+"h"
+      else
+        hours = hours+"h"
+      end
+      voting_days = hours
+    else
+      minutes = expected_voting_time[3, 2]
+      minutes_first_number = minutes[0, 1]
+      if (minutes_first_number == '0')
+        minutes = minutes[1, 1]+"m"
+      else
+        minutes = minutes+"m"
+      end
+      voting_days = minutes
+    end
+  end
+  return voting_days
+end
