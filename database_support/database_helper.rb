@@ -4,6 +4,9 @@ require 'capybara_support/configuration'
 def connection(options)
   query_name = options[:query_name] || :SDP
   @database_name = options[:database_name] || :comments
+  @commentable_name = options[:commentable_name]
+  @product_id = options[:product_id]
+
 
   get_environment()
   @port_number = 5432
@@ -131,8 +134,8 @@ def query_collection(query_name)
     when :Voting_in_progress_SampleDetails
       sql = "SELECT s.name, s.price, s.voting_starts_at,date_trunc('hour',s.voting_ends_at - now()), count(v.product_id)
              FROM samples s FULL OUTER JOIN votes v ON s.product_id = v.product_id
-             WHERE state ='active' AND (voting_starts_at <= now() AND voting_ends_at > now())
-             GROUP BY v.product_id, s.name, s.voting_starts_at, s.price, s.voting_starts_at,s.voting_ends_at
+             WHERE s.product_id =" +@product_id+
+             "GROUP BY v.product_id, s.name, s.voting_starts_at, s.price, s.voting_starts_at,s.voting_ends_at
              ORDER BY s.voting_starts_at DESC
              LIMIT 1"
 
@@ -142,7 +145,8 @@ def query_collection(query_name)
              WHERE state ='active' AND (voting_starts_at <= now() AND voting_ends_at > now())"
 
     when :Voting_in_progress_CommentCount
-      commentable_name = "Sample 2031".gsub("Sample ",'')  #Need to include this line in voting in progress scripts
+      #commentable_name = "Sample 2031".gsub("Sample ",'')  #Need to include this line in voting in progress scripts
+      commentable_name = @commentable_name.gsub("Sample ",'')  #Need to include this line in voting in progress scripts
       puts "Commentable name is:#{commentable_name}"
       sql = "SELECT count(*) FROM comments where commentable_name = " + "'" + commentable_name + "'" + ""
 
@@ -170,7 +174,7 @@ def query_result(query_name, res)
       $sample_name = res.getvalue(0, 0)
       $sample_price = res.getvalue(0, 1)
       $voting_time =  res.getvalue(0, 2)
-      $vote_count = res.getvalue(0, 3)
+      $vote_count = res.getvalue(0, 4)
       puts "Sample name is ****************- #{$sample_name}"
       puts "Sample price is ****************- #{$sample_price}"
       puts "Vote count is ****************- #{$vote_count}"
