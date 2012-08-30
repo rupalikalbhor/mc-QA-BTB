@@ -83,6 +83,11 @@ describe 'voting in progress page' do
     end
 
     it 'Verify when user clicks on sample image then user navigates to SDP' do
+      sample_number = $sample_name.gsub("Sample ",'')
+      page.find(:xpath, "//div[@data-product-id="+@@first_sample_product_id+"]/div[@class = 'photo']/a[@href='/samples/"+@@first_sample_product_id+"-sample-"+sample_number+"']").click
+      page.current_url.should == "http://btb.demo.modcloth.com/samples/59038-sample-2166"    #need to check sdp page breadcrumb
+      puts "HIIIIIIII"
+      puts page.find(:xpath, "//div[@id='breadcrumbs']").text
 
     end
   end
@@ -143,6 +148,7 @@ end
 def get_voting_date_time(expected_voting_time)
   strlength = expected_voting_time.length
   days = expected_voting_time[0, 1]+"d"+" "
+
   if (strlength > 8)
     hours = expected_voting_time[7, 2]
     if (hours != "00")
@@ -151,7 +157,7 @@ def get_voting_date_time(expected_voting_time)
       if (hours_first_number == '0')
         hours = hours[1, 2]+"h"
       else
-        hours+"h"
+        hours = hours+"h"
       end
       voting_days = days + hours
 
@@ -180,5 +186,6 @@ def get_voting_date_time(expected_voting_time)
       voting_days = minutes
     end
   end
+
   return voting_days
 end
