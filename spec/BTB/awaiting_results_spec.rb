@@ -13,11 +13,11 @@ describe 'Awaiting Results page' do
 
   it 'Verify "Awaiting Results" link is loads correct url and title.' do
     expected_path = current_url + path
-    page.find(:xpath, "//a[@href='awaiting-results']/li/div[text()='Awaiting Results']").click
+    page.find(:xpath, "//a[@href='/be-the-buyer/awaiting-results']/li/[contains(text(),'Awaiting Results')]").click
     page.driver.browser.navigate.refresh
 
     page.current_url.should == expected_path
-    page.find(:xpath, "//div[@class='awaiting-results div nav title']").text.should == page_title
+    page.find(:xpath, "//div[@class='sample-grid']/nav/h2[@class='page-title awaiting-results']").text.should == page_title
   end
 
   it 'Verify pagination displays correctly' do
@@ -30,20 +30,24 @@ describe 'Awaiting Results page' do
   end
 
   it 'Verify breadcrumb displays correct sequence with text' do
-
+    page.find(:xpath, "//div[@id='breadcrumbs']").text.should == 'ModCloth » Be The Buyer » Awaiting Results'
   end
 
   it 'Verify clicking on breadcrumb links load relevant pages.' do
-
+    page.find(:xpath, "//div[@id='breadcrumbs']/a[contains(text(),'ModCloth')]").click
+    go_to_awaiting_results_page
+    page.find(:xpath, "//div[@id='breadcrumbs']/a[contains(text(),'Be The Buyer')]").click
+    go_to_awaiting_results_page
   end
 
   context 'Sample Box' do
-    it 'Verify correct sample is displaying' do
-
-    end
-
-    it 'Verify sample number is displaying correctly' do
+    it '1. Verify sample number is displaying correctly' do
       page.find(:xpath, "//div[@class = 'name']").text.should match /Sample [0-9]+/
+
+      FIRST_SAMPLE_PRODUCT_ID = page.evaluate_script("$('.sample-data').attr('data-product-id')").to_s
+      get_voting_in_progress_SampleDetails(FIRST_SAMPLE_PRODUCT_ID)
+      expected_sample_name = $sample_name #Get sample name from database
+      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class='name']").text.should == expected_sample_name
     end
 
     it 'Verify pin icon is displaying in sample box' do
@@ -77,4 +81,10 @@ describe 'Awaiting Results page' do
 
     end
   end
+end
+
+def go_to_awaiting_results_page
+  go_to_BTB_page
+  page.find(:xpath, "//a[@href='/be-the-buyer/awaiting-results']/li/div[contains(text(),'Awaiting Results')]").click
+  page.find(:xpath, "//div[@class='sample-grid']/nav/h2[@class='page-title awaiting-results']").text.should == 'Awaiting Results'
 end
