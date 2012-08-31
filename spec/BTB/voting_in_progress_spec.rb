@@ -81,7 +81,7 @@ describe 'voting in progress page' do
     end
 
     it '6. Verify sample displays comment count' do
-      commentable_name = $sample_name.gsub("Sample ",'')
+      commentable_name = $sample_name.gsub("Sample ", '')
       expected_comment_count = get_voting_in_progress_CommentCount(commentable_name)
       page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class = 'comments-count']").text.should == expected_comment_count
     end
@@ -101,7 +101,21 @@ describe 'voting in progress page' do
 
   context "Pick or Skip functionality" do
     it '' do
+      voting_status = page.evaluate_script("$('.sample-data').attr('data-vote-value')").to_s
+      if (voting_status== "pick")
+        puts "Sample need to skip"
+        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'voting-and-notification clearfix picked']/a[@class = 'pick']").text.should == "PICKED"
+        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'voting-and-notification clearfix skipped']/a[@class = 'skip']").click
+        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'voting-and-notification clearfix skipped']/a[@class = 'skip']").text.should == "SKIPPED"
+      else
+        if (voting_status == "skip")
+          puts "Sample need to pick"
 
+        else
+          puts "sample need to pick & skip"
+
+        end
+      end
     end
 
   end
