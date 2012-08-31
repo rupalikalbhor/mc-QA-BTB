@@ -5,8 +5,31 @@ require 'support/query_helper'
 
 describe 'Testing' do
   it 'Visit to homepage.', :type => :request do
-    tt
+    visit 'http://btb.demo.modcloth.com/be-the-buyer/voting-in-progress'
+    var = page.find(:xpath, "//div[@class='sample-grid']/div[@class='sample'][2]/div[@data-product-id]").text
+    puts " Value is ******:#{var}"
+
+    #tt
   end
+
+  it 'Verify sample number is displaying correctly' do
+
+        FIRST_SAMPLE_PRODUCT_ID = page.evaluate_script("$('.sample-data').attr('data-product-id')").to_s
+        #get_first_sample_product_id(first_sample_product_id)
+
+        #@@first_sample_product_id = page.evaluate_script("$('.sample-data').attr('data-product-id')").to_s
+        #get_voting_in_progress_SampleDetails(@@first_sample_product_id)
+        expected_sample_name = FIRST_SAMPLE_PRODUCT_ID
+        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class='name']").text.should == expected_sample_name
+        #page.find(:xpath, "//div[@data-product-id="+@@first_sample_product_id+"]/div[@class='name']").text.should == expected_sample_name
+
+      end
+
+      it 'Verify pin icon is displaying in sample box' do
+        puts "First sample is... #{FIRST_SAMPLE_PRODUCT_ID}"
+        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'pin']")
+        #page.find(:xpath, "//div[@data-product-id="+@@first_sample_product_id+"]/div[@class = 'pin']")
+      end
 end
 
 def tt

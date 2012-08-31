@@ -5,7 +5,110 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/capybara_support/window_resize.rb" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/spec/comment/no_comment_spec.rb" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/spec/support/agree_helper.rb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-10-38-40.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-00-48.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-04-06.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-10-05.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-12-57.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-13-22.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-14-18.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-15-06.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-17-31.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-23-15.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-37-48.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-37-59.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-38-10.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-40-24.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-40-35.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-42-49.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-42-59.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-44-10.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-47-32.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-11-49-06.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-12-00-50.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-12-00-51.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-12-01-34.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-12-01-35.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-02-04.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-02-10.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-03-33.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-03-34.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-19-59.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-20-00.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-20-41.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-20-42.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-21-44.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-21-45.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-26-26.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-26-27.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-28-20.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-28-21.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-29-07.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-13-30-23.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-05-21.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-05-22.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-12-34.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-12-35.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-13-22.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-13-23.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-20-35.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-20-36.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-20-59.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-22-32.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-23-22.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-24-48.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-50-14.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-50-15.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-53-45.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-53-46.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-54-57.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-54-58.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-55-53.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-55-54.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-56-57.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-14-56-58.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-15-29-50.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-15-57-23.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-16-22-43.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-16-22-44.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-16-22-55.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-16-24-15.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-16-24-17.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-16-30-19.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-29-16-30-20.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-09-43-03.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-09-43-04.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-09-43-05.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-09-43-18.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-09-44-14.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-09-44-15.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-09-44-16.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-09-45-26.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-09-45-27.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-09-45-28.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-02-20.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-02-21.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-02-22.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-02-57.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-02-58.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-02-59.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-05-04.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-05-05.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-06-21.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-06-22.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-06-23.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-06-24.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-07-35.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-07-36.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-09-13.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tmp/screenshots/2012-08-30-10-09-14.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database_support/database_helper.rb" afterPath="$PROJECT_DIR$/database_support/database_helper.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/BTB/voting_in_progress_spec.rb" afterPath="$PROJECT_DIR$/spec/BTB/voting_in_progress_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/Test/test_spec.rb" afterPath="$PROJECT_DIR$/spec/Test/test_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/support/query_helper.rb" afterPath="$PROJECT_DIR$/spec/support/query_helper.rb" />
     </list>
     <ignored path="mc-QA-BTB.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,7 +133,16 @@
       <file leaf-file-name="voting_in_progress_spec.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spec/BTB/voting_in_progress_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="51" selection-start="4043" selection-end="4043" vertical-scroll-proportion="0.60754716">
+            <state line="84" column="81" selection-start="4330" selection-end="4330" vertical-scroll-proportion="2.535849">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Gemfile" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Gemfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="25" selection-start="254" selection-end="254" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -39,7 +151,7 @@
       <file leaf-file-name="test_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/Test/test_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="28" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0">
+            <state line="20" column="50" selection-start="820" selection-end="820" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -66,7 +178,7 @@
       <file leaf-file-name="database_helper.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database_support/database_helper.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="148" column="62" selection-start="3868" selection-end="3868" vertical-scroll-proportion="0.0">
+            <state line="160" column="78" selection-start="4008" selection-end="4008" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -75,7 +187,7 @@
       <file leaf-file-name="query_helper.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/support/query_helper.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="5" selection-start="389" selection-end="389" vertical-scroll-proportion="0.0">
+            <state line="26" column="92" selection-start="804" selection-end="804" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -94,27 +206,27 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/spec/support/post_comment_helper.rb" />
         <option value="$PROJECT_DIR$/spec/comment/pagination_spec.rb" />
         <option value="$PROJECT_DIR$/spec/comment/agree_spec.rb" />
         <option value="$PROJECT_DIR$/spec/support/shared_example_BTB.rb" />
         <option value="$PROJECT_DIR$/spec/comment/post_comment_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/spec_helper.rb" />
         <option value="$PROJECT_DIR$/capybara_support/window_resize.rb" />
         <option value="$PROJECT_DIR$/capybara_support/configuration.rb" />
         <option value="$PROJECT_DIR$/spec/support/common_helper.rb" />
         <option value="$PROJECT_DIR$/spec/BTB/awaiting_results_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/support/query_helper.rb" />
         <option value="$PROJECT_DIR$/spec/support/data/voting_in_progress_helper.rb" />
         <option value="$PROJECT_DIR$/spec/support/voting_in_progress_helper.rb" />
-        <option value="$PROJECT_DIR$/database_support/database_helper.rb" />
+        <option value="$PROJECT_DIR$/Gemfile" />
+        <option value="$PROJECT_DIR$/spec/spec_helper.rb" />
         <option value="$PROJECT_DIR$/spec/Test/test_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/support/query_helper.rb" />
+        <option value="$PROJECT_DIR$/database_support/database_helper.rb" />
         <option value="$PROJECT_DIR$/spec/BTB/voting_in_progress_spec.rb" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="13" />
+    <option name="x" value="39" />
     <option name="y" value="22" />
     <option name="width" value="1280" />
     <option name="height" value="687" />
@@ -584,14 +696,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="13" y="22" width="1280" height="687" extended-state="0" />
-    <editor active="true" />
+    <frame x="39" y="22" width="1280" height="687" extended-state="1" />
+    <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18395463" sideWeight="0.21753794" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19480519" sideWeight="0.99649125" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19480519" sideWeight="0.99649125" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -670,11 +782,6 @@
         <state line="8" column="8" selection-start="109" selection-end="183" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/spec_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="54" selection-start="430" selection-end="430" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/screenshot_support/screenshot_helper.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="80" selection-start="423" selection-end="423" vertical-scroll-proportion="0.0" />
@@ -706,13 +813,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/support/query_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="5" selection-start="389" selection-end="389" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/support/common_helper.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="27" selection-start="134" selection-end="134" vertical-scroll-proportion="0.0">
@@ -727,23 +827,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="25" selection-start="254" selection-end="254" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/spec_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="33" selection-start="530" selection-end="530" vertical-scroll-proportion="0.50092083">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/spec/Test/test_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="28" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0">
+        <state line="20" column="50" selection-start="820" selection-end="820" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/support/query_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="92" selection-start="804" selection-end="804" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/database_support/database_helper.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="62" selection-start="3868" selection-end="3868" vertical-scroll-proportion="0.0">
+        <state line="160" column="78" selection-start="4008" selection-end="4008" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/BTB/voting_in_progress_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="51" selection-start="4043" selection-end="4043" vertical-scroll-proportion="0.60754716">
+        <state line="84" column="81" selection-start="4330" selection-end="4330" vertical-scroll-proportion="2.535849">
           <folding />
         </state>
       </provider>

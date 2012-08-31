@@ -21,6 +21,6 @@ def get_voting_in_progress_SampleCount
   connection({:query_name => :Voting_in_progress_SampleCount, :database_name => :btb})
 end
 
-def get_voting_in_progress_CommentCount(sample_name)
-  connection({:query_name => :Voting_in_progress_CommentCount, :commentable_name => sample_name})
+def get_voting_in_progress_CommentCount(commentable_name)
+  connection({:query_name => :Voting_in_progress_CommentCount, :commentable_name => commentable_name})
 end

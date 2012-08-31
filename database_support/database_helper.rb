@@ -145,10 +145,8 @@ def query_collection(query_name)
              WHERE state ='active' AND (voting_starts_at <= now() AND voting_ends_at > now())"
 
     when :Voting_in_progress_CommentCount
-      #commentable_name = "Sample 2031".gsub("Sample ",'')  #Need to include this line in voting in progress scripts
-      commentable_name = @commentable_name.gsub("Sample ",'')  #Need to include this line in voting in progress scripts
-      puts "Commentable name is:#{commentable_name}"
-      sql = "SELECT count(*) FROM comments where commentable_name = " + "'" + commentable_name + "'" + ""
+
+      sql = "SELECT count(*) FROM comments where commentable_name = " + "'" + commentable_name + "'" + " and status = 'active'"
 
     else
       print "\n No matching query..Please check your typos.... \n"

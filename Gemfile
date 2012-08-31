@@ -7,6 +7,7 @@ gem 'yajl-ruby', '1.1.0'
 gem 'selenium-webdriver'
 gem 'capybara-screenshot'
 gem 'postgres-pr'
+gem 'magic_encoding'
 
 $: << File.dirname(__FILE__)
 
