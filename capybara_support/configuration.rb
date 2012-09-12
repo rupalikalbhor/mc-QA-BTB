@@ -22,14 +22,14 @@ module CapybaraSupport
     def self.configure_environment
       $environment = ENV.fetch('ENV_NAME', @default_env).to_sym
       @browser_name = ENV.fetch('BROWSER_NAME', @default_browser).to_sym
-      @device_name = ENV.fetch('DEVICE_NAME', @default_device).to_sym
+      $device_name = ENV.fetch('DEVICE_NAME', @default_device).to_sym
 
       Capybara.app_host = self.get_environment_url
       Capybara.default_driver = ENV.fetch('DEFAULT_DRIVER', 'selenium').to_sym
       Capybara.default_driver = :selenium
       puts "Set the Capybara default driver to #{Capybara.default_driver}"
       puts "Tests are running on environment: #{$environment}"
-      puts "Window size is set for: #{@device_name}"
+      puts "Window size is set for: #{$device_name}"
 
       #self.set_user #Set user email for the environment
       self.user_info
@@ -40,8 +40,8 @@ module CapybaraSupport
     def self.get_environment_url
       case $environment
         when :demo
-          'http://BTB.demo.modcloth.com'
-        #'http://BTB.demo.modcloth.com/samples'
+          #'http://BTB-demo.modcloth.com'
+          'http://btb-ecomm.demo.modcloth.com/be-the-buyer'
         when :stage
           'http://BTB.stage.modcloth.com'
         when :preview
@@ -98,17 +98,19 @@ module CapybaraSupport
     end
 
     def self.set_browser_size
-      case @device_name
+      case $device_name
         when :desktop
           @browser_size = {:width => 1024, :height => 1024}
-        when :phone_portrait
+        #when :phone_portrait
+        when :phone
           @browser_size = {:width => 320, :height => 960}
-        when :phone_landscape
-          @browser_size = {:width => 480, :height => 960}
-        when :tablet_portrait
+        #when :phone_landscape
+        #  @browser_size = {:width => 480, :height => 960}
+        #when :tablet_portrait
+        when :tablet
           @browser_size = {:width => 768, :height => 768}
-        when :tablet_landscape
-          @browser_size = {:width => 1024, :height => 768}
+        #when :tablet_landscape
+        #  @browser_size = {:width => 1024, :height => 768}
         else
           puts 'Invalid device name..Running on default device DESKTOP !!!!'
       end
@@ -120,5 +122,3 @@ module CapybaraSupport
     end
   end
 end
-
-

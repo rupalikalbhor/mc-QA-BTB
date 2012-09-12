@@ -7,11 +7,8 @@ def connection(options)
   @commentable_name = options[:commentable_name]
   @product_id = options[:product_id]
 
-
   get_environment()
   @port_number = 5432
-  puts "Database name is: #{@database_name}"
-  puts "Query name is: #{query_name}"
   @conn = PGconn.connect(@ip_address, @port_number, '', '', @database_name, @user_name, @password)
 
   sql = query_collection(query_name)
@@ -24,37 +21,6 @@ def connection(options)
   @conn.close()
   return output
 end
-
-#private
-#def get_environment1()
-#  env = $environment #Global variable from configuration file
-#  case env
-#    when :stage
-#      @ip_address = ""
-#      @database_name = ""
-#      @user_name = ""
-#      @password = ""
-#
-#    when :production
-#      @ip_address = ""
-#      @database_name = ""
-#      @user_name = ""
-#      @password = ""
-#
-#    when :preview
-#      @ip_address = ""
-#      @database_name = ""
-#      @user_name = ""
-#      @password = ""
-#
-#    when :demo
-#      @ip_address = "192.168.113.22"
-#      @database_name = "comments"
-#      @user_name = "comments"
-#      @password = "alfjljqreovcab408qewfasdlj"
-#  end
-#  @url = CapybaraSupport::Configuration.get_environment_url
-#end
 
 private
 def get_environment()
@@ -145,8 +111,7 @@ def query_collection(query_name)
              WHERE state ='active' AND (voting_starts_at <= now() AND voting_ends_at > now())"
 
     when :Voting_in_progress_CommentCount
-
-      sql = "SELECT count(*) FROM comments where commentable_name = " + "'" + commentable_name + "'" + " and status = 'active'"
+      sql = "SELECT count(*) FROM comments where commentable_name = " + "'" + @commentable_name + "'" + " and status = 'active'"
 
     else
       print "\n No matching query..Please check your typos.... \n"
@@ -173,14 +138,13 @@ def query_result(query_name, res)
       $sample_price = res.getvalue(0, 1)
       $voting_time =  res.getvalue(0, 3)
       $vote_count = res.getvalue(0, 4)
-      puts "Sample name is ****************- #{$sample_name}"
-      puts "Sample price is ****************- #{$sample_price}"
-      puts "Vote count is ****************- #{$vote_count}"
-      puts "voting time is ****************- #{$voting_time}"
+      #puts "Sample name is ****************- #{$sample_name}"
+      #puts "Sample price is ****************- #{$sample_price}"
+      #puts "Vote count is ****************- #{$vote_count}"
+      #puts "voting time is ****************- #{$voting_time}"
 
     else
       value = res.getvalue(0, 0)
       return value
   end
 end
-
