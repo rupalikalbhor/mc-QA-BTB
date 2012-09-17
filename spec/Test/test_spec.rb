@@ -120,7 +120,6 @@ describe 'Testing' do
   #   sign_out()
   #  end
   #end
-
 end
 
 def go_to_voting_in_progress_page
@@ -174,7 +173,7 @@ def join_tablet()
   wait_for_script
 end
 
-def join_phone()     #pending
+def join_phone() #pending
   within ('#mc-header-welcome') do
     page.find(:xpath, "//a[@id='mc-phone-header-join']").click
   end
@@ -190,13 +189,13 @@ end
 
 def sign_in()
   case $device_name
-      when :phone
-        sign_in_phone()
-      when :tablet
-        sign_in_tablet()
-      else
-        sign_in_desktop()
-    end
+    when :phone
+      sign_in_phone()
+    when :tablet
+      sign_in_tablet()
+    else
+      sign_in_desktop()
+  end
 end
 
 def sign_in_desktop()
@@ -240,13 +239,13 @@ end
 
 def sign_out()
   case $device_name
-      when :phone
-        sign_out_phone()
-      when :tablet
-        sign_out_tablet()
-      else
-        sign_out_desktop()
-    end
+    when :phone
+      sign_out_phone()
+    when :tablet
+      sign_out_tablet()
+    else
+      sign_out_desktop()
+  end
 end
 
 def sign_out_desktop()
@@ -259,9 +258,9 @@ def sign_out_desktop()
 end
 
 def sign_out_tablet()
-    page.find(:xpath, "//div[@class = 'name-and-arrow']/div").click
-    page.find(:xpath, "//a[@class = 'sign-out']").click
-    page.should have_xpath("//div[@id = 'mc-header-join-or-sign-in']")
+  page.find(:xpath, "//div[@class = 'name-and-arrow']/div").click
+  page.find(:xpath, "//a[@class = 'sign-out']").click
+  page.should have_xpath("//div[@id = 'mc-header-join-or-sign-in']")
 end
 
 def sign_out_phone()
@@ -269,73 +268,6 @@ def sign_out_phone()
 end
 
 #----------------------------------------------------------
-
-describe 'Desktop header' do
-
-  before(:all) do
-    go_to_BTB_page1
-    wait_for_script
-  end
-
-  it 'Verify user see "Curstomer Care" link.' do
-  within ('#mc-header-links') do
-    page.should have_link('Customer Care')
-  end
-  end
-
-  it 'Verify when user clicks on "Customer Care" link it opens correct window' do
-
-  end
-
-  it 'Verify when user clicks on username then user navigates to dashboard.' do
-
-  end
-
-  it 'Verify when user clicks on Notifications then user navigates to Restock notification page' do
-
-  end
-
-  it 'Verify when user clicks on Wishlist then user navigates to wishlist page' do
-
-  end
-
-  it 'Verify when user clicks on Order History then user navigates to order history page.' do
-
-  end
-
-  it 'Verify when user clicks on Loved items then user navigates to loved items page.' do
-
-  end
-
-  it 'Verify when Loved item count displays correctly.' do
-
-  end
-
-  it 'Verify user see text "Shopping bag"' do
-
-  end
-
-  it 'Verify user see correct shopping count' do
-
-  end
-
-  it 'Verify user see "Checkout" button' do
-
-  end
-
-  it 'Verify when user clicks on "Checkout" button then user see checkout flow' do
-
-  end
-
-  it 'Verify user see "Search" text box with text "Search"' do
-
-  end
-end
-
-describe 'Search' do
-
-end
-
 
 
 
