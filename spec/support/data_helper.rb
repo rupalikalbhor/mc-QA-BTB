@@ -5,6 +5,7 @@ def get_file(filename)
 end
 
 UserData = get_file('users.json')
+ProductData = get_file('products.json')
 
 def parse_json_data(path)
   json = File.new(path, 'r')
@@ -14,6 +15,10 @@ end
 
 def get_user_data
   @data ||= parse_json_data(UserData)
+end
+
+def get_product_data
+  @data ||= parse_json_data(ProductData)
 end
 
 

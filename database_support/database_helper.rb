@@ -51,11 +51,17 @@ def comments_database(env)
       @user_name = ""
       @password = ""
 
-    when :demo
+    when :old_demo
       @ip_address = "192.168.113.22"
       @database_name = "comments"
       @user_name = "comments"
       @password = "alfjljqreovcab408qewfasdlj"
+
+    when :demo
+      @ip_address = "192.168.113.17"
+      @database_name = "comments_demo"
+      @user_name = "postgres"
+      @password = "zSZ9LBs_dG9p8jX9Vsiz"
   end
 end
 
@@ -73,15 +79,16 @@ def BTB_database(env)
       @password = ""
 
     when :preview
-      @ip_address = ""
-      @user_name = ""
-      @password = ""
-
-    when :demo
-      @ip_address = "btb.demo.modcloth.com"
+      @ip_address = "192.168.113.14"
       @database_name = "btb"
       @user_name = "btb"
       @password = "mcuemcvhbuoaec"
+
+    when :demo
+      @ip_address = "btb.demo.modcloth.com"
+      @database_name = "btb_demo"
+      @user_name = "postgres"
+      @password = "OKh4iqgpioqXY2B9bf0z"
   end
 end
 
