@@ -27,6 +27,7 @@ describe 'Grid page - Voting In Progress' do
     end
 
     it '2. Verify pagination displays correctly' do
+      go_to_voting_in_progress_page  # THIS NEED TO remove after bug gets fixed
       case $device_name
         when :phone
           page.find(:xpath, "//div[@class = 'pagination phone']").text.should == 'Showing 1 - '+expected_sample_count+ ' of ' + expected_sample_count
@@ -125,54 +126,8 @@ describe 'Grid page - Voting In Progress' do
       sign_in
       go_to_voting_in_progress_page
     end
-    #it '1. Verify when user clicks on "Pick" button then button changes to "Picked, Pick violater displays on sample image."
-    #2. Verify when user clicks on "Skip" button then button changes to "Skipped, Skip violater displays on sample image.' do
-    #  sign_in
-    #  go_to_voting_in_progress_page
-    #  first_sample_product_id = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
-    #  voting_status = page.evaluate_script("$('.sample-data').attr('data-vote-value')").to_s
-    #  if (voting_status == "pick")
-    #    page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-skip']").click
-    #    page.driver.browser.navigate.refresh
-    #    page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-skip']").text.should == "SKIPPED"
-    #    page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-pick']").text.should == "PICK"
-    #    page.should have_xpath("//div[@data-product-id="+first_sample_product_id+"]/div[@class='violator picked']")
-    #
-    #    page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-pick']").click
-    #    page.driver.browser.navigate.refresh
-    #    page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-skip']").text.should == "SKIP"
-    #    page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-pick']").text.should == "PICKED"
-    #    page.should have_xpath("//div[@data-product-id="+first_sample_product_id+"]/div[@class='violator skipped']")
-    #  else
-    #    if (voting_status == "skip")
-    #      page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-pick']").click
-    #      page.driver.browser.navigate.refresh
-    #      page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-skip']").text.should == "SKIP"
-    #      page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-pick']").text.should == "PICKED"
-    #      page.should have_xpath("//div[@data-product-id="+first_sample_product_id+"]/div[@class='violator picked']")
-    #
-    #      page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-skip']").click
-    #      page.driver.browser.navigate.refresh
-    #      page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-skip']").text.should == "SKIPPED"
-    #      page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-pick']").text.should == "PICK"
-    #      page.should have_xpath("//div[@data-product-id="+first_sample_product_id+"]/div[@class='violator skipped']")
-    #    else
-    #      page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-pick']").click
-    #      page.driver.browser.navigate.refresh
-    #      page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-skip']").text.should == "SKIP"
-    #      page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-pick']").text.should == "PICKED"
-    #      page.should have_xpath("//div[@data-product-id="+first_sample_product_id+"]/div[@class='violator picked']")
-    #
-    #      page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-skip']").click
-    #      page.driver.browser.navigate.refresh
-    #      page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-skip']").text.should == "SKIPPED"
-    #      page.find(:xpath, "//div[@data-product-id="+first_sample_product_id+"]/div/a[@href = '#vote-pick']").text.should == "PICK"
-    #      page.should have_xpath("//div[@data-product-id="+first_sample_product_id+"]/div[@class='violator skipped']")
-    #    end
-    #  end
-    #end
 
-    it '3. Verify if a logged in user clicks on "Pick" then
+    it '2. Verify if a logged in user clicks on "Pick" then
        - button changes to "Picked,
        - Pick violater displays on sample image.
        - voting count increments by 1.' do
@@ -180,11 +135,13 @@ describe 'Grid page - Voting In Progress' do
       if (no_pick_no_skip_product_id != "")
         before_vote_count = page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='counters']/div[@class='vote-count']").text
         page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-pick']").click
-        page.driver.browser.navigate.refresh
         wait_for_script
-        page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-skip']").text.should == "SKIP"
-        page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-pick']").text.should == "PICKED"
-        page.should have_xpath("//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='violator picked']")
+        page.driver.browser.navigate.refresh
+        wait_until {
+          page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-skip']").text.should == "SKIP"
+          page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-pick']").text.should == "PICKED"
+          page.should have_xpath("//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='violator picked']")
+        }
         after_vote_count = page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='counters']/div[@class='vote-count']").text
         after_vote_count.to_i.should == before_vote_count.to_i + 1
       else
@@ -197,11 +154,13 @@ describe 'Grid page - Voting In Progress' do
       if (no_pick_no_skip_product_id != "")
         before_vote_count = page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='counters']/div[@class='vote-count']").text
         page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-skip']").click
-        page.driver.browser.navigate.refresh
         wait_for_script
-        page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-skip']").text.should == "SKIPPED"
-        page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-pick']").text.should == "PICK"
-        page.should have_xpath("//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='violator skipped']")
+        page.driver.browser.navigate.refresh
+        wait_until {
+          page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-skip']").text.should == "SKIPPED"
+          page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-pick']").text.should == "PICK"
+          page.should have_xpath("//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='violator skipped']")
+        }
         after_vote_count = page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='counters']/div[@class='vote-count']").text
         after_vote_count.to_i.should == before_vote_count.to_i + 1
       else
@@ -220,7 +179,6 @@ describe 'Grid page - Voting In Progress' do
           fill_in 'new-comment-text', :with => 'Great Dress'
           click_button('Comment')
         end
-
         go_to_BTB_page
         wait_for_script
         after_comments_count = page.find(:xpath, "//div[@data-product-id="+picked_product_id+"]/div[@class='counters']/div[@class='comments-count']").text
@@ -240,10 +198,6 @@ describe 'Grid page - Voting In Progress' do
           fill_in 'new-comment-text', :with => 'Great Dress'
           click_button('Comment')
         end
-
-        # within('#breadcrumbs') do
-        #   click_link 'Voting In Progress'
-        # end
         go_to_BTB_page
         wait_for_script
         after_comments_count = page.find(:xpath, "//div[@data-product-id="+picked_product_id+"]/div[@class='counters']/div[@class='comments-count']").text
@@ -275,7 +229,6 @@ describe 'Grid page - Voting In Progress' do
     end
   end
 
-
   context "D. Pick or skip functionality - Logged out user" do
 
   end
@@ -291,60 +244,4 @@ describe 'Grid page - Voting In Progress' do
   end
 end
 
-def get_voting_date_time(expected_voting_time)
-  strlength = expected_voting_time.length
-  days = expected_voting_time[0, 1]+"d"+" "
 
-  if (strlength > 8)
-    hours = expected_voting_time[strlength - 8, 2]
-    if (hours != "00")
-      hours_first_number = hours[0, 1]
-
-      if (hours_first_number == '0')
-        hours = hours[1, 1]+"h"
-      else
-
-        hours = hours+"h"
-      end
-      voting_days = days + hours
-
-    else
-      voting_days = days
-    end
-  else
-    hours = expected_voting_time[0, 2]
-    if (hours != "00")
-      hours_first_number = hours[0, 1]
-
-      if (hours_first_number == '0')
-        hours = hours[1, 1]+"h"
-      else
-        hours = hours+"h"
-      end
-      voting_days = hours
-    else
-      minutes = expected_voting_time[3, 2]
-      minutes_first_number = minutes[0, 1]
-      if (minutes_first_number == '0')
-        minutes = minutes[1, 1]+"m"
-      else
-        minutes = minutes+"m"
-      end
-      voting_days = minutes
-    end
-  end
-  return voting_days
-end
-
-def go_to_voting_in_progress_page
-  go_to_BTB_page
-  case $device_name
-    when :phone
-      page.find(:xpath, "//div[@id='menu-toggle']").click
-      page.find(:xpath, "//a[@href='/be-the-buyer/voting-in-progress']/li/div[contains(text(),'Voting In Progress')]").click
-      page.find(:xpath, "//div[@id = 'menu-toggle']").text.should == "Voting In Progress"
-    else
-      page.find(:xpath, "//a[@href='/be-the-buyer/voting-in-progress']/li/div[contains(text(),'Voting In Progress')]").click
-      page.find(:xpath, "//div[@class='sample-grid']/nav/h2[@class='page-title voting-in-progress']").text.should == 'Voting In Progress'
-  end
-end

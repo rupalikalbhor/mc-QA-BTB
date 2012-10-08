@@ -51,17 +51,11 @@ def comments_database(env)
       @user_name = ""
       @password = ""
 
-    when :old_demo
-      @ip_address = "192.168.113.22"
-      @database_name = "comments"
-      @user_name = "comments"
-      @password = "alfjljqreovcab408qewfasdlj"
-
     when :demo
       @ip_address = "192.168.113.17"
       @database_name = "comments_demo"
-      @user_name = "postgres"
-      @password = "zSZ9LBs_dG9p8jX9Vsiz"
+      @user_name = "rkalbhor"
+      @password = "HbusEU66jTLszq"
   end
 end
 
@@ -79,23 +73,23 @@ def BTB_database(env)
       @password = ""
 
     when :preview
-      @ip_address = "192.168.113.14"
-      @database_name = "btb"
-      @user_name = "btb"
-      @password = "mcuemcvhbuoaec"
+      @ip_address = ""
+      @database_name = ""
+      @user_name = ""
+      @password = ""
 
     when :demo
-      @ip_address = "btb.demo.modcloth.com"
+      @ip_address = "192.168.113.14"
       @database_name = "btb_demo"
-      @user_name = "postgres"
-      @password = "OKh4iqgpioqXY2B9bf0z"
+      @user_name = "rkalbhor"
+      @password = "HbusEU66jTLszq"
   end
 end
 
 private
 def query_collection(query_name)
   case query_name
-    when :SDP
+    when :SDP_no_comment_for_logged_in_user
       sql = "SELECT commentable_id, commentable_name, id
      FROM comments where account_email !=" + "'" + $email + "'" + "
      AND status = 'active'
@@ -130,7 +124,7 @@ end
 private
 def query_result(query_name, res)
   case query_name
-    when :SDP
+    when :SDP_no_comment_for_logged_in_user
       commentable_id = res.getvalue(0, 0)
       commentable_name = res.getvalue(0, 1)
       $comment_id = res.getvalue(0, 2)
@@ -148,8 +142,7 @@ def query_result(query_name, res)
       #puts "Sample name is ****************- #{$sample_name}"
       #puts "Sample price is ****************- #{$sample_price}"
       #puts "Vote count is ****************- #{$vote_count}"
-      #puts "voting time is ****************- #{$voting_time}"
-
+      puts "voting time is ****************- #{$voting_time}"
     else
       value = res.getvalue(0, 0)
       return value

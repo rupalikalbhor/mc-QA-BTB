@@ -1,9 +1,9 @@
 require 'database_support/database_helper'
 
 #Get Sample detail page method
-def go_to_SDP
+def go_to_SDP_no_comment_for_logged_in_user
   puts "Before url is"
-  url = connection({:query_name => :SDP})
+  url = connection({:query_name => :SDP_no_comment_for_logged_in_user})
   puts "Url is - #{url}"
   visit url
 end

@@ -40,9 +40,9 @@ module CapybaraSupport
     def self.get_environment_url
       case $environment
         when :demo
-         # 'http://10.3.30.207:3003/be-the-buyer'
+          # 'http://10.3.30.207:3003/be-the-buyer'
           'http://btb.demo.modcloth.com/be-the-buyer'
-          #'http://btb-ecomm.demo.modcloth.com/be-the-buyer'
+        #'http://btb-ecomm.demo.modcloth.com/be-the-buyer'
         when :stage
           'http://BTB.stage.modcloth.com'
         when :preview
@@ -102,16 +102,10 @@ module CapybaraSupport
       case $device_name
         when :desktop
           @browser_size = {:width => 1024, :height => 1024}
-        #when :phone_portrait
         when :phone
           @browser_size = {:width => 320, :height => 960}
-        #when :phone_landscape
-        #  @browser_size = {:width => 480, :height => 960}
-        #when :tablet_portrait
         when :tablet
           @browser_size = {:width => 1024, :height => 768}
-        #when :tablet_landscape
-        #  @browser_size = {:width => 1024, :height => 768}
         else
           puts 'Invalid device name..Running on default device DESKTOP !!!!'
       end
@@ -119,7 +113,11 @@ module CapybaraSupport
 
     def self.resize_browser_window()
       self.set_browser_size
-      Capybara.current_session.driver.browser.manage.window.resize_to(@browser_size[:width], @browser_size[:height])
+      if ($device_name == :desktop)
+        Capybara.current_session.driver.browser.manage.window.maximize
+      else
+        Capybara.current_session.driver.browser.manage.window.resize_to(@browser_size[:width], @browser_size[:height])
+      end
     end
   end
 end

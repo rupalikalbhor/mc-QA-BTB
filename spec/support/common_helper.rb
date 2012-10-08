@@ -5,15 +5,15 @@ require 'spec/support/query_helper'
 def go_to_BTB_page
   case $device_name
     when :phone
-      visit 'http://btb.demo.modcloth.com/be-the-buyer/voting-in-progress?device_type=phone'
+      visit 'http://btb-ecomm.demo.modcloth.com/be-the-buyer/voting-in-progress?device_type=phone'
       #visit 'http://btb.demo.modcloth.com/be-the-buyer'
 
       #visit 'http://10.3.30.207:3003/be-the-buyer/voting-in-progress?device_type=phone'
       #visit 'http://10.3.30.207:3003/be-the-buyer'
     when :tablet
-      visit 'http://btb.demo.modcloth.com/be-the-buyer/voting-in-progress?device_type=tablet'
+      visit 'http://btb-ecomm.demo.modcloth.com/be-the-buyer/voting-in-progress?device_type=tablet'
     else
-      visit 'http://btb.demo.modcloth.com/be-the-buyer'
+      visit 'http://btb-ecomm.demo.modcloth.com/be-the-buyer'
   end
 end
 
@@ -150,8 +150,8 @@ def sign_in_desktop()
     fill_in 'email', :with => $email
     fill_in 'sign_in_password', :with => $password
     click_button('Sign In')
+    wait_for_script
   end
-  wait_for_script
   name = should_be_signed_in_as_user($first_name, $email)
   page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
   page.find(:xpath, "//a[@id='mc-header-welcome-name']").text.should eq(name)
@@ -169,7 +169,7 @@ def sign_in_tablet()
   end
   wait_for_script
   name = should_be_signed_in_as_user($first_name, $email)
-  page.find(:xpath, "//div[@class='name-and-arrow']").text.should eq('Hi, '+name)
+  page.find(:xpath, "//div[@class='name-and-arrow']").text.should eq('Hi, '+name+'!')
 end
 
 def sign_in_phone()
@@ -245,4 +245,69 @@ def remove_product_from_shopping_bag
   page.find(:xpath, "//a[@class = 'remove_item_link remove_from_cart']").click
   wait_for_script
   page.should have_content('Your Shopping Bag is Empty')
+end
+
+def get_voting_date_time(expected_voting_time)
+  strlength = expected_voting_time.length
+  days = expected_voting_time[0, 1]+"d"+" "
+
+  if (strlength > 8)
+    hours = expected_voting_time[strlength - 8, 2]
+    if (hours != "00")
+      hours_first_number = hours[0, 1]
+
+      if (hours_first_number == '0')
+        hours = hours[1, 1]+"h"
+      else
+
+        hours = hours+"h"
+      end
+      voting_days = days + hours
+
+    else
+      voting_days = days
+    end
+  else
+    hours = expected_voting_time[0, 2]
+    if (hours != "00")
+      hours_first_number = hours[0, 1]
+
+      if (hours_first_number == '0')
+        hours = hours[1, 1]+"h"
+      else
+        hours = hours+"h"
+      end
+      voting_days = hours
+    else
+      minutes = expected_voting_time[3, 2]
+      minutes_first_number = minutes[0, 1]
+      if (minutes_first_number == '0')
+        minutes = minutes[1, 1]+"m"
+      else
+        minutes = minutes+"m"
+      end
+      voting_days = minutes
+    end
+  end
+  return voting_days
+end
+
+def go_to_voting_in_progress_page
+  go_to_BTB_page
+  case $device_name
+    when :phone
+      page.find(:xpath, "//div[@id='menu-toggle']").click
+      page.find(:xpath, "//a[@href='/be-the-buyer/voting-in-progress']/li/div[contains(text(),'Voting In Progress')]").click
+      page.find(:xpath, "//div[@id = 'menu-toggle']").text.should == "Voting In Progress"
+    else
+      page.find(:xpath, "//a[@href='/be-the-buyer/voting-in-progress']/li/div[contains(text(),'Voting In Progress')]").click
+      page.find(:xpath, "//div[@class='sample-grid']/nav/h2[@class='page-title voting-in-progress']").text.should == 'Voting In Progress'
+  end
+end
+
+def go_to_SDP_page(sample_product_id)
+      page.find(:xpath, "//div[@data-product-id="+sample_product_id+"]/div[@class = 'photo']/a").click
+      wait_until{
+      page.should have_xpath("//div[@class='sdp']")
+      }
 end
