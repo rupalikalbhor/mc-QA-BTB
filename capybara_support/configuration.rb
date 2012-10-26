@@ -40,9 +40,8 @@ module CapybaraSupport
     def self.get_environment_url
       case $environment
         when :demo
-          # 'http://10.3.30.207:3003/be-the-buyer'
-          'http://btb.demo.modcloth.com/be-the-buyer'
-        #'http://btb-ecomm.demo.modcloth.com/be-the-buyer'
+          #'http://btb-ecomm.demo.modcloth.com/be-the-buyer'
+          'http://btb-ecomm.demo.modcloth.com'
         when :stage
           'http://BTB.stage.modcloth.com'
         when :preview

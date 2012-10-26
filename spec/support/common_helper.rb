@@ -5,15 +5,14 @@ require 'spec/support/query_helper'
 def go_to_BTB_page
   case $device_name
     when :phone
-      visit 'http://btb-ecomm.demo.modcloth.com/be-the-buyer/voting-in-progress?device_type=phone'
-      #visit 'http://btb.demo.modcloth.com/be-the-buyer'
-
-      #visit 'http://10.3.30.207:3003/be-the-buyer/voting-in-progress?device_type=phone'
-      #visit 'http://10.3.30.207:3003/be-the-buyer'
+      #visit 'http://btb-ecomm.demo.modcloth.com/be-the-buyer/voting-in-progress?device_type=phone'
+      visit '/'+'/be-the-buyer/voting-in-progress?device_type=phone'
     when :tablet
-      visit 'http://btb-ecomm.demo.modcloth.com/be-the-buyer/voting-in-progress?device_type=tablet'
+      #visit 'http://btb-ecomm.demo.modcloth.com/be-the-buyer/voting-in-progress?device_type=tablet'
+      visit '/'+'/be-the-buyer/voting-in-progress?device_type=tablet'
     else
-      visit 'http://btb-ecomm.demo.modcloth.com/be-the-buyer'
+      #visit 'http://btb-ecomm.demo.modcloth.com/be-the-buyer'
+      visit '/'+'/be-the-buyer'
   end
 end
 
@@ -40,28 +39,6 @@ def get_short_name(name, email)
     name = "#{name[0..14]}..."
   end
   return name
-end
-
-def should_be_signed_in_as_user1()
-  name = $first_name
-  short_name = get_short_name1(name)
-  should_be_signed_in_with_name(short_name)
-end
-
-def get_short_name1(name)
-  if (name == '')
-    email = $email
-    name = email.match(/([\S]+)@/)[1]
-  elsif (name.length > 15)
-    name = "#{name[0..14]}..."
-  end
-  name
-end
-
-def should_be_signed_in_with_name1(name)
-  within('#mc-header') do
-    page.find(:xpath, "//div[@id='member-dropdown']").text.should eq(name)
-  end
 end
 
 def generate_new_email
@@ -93,9 +70,9 @@ def join_desktop()
     click_button('Join')
   end
   wait_for_script
-  name = should_be_signed_in_as_user('', email_address)
+  #name = should_be_signed_in_as_user('', email_address)
   page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
-  page.find(:xpath, "//a[@id='mc-header-welcome-name']").text.should eq(name)
+  #page.find(:xpath, "//a[@id='mc-header-welcome-name']").text.should eq(name)
 end
 
 def join_tablet()
