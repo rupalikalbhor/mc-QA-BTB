@@ -27,17 +27,17 @@ describe 'Grid page - Voting In Progress' do
     end
 
     it '4. Verify pagination displays correctly' do
-      go_to_voting_in_progress_page  # THIS NEED TO remove after bug gets fixed
+      go_to_voting_in_progress_page # THIS NEED TO remove after bug gets fixed
       case $device_name
         when :phone
-          if(expected_sample_count.to_i < 10)
+          if (expected_sample_count.to_i < 10)
             page.find(:xpath, "//span[@class = 'page-info']").text.should == 'Showing all '+expected_sample_count+ ' items'
           else
-            page.find(:xpath, "//span[@class = 'page-info']").text.should == 'Showing 1 - '+expected_sample_count+ ' of ' + expected_sample_count
+            page.find(:xpath, "//span[@class = 'page-info']").text.should == 'Showing 1 - 10' + ' of ' + expected_sample_count
           end
 
         else
-          if(expected_sample_count.to_i < 22)
+          if (expected_sample_count.to_i < 22)
             page.find(:xpath, "//span[@class = 'page-info']").text.should == 'Showing all '+expected_sample_count+ ' items'
           else
             page.find(:xpath, "//span[@class = 'page-info']").text.should == 'Showing 1 - '+expected_sample_count+ ' of ' + expected_sample_count
@@ -58,22 +58,23 @@ describe 'Grid page - Voting In Progress' do
       page.find(:xpath, "//div[@id='breadcrumbs']/a[contains(text(),'ModCloth')]").click
       actual_url = current_url
       visit '/'
-      wait_until{
-      current_url.should == actual_url
+      wait_until {
+        current_url.should == actual_url
       }
       go_to_voting_in_progress_page
+
+      visit '/'+'be-the-buyer/voting-in-progress'
       wait_for_script
 
       actual_url1 = current_url
 
       page.find(:xpath, "//div[@id='breadcrumbs']/a[contains(text(),'Be The Buyer')]").click
-      wait_until{
-      current_url.should == actual_url1
+      wait_until {
+        current_url.should == actual_url1
       }
     end
 
-    it '8. Verify all samples have image' do
-      #sample_count = page.body.match(/of (\d+)/)[1]
+    it '8. Verify all samples have image', :no_phone => true, :no_tablet => true do
       sample_count = expected_sample_count
       i = 1
       case $device_name
@@ -81,11 +82,6 @@ describe 'Grid page - Voting In Progress' do
           while (i != sample_count.to_i+1) do
             page.find(:xpath, "//div[@class = 'sample']["+i.to_s+"]/div/div[@class = 'photo']/a/img[@class = 'primary' and @src[contains(.,'http://s3.amazonaws.com/')]]")
             page.find(:xpath, "//div[@class = 'sample']["+i.to_s+"]/div/div[@class = 'photo']/a/img[@class = 'alternate' and @src[contains(.,'http://s3.amazonaws.com/')]]")
-            i = i+1
-          end
-        else
-          while (i != sample_count.to_i+1) do
-            page.find(:xpath, "//div[@class = 'sample']["+i.to_s+"]/div/div[@class = 'photo']/a/div/div[@class = 'flex-viewport']/ul/li[@class='flex-active-slide']/img[@src[contains(.,'http://s3.amazonaws.com/')]]")
             i = i+1
           end
       end
@@ -145,20 +141,13 @@ describe 'Grid page - Voting In Progress' do
     end
   end
 
-  context "F. Join functionality" do
-      it '1. Verify when user clicks on "join" link, after successful join user navigates back to BTB page.' do
-        go_to_voting_in_progress_page
-        expected_url = current_url
-        join()
-        go_to_voting_in_progress_page # NEED to Remove after bug fix
-        current_url.should == expected_url
-      end
-    end
-
   context "C. Pick or Skip functionality - Logged in user" do
-    it '1. Verify user successfully Sign in' do
-      #sign_in
+    it '1. Verify when user clicks on "join" link, after successful join user navigates back to BTB page.' do
       go_to_voting_in_progress_page
+      visit '/'+'be-the-buyer/voting-in-progress'
+      expected_url = current_url
+      join()
+      current_url.should == expected_url
     end
 
     it '2. Verify if a logged in user clicks on "Pick" then
@@ -260,15 +249,79 @@ describe 'Grid page - Voting In Progress' do
     end
   end
 
-  context "E. Sign out functionality" do
+  context "D. Sign out functionality" do
     it '1. Verify when user clicks on "Sign out" link then user successfully signed out' do
       wait_for_script
       sign_out
     end
   end
 
-  context "D. Pick or skip functionality - Logged out user" do
+  context "E. Sign In functionality" do
+    it '1. Verify user successfully Sign in and after successful sign in user navigates back to BTB page.' do
+      expected_url = current_url
+      click_sign_in_link
+      sign_in
+      current_url.should == expected_url
+      go_to_voting_in_progress_page
+      sign_out
+    end
+  end
 
+  #Scripts are failing because of issue
+  context "F. Pick or skip functionality - Logged out user" do
+    it ' 1. Verify when user click on "Pick" button, Log in window gets displayed and upon successful login following operations happens -
+        - button changes to "Picked,
+        - Pick violater displays on sample image.
+        - voting count increments by 1.' do
+      go_to_voting_in_progress_page
+      no_pick_no_skip_product_id = page.evaluate_script('$("div[class=\"voting-and-notification clearfix\"]").eq(0).parent().attr("data-product-id")').to_s
+      if (no_pick_no_skip_product_id != "")
+        before_vote_count1 = page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='counters']/div[@class='vote-count']").text
+        before_vote_count = before_vote_count1.gsub(",", "")
+        page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-pick']").click
+        sign_in()
+        wait_for_script
+        page.driver.browser.navigate.refresh
+        wait_until {
+          page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-skip']").text.should == "SKIP"
+          page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-pick']").text.should == "PICKED"
+          page.should have_xpath("//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='violator picked']")
+        }
+        after_vote_count1 = page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='counters']/div[@class='vote-count']").text
+        after_vote_count = after_vote_count1.gsub(",", "")
+        after_vote_count.to_i.should == before_vote_count.to_i + 1
+        sign_out
+      else
+        fail "No sample found to pick..so This test case is not executed."
+      end
+
+    end
+
+    it ' 2. Verify when user click on "Skip" button, Log in window gets displayed and upon successful login following operations happens -
+            - button changes to "Skipped,
+            - Skip violater displays on sample image.
+            - voting count increments by 1.' do
+      no_pick_no_skip_product_id = page.evaluate_script('$("div[class=\"voting-and-notification clearfix\"]").eq(0).parent().attr("data-product-id")').to_s
+      if (no_pick_no_skip_product_id != "")
+        before_vote_count1 = page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='counters']/div[@class='vote-count']").text
+        before_vote_count = before_vote_count1.gsub(",", "")
+        page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-skip']").click
+        sign_in()
+        wait_for_script
+        page.driver.browser.navigate.refresh
+        wait_until {
+          page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-skip']").text.should == "SKIPPED"
+          page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div/a[@href = '#vote-pick']").text.should == "PICK"
+          page.should have_xpath("//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='violator skipped']")
+        }
+        after_vote_count1 = page.find(:xpath, "//div[@data-product-id="+no_pick_no_skip_product_id+"]/div[@class='counters']/div[@class='vote-count']").text
+        after_vote_count = after_vote_count1.gsub(",", "")
+        after_vote_count.to_i.should == before_vote_count.to_i + 1
+        sign_out
+      else
+        fail "No sample found to skip..so This test case is not executed."
+      end
+    end
   end
 end
 

@@ -1,4 +1,5 @@
 require 'yajl'
+require 'json'
 
 def get_file(filename)
   File.join(File.dirname(__FILE__), 'data', filename)
@@ -20,5 +21,12 @@ end
 def get_product_data
   @data ||= parse_json_data(ProductData)
 end
+
+def write_json_data(path,tempHash)
+  File.open(path, 'w')do |f|
+    f.write(JSON.pretty_generate(tempHash))
+  end
+end
+
 
 

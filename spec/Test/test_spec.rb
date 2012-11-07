@@ -5,11 +5,16 @@ require 'support/common_helper'
 require 'support/query_helper'
 
 describe 'Testing' do
-    it '2. Verify pagination displays correctly' do
-      go_to_BTB_page
-      sign_in
-      sign_out
-        end
+  it '3. Verify after clicking on "Sign in Comment" button and successful login user navigates back to SDP page.' do
+    visit 'https://btb-ecomm.demo.modcloth.com/signin?gate=btb&known=true'
+        wait_until{
+
+          #page.find(:xpath, "//form[@id='login-form']").visible? == true
+          page.should have_xpath("//form[@id='login-form']")
+
+        }
+
+      end
 
 end
 #----------------------------------------------------------

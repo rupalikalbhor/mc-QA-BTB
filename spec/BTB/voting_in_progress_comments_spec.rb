@@ -6,7 +6,7 @@ describe 'Posting comment on a sample for logged-in user' do
   before(:all) do
     go_to_BTB_page
     wait_for_script
-    sign_in
+    sign_in('')
     wait_for_script
     go_to_voting_in_progress_page
   end

@@ -5,15 +5,24 @@ require 'spec/support/query_helper'
 def go_to_BTB_page
   case $device_name
     when :phone
-      #visit 'http://btb-ecomm.demo.modcloth.com/be-the-buyer/voting-in-progress?device_type=phone'
-      visit '/'+'/be-the-buyer/voting-in-progress?device_type=phone'
+      visit '/'+'be-the-buyer/voting-in-progress?device_type=phone'
     when :tablet
-      #visit 'http://btb-ecomm.demo.modcloth.com/be-the-buyer/voting-in-progress?device_type=tablet'
-      visit '/'+'/be-the-buyer/voting-in-progress?device_type=tablet'
+      visit '/'+'be-the-buyer/voting-in-progress?device_type=tablet'
     else
-      #visit 'http://btb-ecomm.demo.modcloth.com/be-the-buyer'
-      visit '/'+'/be-the-buyer'
+      visit '/'+'be-the-buyer'
   end
+end
+
+def register_user()
+  go_to_BTB_page
+  wait_for_script
+  email_address = join()
+  tempHash = {
+      "email" => email_address,
+      "password" => "testing"}
+  write_json_data(UserData, tempHash)
+  sign_out
+  return email_address
 end
 
 def wait_for_script
@@ -48,21 +57,21 @@ end
 
 #---------------------------------------
 def join()
+  email_address = generate_new_email
   case $device_name
     when :phone
-      join_phone()
+      join_phone(email_address)
     when :tablet
-      join_tablet()
+      join_tablet(email_address)
     else
-      join_desktop()
+      join_desktop(email_address)
   end
 end
 
-def join_desktop()
+def join_desktop(email_address)
   within ('#mc-header-personalization') do
     page.find(:xpath, "//a[@id='mc-header-join']").click
   end
-  email_address = generate_new_email
   within ('#account-form') do
     fill_in 'Email Address', :with => email_address
     fill_in 'Password', :with => $password
@@ -70,31 +79,39 @@ def join_desktop()
     click_button('Join')
   end
   wait_for_script
-  #name = should_be_signed_in_as_user('', email_address)
-  page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
-  #page.find(:xpath, "//a[@id='mc-header-welcome-name']").text.should eq(name)
+  go_to_BTB_page #Need to delete this once issue gets fixed
+  wait_for_script #Need to delete this once issue gets fixed
+  name = should_be_signed_in_as_user('', email_address)
+  wait_until {
+    page.find(:xpath, "//div[@id='mc-header-hello']/span").text == 'Hello,'
+    page.find(:xpath, "//a[@id='mc-header-welcome-name']").text == name
+  }
+  return email_address
 end
 
-def join_tablet()
+def join_tablet(email_address)
   within ('#mc-header-welcome') do
     page.find(:xpath, "//div[@id='mc-header-join']").click
   end
-  email_address = generate_new_email
   within ('#account-form') do
     fill_in 'Email Address', :with => email_address
     fill_in 'Password', :with => $password
     fill_in 'Confirm Password', :with => $password
     click_button('Join')
   end
-  wait_for_script
+  wait_until {
+    name = should_be_signed_in_as_user('', email_address)
+    page.find(:xpath, "//div[@class='name-and-arrow']").text.should eq('Hi, '+name+'!')
+  }
+  return email_address
 end
 
-def join_phone()
+def join_phone(email_address)
   within ('#mc-phone-header-welcome') do
     page.find(:xpath, "//a[@id='mc-phone-header-join']").click
     wait_for_script
   end
-  email_address = generate_new_email
+  #email_address = generate_new_email
   page.find(:xpath, "//a[@href = '/customers/accounts/new']").click
   wait_for_script
   within ('#account-form') do
@@ -104,7 +121,39 @@ def join_phone()
     click_button('Join')
   end
   wait_for_script
-  go_to_BTB_page  #NEED to uncomment this one once issue gets fixed.
+  return email_address
+end
+
+def click_sign_in_link
+  case $device_name
+    when :phone
+      click_phone_sign_in_link
+    when :tablet
+      click_tablet_sign_in_link
+    else
+      click_desktop_sign_in_link
+  end
+end
+
+def click_phone_sign_in_link
+  within ('#mc-phone-header-welcome') do
+    page.find(:xpath, "//a[@id='mc-phone-header-join']").click
+    wait_for_script
+  end
+end
+
+def click_tablet_sign_in_link
+  within ('#mc-header-welcome') do
+    page.find(:xpath, "//div[@id='mc-header-sign-in']").click
+    wait_for_script
+  end
+end
+
+def click_desktop_sign_in_link
+  within ('#mc-header-personalization') do
+    page.find(:xpath, "//a[@id='mc-header-sign-in']").click
+    wait_for_script
+  end
 end
 
 def sign_in()
@@ -119,48 +168,38 @@ def sign_in()
 end
 
 def sign_in_desktop()
-  within ('#mc-header-personalization') do
-    page.find(:xpath, "//a[@id='mc-header-sign-in']").click
-    wait_for_script
-  end
   within ('#login-form') do
     fill_in 'email', :with => $email
     fill_in 'sign_in_password', :with => $password
     click_button('Sign In')
     wait_for_script
   end
-  name = should_be_signed_in_as_user($first_name, $email)
+  name = should_be_signed_in_as_user('', $email)
   page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
   page.find(:xpath, "//a[@id='mc-header-welcome-name']").text.should eq(name)
 end
 
-def sign_in_tablet()
-  within ('#mc-header-welcome') do
-    page.find(:xpath, "//div[@id='mc-header-sign-in']").click
-    wait_for_script
-  end
+def sign_in_tablet
   within ('#login-form') do
     fill_in 'email', :with => $email
     fill_in 'sign_in_password', :with => $password
     click_button('Sign In')
   end
   wait_for_script
-  name = should_be_signed_in_as_user($first_name, $email)
-  page.find(:xpath, "//div[@class='name-and-arrow']").text.should eq('Hi, '+name+'!')
+  wait_until {
+    name = should_be_signed_in_as_user('', $email)
+    page.find(:xpath, "//div[@class='name-and-arrow']").text.should eq('Hi, '+name+'!')
+  }
 end
 
-def sign_in_phone()
-  within ('#mc-phone-header-welcome') do
-    page.find(:xpath, "//a[@id='mc-phone-header-join']").click
-    wait_for_script
-  end
+def sign_in_phone
   within ('#login-form') do
     fill_in 'email', :with => $email
     fill_in 'sign_in_password', :with => $password
     click_button('Sign In')
   end
   wait_for_script
-  name = should_be_signed_in_as_user($first_name, $email)
+  name = should_be_signed_in_as_user('', $email)
   page.find(:xpath, "//div[@id='mc-phone-header-welcome']/span").text.should eq('Hello')
   page.find(:xpath, "//div[@id='mc-phone-header-welcome']/a").text.should eq(name)
 end
@@ -177,17 +216,24 @@ def sign_out()
 end
 
 def sign_out_desktop()
+  wait_until {
+    page.find(:xpath, "//a[@id = 'mc-header-sign-out']").visible? == true
+  }
   page.find(:xpath, "//a[@id = 'mc-header-sign-out']").click
-  wait_for_script
-  within('#mc-header-personalization') do
-    page.should have_link('Sign In')
-  end
+  wait_until {
+    page.find(:xpath, "//a[@id = 'mc-header-sign-in']").visible? == true
+  }
 end
 
 def sign_out_tablet()
   page.find(:xpath, "//div[@class = 'name-and-arrow']/div").click
+  wait_until{
+    page.find(:xpath, "//a[@class = 'sign-out']").visible? == true
+  }
   page.find(:xpath, "//a[@class = 'sign-out']").click
-  page.should have_xpath("//div[@id = 'mc-header-join-or-sign-in']")
+  wait_until{
+    page.find(:xpath, "//div[@id = 'mc-header-join-or-sign-in']").visible? == true
+  }
 end
 
 def sign_out_phone()
@@ -283,8 +329,9 @@ def go_to_voting_in_progress_page
 end
 
 def go_to_SDP_page(sample_product_id)
-      page.find(:xpath, "//div[@data-product-id="+sample_product_id+"]/div[@class = 'photo']/a").click
-      wait_until{
-      page.should have_xpath("//div[@class='sdp']")
-      }
+  page.find(:xpath, "//div[@data-product-id="+sample_product_id+"]/div[@class = 'photo']/a").click
+  wait_until {
+    page.should have_xpath("//div[@class='sdp']")
+  }
 end
+

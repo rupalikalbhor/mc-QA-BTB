@@ -2,6 +2,7 @@ require 'capybara'
 require 'selenium/webdriver'
 require 'support/data_helper'
 
+
 module CapybaraSupport
   class Configuration
     @default_env = :demo
@@ -13,7 +14,7 @@ module CapybaraSupport
       Capybara.reset!
       Capybara.current_driver = Capybara.default_driver
       Capybara.javascript_driver = Capybara.default_driver #default driver when you using @javascript tag
-      Capybara.default_wait_time = 10 #When testing AJAX, we can set a default wait time
+      Capybara.default_wait_time = 50 #When testing AJAX, we can set a default wait time
       Capybara.server_boot_timeout = 30
       Capybara.default_selector = :css #:xpath #default selector , you can change to :css
       Capybara.ignore_hidden_elements = false #Ignore hidden elements when testing, make helpful when you hide or show elements using javascript
@@ -40,7 +41,6 @@ module CapybaraSupport
     def self.get_environment_url
       case $environment
         when :demo
-          #'http://btb-ecomm.demo.modcloth.com/be-the-buyer'
           'http://btb-ecomm.demo.modcloth.com'
         when :stage
           'http://BTB.stage.modcloth.com'
@@ -56,7 +56,7 @@ module CapybaraSupport
     def self.set_user
       case $environment
         when :demo
-          $user = 'demo_sign_in'
+          $user = 'demo'
         when :stage
           $user = 'stage_sign_in'
         when :preview
@@ -70,7 +70,8 @@ module CapybaraSupport
 
     def self.user_info
       self.set_user
-      user_data = get_user_data[$user]
+      #user_data = get_user_data[$user]
+      user_data = get_user_data
       $email = user_data['email']
       $password = user_data['password']
       $first_name = user_data['first-name']
@@ -102,7 +103,7 @@ module CapybaraSupport
         when :desktop
           @browser_size = {:width => 1024, :height => 1024}
         when :phone
-          @browser_size = {:width => 320, :height => 960}
+          @browser_size = {:width => 431, :height => 960}
         when :tablet
           @browser_size = {:width => 1024, :height => 768}
         else
