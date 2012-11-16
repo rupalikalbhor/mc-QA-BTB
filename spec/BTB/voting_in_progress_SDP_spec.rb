@@ -13,13 +13,13 @@ describe 'SDP - Voting In Progress' do
   it '1. Get first sample from grid' do
     go_to_voting_in_progress_page
     wait_for_script
-    FIRST_SAMPLE_PRODUCT_ID = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
-    get_voting_in_progress_SampleDetails(FIRST_SAMPLE_PRODUCT_ID) #Get sample details from database
+    First_sample_product_id = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
+    get_voting_in_progress_SampleDetails(First_sample_product_id) #Get sample details from database
   end
 
   it '2. Verify when user clicks on sample image then user navigates to SDP' do
     sample_number = $sample_name.gsub("Sample ", '')
-    page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'photo']/a[@href='/be-the-buyer/samples/"+FIRST_SAMPLE_PRODUCT_ID+"-sample-"+sample_number+"']").click
+    page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div[@class = 'photo']/a[@href='/be-the-buyer/samples/"+First_sample_product_id+"-sample-"+sample_number+"']").click
     wait_until {
       page.should have_xpath("//div[@class='sdp']")
     }
@@ -58,7 +58,7 @@ describe 'SDP - Voting In Progress' do
       commentable_name = $sample_name
       expected_comment_count = get_voting_in_progress_CommentCount(commentable_name)
       if (expected_comment_count.to_i > 0)
-        page.find(:xpath, "//a[@href = '#comments']").text.should == "View All " +expected_comment_count+ " Comments"
+        page.find(:xpath, "//a[@href = '#comments']").text.should == "View All " +expected_comment_count+ " Comment"
         within ('.new-comment') do
           page.should have_link "View All " +expected_comment_count+ " Comments"
         end
@@ -69,22 +69,22 @@ describe 'SDP - Voting In Progress' do
   context 'C. Sample detail box' do
     it '1. Verify sample name is displaying correctly' do
       expected_sample_name = $sample_name #Get sample name from database
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class='sample']/div[@class='name']").text.should == expected_sample_name
+      page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div/div[@class='sample']/div[@class='name']").text.should == expected_sample_name
     end
 
     it '2. Verify pin icon is displaying in sample box' do
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class='sample']/div[@class = 'pin']")
+      page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div/div[@class='sample']/div[@class = 'pin']")
     end
 
     it '3. Verify correct dollar amount appears above each sample' do
       expected_sample_price = $sample_price
       expected_sample_price = "$"+expected_sample_price.insert(-3, '.')
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class='sample']/div[@class = 'price']").text.should == expected_sample_price
+      page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div/div[@class='sample']/div[@class = 'price']").text.should == expected_sample_price
     end
 
     it '4. Verify all the samples on this page have "Pick","Skip" buttons.' do
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class='sample']/div/a[@class = 'skip']").text.should == "SKIP"
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class='sample']/div/a[@class = 'pick']").text.should == "PICK"
+      page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div/div[@class='sample']/div/a[@class = 'skip']").text.should == "SKIP"
+      page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div/div[@class='sample']/div/a[@class = 'pick']").text.should == "PICK"
     end
   end
 
@@ -92,7 +92,7 @@ describe 'SDP - Voting In Progress' do
     it '1. Verify sample displays Vote count' do
       expected_vote_count = $vote_count
 
-      actual = page.find(:xpath, "//aside/div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
+      actual = page.find(:xpath, "//aside/div[@data-product-id="+First_sample_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
       actual_vote_count = actual.gsub(",", "")
       actual_vote_count.should == expected_vote_count
     end
@@ -100,7 +100,7 @@ describe 'SDP - Voting In Progress' do
     it '2. Verify sample displays comment count' do
       commentable_name = $sample_name
       expected_comment_count = get_voting_in_progress_CommentCount(commentable_name)
-      page.find(:xpath, "//aside/div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class='counter'][2]/div[@class = 'comment-count']").text.should == expected_comment_count
+      page.find(:xpath, "//aside/div[@data-product-id="+First_sample_product_id+"]/div[@class='counter'][2]/div[@class = 'comment-count']").text.should == expected_comment_count
     end
 
     it '3. Verify user see message "More Samples - Keep Voting!"' do
@@ -254,7 +254,7 @@ describe 'SDP - Voting In Progress' do
     it "1. Verify when user is on 1st sample SDP page then user see only 'Next' arrow." do
       go_to_voting_in_progress_page
       sample_number = $sample_name.gsub("Sample ", '')
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'photo']/a[@href='/be-the-buyer/samples/"+FIRST_SAMPLE_PRODUCT_ID+"-sample-"+sample_number+"']").click
+      page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div[@class = 'photo']/a[@href='/be-the-buyer/samples/"+First_sample_product_id+"-sample-"+sample_number+"']").click
       wait_until {
         page.should have_xpath("//div[@class='sdp']")
       }
@@ -296,8 +296,8 @@ describe 'SDP - Voting In Progress' do
       register_user
       go_to_voting_in_progress_page
       wait_for_script
-      FIRST_SAMPLE_PRODUCT_ID = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
-      go_to_SDP_page(FIRST_SAMPLE_PRODUCT_ID)
+      #FIRST_SAMPLE_PRODUCT_ID = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
+      go_to_SDP_page(First_sample_product_id)
     end
 
     it '3. Verify after clicking on "Sign in Comment" button and successful login user navigates back to SDP page.' do
@@ -310,7 +310,6 @@ describe 'SDP - Voting In Progress' do
       expected_url.should == actual_url
     end
 
-
     it "2. Verify user see 'Write a comment' text." do
       within('.new-comment .new-comment-header') do
         page.should have_content ('Write a Comment')
@@ -318,7 +317,6 @@ describe 'SDP - Voting In Progress' do
       page.find(:xpath, "//textarea[@name = 'new-comment-text' and @placeholder = 'Write a comment...']")
       sign_out()
     end
-
 
     it ' 4. Verify when user click on "Pick" button, Log in window gets displayed and upon successful login following operations happens -
             - button changes to "Picked,

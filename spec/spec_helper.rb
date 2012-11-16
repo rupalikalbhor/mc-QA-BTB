@@ -8,8 +8,8 @@ RSpec.configure do |config|
 
   config.before(:all) do
     CapybaraSupport::Configuration.reset_capybara
-    email = register_user()
-    puts "Following user registered successfully: #{email}"
+    #email = register_user()
+    #puts "Following user registered successfully: #{email}"
   end
   config.include Capybara::DSL
   CapybaraSupport::Configuration.configure_environment

@@ -142,7 +142,7 @@ def query_result(query_name, res)
       #puts "Sample name is ****************- #{$sample_name}"
       #puts "Sample price is ****************- #{$sample_price}"
       #puts "Vote count is ****************- #{$vote_count}"
-      puts "voting time is ****************- #{$voting_time}"
+      #puts "voting time is ****************- #{$voting_time}"
     else
       value = res.getvalue(0, 0)
       return value
