@@ -12,9 +12,16 @@ describe 'Agree - Logged-in user' do
   context '1. Verify user can agree to a comment by other users.' do
     it 'Clicking on "Agree" link changes to "You Agree"' do
       go_to_SDP_with_comments()
+      if ($device_name == :phone)
+        page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+      end
       Comment_id = page.evaluate_script("$('div[class="+'agree'+"]').eq(0).parent().parent().attr('data-comment-id')").to_s
+
       page.find(:xpath, "//div[@data-comment-id=#{Comment_id}]/div[@class = 'metadata']/div[@class = 'agree']/a").click
       page.driver.browser.navigate.refresh
+      if ($device_name == :phone)
+        page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+      end
       page.find(:xpath, "//div[@data-comment-id=#{Comment_id}]/div[@class = 'metadata']/div[@class = 'agree agreed']/a").text.should eq('You Agree')
     end
 
@@ -33,6 +40,9 @@ describe 'Agree - Logged-in user' do
       end
       page.find(:xpath, "//div[@data-comment-id=#{Agreed_comment_id}]/div[@class = 'metadata']/div[@class = 'agree']/a").click
       page.driver.browser.navigate.refresh
+      if ($device_name == :phone)
+        page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+      end
       Actual_agree_count = page.find(:xpath, "//div[@data-comment-id=#{Agreed_comment_id}]/div[@class = 'metadata']/div[@class = 'agree agreed']/span").text
       Actual_agree_count.to_i.should == (expected_agree_count.to_i + 1)
     end
@@ -51,6 +61,7 @@ describe 'Agree - Logged-in user' do
   end
 end
 
+# This function will navigate user to SDP where sample has atleast 1 comment
 def go_to_SDP_with_comments()
   sample_count = get_voting_in_progress_SampleCount()
   i = 1

@@ -13,7 +13,7 @@ describe 'Posting comment on a sample for logged-in user' do
   end
 
   context "I. UI" do
-    it '1. Go to SDP' do
+    it '1. Go to first sample SDP page.' do
       first_sample_product_id = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
       go_to_SDP_page(first_sample_product_id)
       wait_for_script
@@ -58,7 +58,7 @@ describe 'Posting comment on a sample for logged-in user' do
       end
     end
 
-    it "7. Verify when sample has atleast 1 comment then user see 'View x all comments' link" do
+    it "7. Verify when sample has atleast 1 comment then user see 'View x all comments' link", :no_phone => true do
       commentable_name = $sample_name
       expected_comment_count = get_voting_in_progress_CommentCount(commentable_name)
       if (expected_comment_count.to_i > 0)
@@ -70,14 +70,12 @@ describe 'Posting comment on a sample for logged-in user' do
     end
   end
 
-
   context "II. No voting" do
-    it '1. Go to Sample where user is not voted yet' do
+    it '1. Go to Sample SDP where user is not voted yet' do
       go_to_voting_in_progress_page
       wait_for_script
 
       no_pick_no_skip_product_id = page.evaluate_script('$("div[class=\"voting-and-notification clearfix\"]").eq(0).parent().attr("data-product-id")').to_s
-
       if (no_pick_no_skip_product_id != "")
         go_to_SDP_page(no_pick_no_skip_product_id)
       else
@@ -87,7 +85,7 @@ describe 'Posting comment on a sample for logged-in user' do
 
     it 'New comment' do
       currentDateTime = Time.now.strftime('%Y-%m-%d-%H-%M-%S')
-      New_comment = 'New comment is added by QA ' +currentDateTime.to_s #@@comment is a class variable.
+      New_comment = 'New comment is added by QA ' +currentDateTime.to_s
       New_comment_id = page.evaluate_script("$('div[class="+"content"+"]').text('Greate Dress').eq(0).parent().attr('data-comment-id')").to_s
     end
 
@@ -99,12 +97,14 @@ describe 'Posting comment on a sample for logged-in user' do
         fill_in 'new-comment-text', :with => New_comment
         page.find("input[@type='submit']").click
         page.driver.browser.navigate.refresh #Need to delete this line after bug gets fixed
+        if ($device_name == :phone)
+          page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+        end
         page.find(:xpath, "//div[@class = 'comment-list']/ul/li/div/div").text.should eq(New_comment)
       end
     end
 
     it '3. Verify the voting status appears as blank' do
-      #page.should_not have_xpath("//div[@data-comment-id = "+New_comment_id+"]/div[@class = 'vote']")
       page.find(:xpath, "//div[@data-comment-id = "+New_comment_id+"]/div[@class = 'vote']").text.should == ""
     end
   end
@@ -128,15 +128,24 @@ describe 'Posting comment on a sample for logged-in user' do
         fill_in 'new-comment-text', :with => New_comment
         page.find("input[@type='submit']").click
         #page.driver.browser.navigate.refresh #Need to delete this line after bug gets fixed
+        if ($device_name == :phone)
+          page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+        end
+
         page.find(:xpath, "//div[@class = 'comment-list']/ul/li/div/div").text.should eq(New_comment)
       end
     end
 
     it '3. Verify after page refresh the comment is retained and comment count increments by 1' do
-      expected_comment_count = page.evaluate_script("$('.comment-list ul li').size()").to_s
+      #expected_comment_count = page.evaluate_script("$('.comment-list ul li').size()").to_s
+      expected_comment_count = page.body.match(/of (\d+)/)[1]
       page.driver.browser.navigate.refresh
+      if ($device_name == :phone)
+        page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+      end
       page.find(:xpath, "//div[@class = 'comment-list']/ul/li/div/div").text.should eq(New_comment)
-      actual_comment_count = page.evaluate_script("$('.comment-list ul li').size()").to_s
+      #actual_comment_count = page.evaluate_script("$('.comment-list ul li').size()").to_s
+      actual_comment_count = page.body.match(/of (\d+)/)[1]
       actual_comment_count.to_i.should eq(expected_comment_count.to_i + 1)
     end
 
@@ -166,10 +175,14 @@ describe 'Posting comment on a sample for logged-in user' do
       within ('.new-comment') do
         page.find(:xpath, "//textarea[@name='new-comment-text']").click
         @currentDateTime = Time.now.strftime('%Y-%m-%d-%H-%M-%S')
-        Long_comment = 'New comment is added by QA1' +@currentDateTime.to_s+ 'New comment is added by QA2, New comment is added by QA3, New comment is added by QA4, New comment is added by QA5, New comment is added by QA6, New comment is added by QA7, New comment is added by QA8, New comment is added by QA9, New comment is added by QA10, New comment is added by QA11, New comment is added by QA12, New comment is added by QA13, New comment is added by QA14, New comment is added by QA15, New comment is added by QA16, New comment is added by QA17, New comment is added by QA18, New comment is added by QA19, New comment is added by QA20'
+        Long_comment = 'New comment is added by QA1' +@currentDateTime.to_s+ ' New comment is added by QA2, New comment is added by QA3, New comment is added by QA4, New comment is added by QA5, New comment is added by QA6, New comment is added by QA7, New comment is added by QA8, New comment is added by QA9, New comment is added by QA10, New comment is added by QA11, New comment is added by QA12'
         fill_in 'new-comment-text', :with => Long_comment
         page.find("input[@type='submit']").click
         page.driver.browser.navigate.refresh
+        if ($device_name == :phone)
+          page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+          page.find(:xpath, "//div[@class = 'comment-list']/ul/li/div/div/span/a").click
+        end
         page.find(:xpath, "//div[@class = 'comment-list']/ul/li/div/div").text.should eq(Long_comment)
       end
     end
@@ -181,6 +194,9 @@ describe 'Posting comment on a sample for logged-in user' do
         fill_in 'new-comment-text', :with => blocked_word_comment
         page.find("input[@type='submit']").click
         page.driver.browser.navigate.refresh
+        if ($device_name == :phone)
+          page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+        end
         page.find(:xpath, "//div[@class = 'comment-list']/ul/li/div/div").text.should_not eq(blocked_word_comment)
       end
     end
@@ -205,6 +221,9 @@ describe 'Posting comment on a sample for logged-in user' do
         fill_in 'new-comment-text', :with => Pick_comment
         page.find("input[@type='submit']").click
         page.driver.browser.navigate.refresh
+        if ($device_name == :phone)
+          page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+        end
         page.find(:xpath, "//div[@class = 'comment-list']/ul/li/div/div").text.should eq(Pick_comment)
       end
     end
@@ -235,6 +254,9 @@ describe 'Posting comment on a sample for logged-in user' do
         fill_in 'new-comment-text', :with => Skip_comment
         page.find("input[@type='submit']").click
         page.driver.browser.navigate.refresh
+        if ($device_name == :phone)
+          page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+        end
         page.find(:xpath, "//div[@class = 'comment-list']/ul/li/div/div").text.should eq(Skip_comment)
       end
     end
@@ -263,6 +285,9 @@ describe 'Posting comment on a sample for logged-in user' do
         fill_in 'new-comment-text', :with => Blocked_comment
         page.find("input[@type='submit']").click
         page.driver.browser.navigate.refresh
+        if ($device_name == :phone)
+          page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+        end
         page.find(:xpath, "//div[@class = 'comment-list']/ul/li/div/div").text.should_not eq(Blocked_comment)
       end
     end
