@@ -5,11 +5,13 @@ require 'spec/support/query_helper'
 def go_to_BTB_page
   case $device_name
     when :phone
-      visit '/'+'be-the-buyer/voting-in-progress?device_type=phone'
+      #visit '/'+'be-the-buyer/voting-in-progress?device_type=phone'
+      visit '/'+'be-the-buyer/voting-in-progress'
     when :tablet
-      visit '/'+'be-the-buyer/voting-in-progress?device_type=tablet'
+      #visit '/'+'be-the-buyer/voting-in-progress?device_type=tablet'
+      visit '/'+'be-the-buyer/voting-in-progress'
     else
-      visit '/'+'be-the-buyer'
+      visit '/'+'be-the-buyer/voting-in-progress'
   end
 end
 
@@ -20,7 +22,12 @@ def register_user()
   tempHash = {
       "email" => email_address,
       "password" => "testing"}
-  write_json_data(UserData, tempHash)
+  write_json_data(RegularUserData, tempHash)
+
+  user_data = get_regular_user_data      #set email & password constant values
+  $email = user_data['email']
+  $password = user_data['password']
+  puts "Email is: #{$email}"
   sign_out
   return email_address
 end
@@ -111,13 +118,12 @@ def join_phone(email_address)
     page.find(:xpath, "//a[@id='mc-phone-header-join']").click
     wait_for_script
   end
-  #email_address = generate_new_email
-  page.find(:xpath, "//a[@href = '/customers/accounts/new']").click
+  #page.find(:xpath, "//a[@href = '/customers/accounts/new']").click
   wait_for_script
-  within ('#account-form') do
-    fill_in 'Email Address', :with => email_address
-    fill_in 'Password', :with => $password
-    fill_in 'Confirm Password', :with => $password
+  within ('#signup-form') do
+    fill_in 'account_email', :with => email_address
+    fill_in 'account_password', :with => $password
+    fill_in 'account-password-confirmation', :with => $password
     click_button('Join')
   end
   wait_for_script
@@ -143,10 +149,8 @@ def click_phone_sign_in_link
 end
 
 def click_tablet_sign_in_link
-  within ('#mc-header-welcome') do
-    page.find(:xpath, "//div[@id='mc-header-sign-in']").click
+    page.find(:xpath, "//a[@id='mc-header-sign-in']").click
     wait_for_script
-  end
 end
 
 def click_desktop_sign_in_link
@@ -193,15 +197,104 @@ def sign_in_tablet
 end
 
 def sign_in_phone
-  within ('#login-form') do
+  within ('#signin-form') do
     fill_in 'email', :with => $email
-    fill_in 'sign_in_password', :with => $password
+    fill_in 'password', :with => $password
     click_button('Sign In')
   end
   wait_for_script
   name = should_be_signed_in_as_user('', $email)
   page.find(:xpath, "//div[@id='mc-phone-header-welcome']/span").text.should eq('Hello')
   page.find(:xpath, "//div[@id='mc-phone-header-welcome']/a").text.should eq(name)
+end
+
+def sign_in_with_facebook()
+  case $device_name
+    when :phone
+      sign_in_facebook_phone()
+    when :tablet
+      sign_in_facebook_tablet()
+    else
+      sign_in_facebook_desktop()
+  end
+end
+
+def sign_in_facebook_desktop
+  page.find(:xpath, "//a[@class = 'facebook-connect-button']").click
+  #user_data = get_user_data['facebook']
+  user_data = get_facebook_user_data
+
+  email = user_data['email']
+  password = user_data['password']
+  name = user_data['name']
+
+  new_window = page.driver.browser.window_handles.last
+  page.within_window new_window do
+    page.find(:xpath, "//form[@id = 'login_form']")
+    within ('#login_form') do
+      fill_in 'email', :with => email
+      fill_in 'pass', :with => password
+      click_button('Log In')
+    end
+  end
+
+  new_window = page.driver.browser.window_handles.last
+  page.within_window new_window do
+    go_to_BTB_page
+    page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
+    page.find(:xpath, "//a[@id='mc-header-welcome-name']").text.should eq(name)
+  end
+end
+
+def sign_in_facebook_tablet
+  page.find(:xpath, "//a[@class = 'facebook-connect-button']").click
+  user_data = get_facebook_user_data
+  #user_data = get_user_data['facebook']
+  email = user_data['email']
+  password = user_data['password']
+  name = user_data['name']
+
+  new_window = page.driver.browser.window_handles.last
+  page.within_window new_window do
+    page.find(:xpath, "//form[@id = 'login_form']")
+    within ('#login_form') do
+      fill_in 'email', :with => email
+      fill_in 'pass', :with => password
+      click_button('Log In')
+    end
+  end
+
+  new_window = page.driver.browser.window_handles.last
+  page.within_window new_window do
+    go_to_BTB_page
+    page.find(:xpath, "//div[@id='mc-phone-header-welcome']/span").text.should eq('Hello')
+    page.find(:xpath, "//div[@id='mc-phone-header-welcome']/a").text.should eq(name)
+  end
+end
+
+def sign_in_facebook_phone
+  page.find(:xpath, "//a[@class = 'facebook-connect-button']").click
+  user_data = get_facebook_user_data
+  email = user_data['email']
+  password = user_data['password']
+  name = user_data['name']
+
+  new_window = page.driver.browser.window_handles.last
+  page.within_window new_window do
+    page.find(:xpath, "//form[@id = 'login_form']")
+    within ('#login_form') do
+      fill_in 'email', :with => email
+      fill_in 'pass', :with => password
+      click_button('Log In')
+    end
+  end
+
+  new_window = page.driver.browser.window_handles.last
+  page.within_window new_window do
+    go_to_BTB_page
+    page.find(:xpath, "//div[@id='mc-phone-header-welcome']/span").text.should eq('Hello')
+    page.find(:xpath, "//div[@id='mc-phone-header-welcome']/a").text.should eq(name)
+  end
 end
 
 def sign_out()
@@ -227,11 +320,11 @@ end
 
 def sign_out_tablet()
   page.find(:xpath, "//div[@class = 'name-and-arrow']/div").click
-  wait_until{
+  wait_until {
     page.find(:xpath, "//a[@class = 'sign-out']").visible? == true
   }
   page.find(:xpath, "//a[@class = 'sign-out']").click
-  wait_until{
+  wait_until {
     page.find(:xpath, "//div[@id = 'mc-header-join-or-sign-in']").visible? == true
   }
 end
@@ -335,3 +428,14 @@ def go_to_SDP_page(sample_product_id)
   }
 end
 
+def go_to_available_now_page
+  case $device_name
+    when :phone
+      page.find(:xpath, "//div[@id='menu-toggle']").click
+      page.find(:xpath, "//a[@href='/be-the-buyer/available-now']/li/div[contains(text(),'Available Now')]").click
+    else
+      page.find(:xpath, "//a[@href = '/be-the-buyer/available-now']").click
+    #page.find(:xpath, "//a[@href='/be-the-buyer/voting-in-progress']/li/div[contains(text(),'Voting In Progress')]").click
+    #page.find(:xpath, "//div[@class='sample-grid']/nav/h2[@class='page-title voting-in-progress']").text.should == 'Voting In Progress'
+  end
+end

@@ -1,0 +1,10 @@
+== String#snakecase
+
+  require 'facets/string/snakecase'
+
+  'my_name'.snakecase.assert == 'my_name'
+
+  'MyName'.snakecase.assert == 'my_name'
+
+  'URI'.snakecase.assert == 'uri'
+

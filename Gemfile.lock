@@ -9,21 +9,20 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
-    capybara-screenshot (0.3)
-      capybara (>= 1.0)
-    capybara-webkit (0.11.0)
-      capybara (>= 1.0.0, < 1.2)
-      json
+    capybara-screenshot (0.3.1)
+      capybara (>= 1.0, < 3)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
     diff-lcs (1.1.3)
-    ffi (1.1.5)
+    facets (2.9.3)
+    ffi (1.2.0)
     json (1.7.5)
-    libwebsocket (0.1.5)
+    libwebsocket (0.1.7.1)
       addressable
+      websocket
     magic_encoding (0.0.2)
     mime-types (1.19)
-    multi_json (1.3.7)
+    multi_json (1.4.0)
     nokogiri (1.5.5)
     postgres-pr (0.6.3)
     rack (1.4.1)
@@ -43,6 +42,11 @@ GEM
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
+    webdriver-user-agent (0.2.0)
+      facets
+      json
+      selenium-webdriver
+    websocket (1.0.4)
     xpath (0.1.4)
       nokogiri (~> 1.3)
     yajl-ruby (1.1.0)
@@ -51,11 +55,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  capybara (= 1.1.2)
+  capybara
   capybara-screenshot
-  capybara-webkit (= 0.11.0)
   magic_encoding
   postgres-pr
   rspec (= 2.10.0)
   selenium-webdriver
+  webdriver-user-agent
   yajl-ruby (= 1.1.0)

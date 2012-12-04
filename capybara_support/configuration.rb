@@ -1,6 +1,8 @@
 require 'capybara'
 require 'selenium/webdriver'
 require 'support/data_helper'
+require 'selenium-webdriver'
+require 'webdriver-user-agent'
 
 
 module CapybaraSupport
@@ -12,7 +14,7 @@ module CapybaraSupport
 
     def self.reset_capybara
       Capybara.reset!
-      Capybara.current_driver = Capybara.default_driver
+      #Capybara.current_driver = Capybara.default_driver
       Capybara.javascript_driver = Capybara.default_driver #default driver when you using @javascript tag
       Capybara.default_wait_time = 50 #When testing AJAX, we can set a default wait time
       Capybara.server_boot_timeout = 30
@@ -26,8 +28,9 @@ module CapybaraSupport
       $device_name = ENV.fetch('DEVICE_NAME', @default_device).to_sym
 
       Capybara.app_host = self.get_environment_url
-      Capybara.default_driver = ENV.fetch('DEFAULT_DRIVER', 'selenium').to_sym
-      Capybara.default_driver = :selenium
+      #Capybara.default_driver = ENV.fetch('DEFAULT_DRIVER', 'selenium').to_sym
+      Capybara.default_driver = ENV.fetch('DEFAULT_DRIVER', self.set_default_driver).to_sym
+      #Capybara.default_driver = :selenium
       puts "Set the Capybara default driver to #{Capybara.default_driver}"
       puts "Tests are running on environment: #{$environment}"
       puts "Window size is set for: #{$device_name}"
@@ -53,38 +56,60 @@ module CapybaraSupport
       end
     end
 
-    def self.set_user
-      case $environment
-        when :demo
-          $user = 'demo'
-        when :stage
-          $user = 'stage_sign_in'
-        when :preview
-          $user = 'preview_sign_in'
-        when :production
-          $user = 'prod_sign_in'
-        else
-          puts 'Invalid environment name..Running on default environment STAGE !!!!'
+    #def self.set_user
+    #  case $environment
+    #    when :demo
+    #      $user = 'demo'
+    #    when :stage
+    #      $user = 'stage_sign_in'
+    #    when :preview
+    #      $user = 'preview_sign_in'
+    #    when :production
+    #      $user = 'prod_sign_in'
+    #    else
+    #      puts 'Invalid environment name..Running on default environment STAGE !!!!'
+    #  end
+    #end
+
+    def self.user_info
+      #self.set_user
+      #user_data = get_user_data['modcloth']
+      user_data = get_regular_user_data
+      $email = user_data['email']
+      $password = user_data['password']
+    end
+
+    def self.set_default_driver
+      case $device_name
+        when :desktop
+          'selenium'
+        when :phone
+          :iphone
+        when :tablet
+          :ipad
       end
     end
 
-    def self.user_info
-      self.set_user
-      #user_data = get_user_data[$user]
-      user_data = get_user_data
-      $email = user_data['email']
-      $password = user_data['password']
-      $first_name = user_data['first-name']
-      $last_name = user_data['last_name']
+    def self.get_user_agent(profile)
+      case $device_name
+        when :desktop
+          ""
+        when :phone  #iPhone with ios = 5.0
+          #"iPhone"
+
+          profile['general.useragent.override'] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3"
+        when :tablet #iPad with ios = 5.0
+          profile['general.useragent.override'] = "Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3"
+      end
     end
 
     def self.get_browser
       case @browser_name
         when :firefox
           puts "Running tests using FIREFOX browser"
-          profile = Selenium::WebDriver::Firefox::Profile.new
-          profile.assume_untrusted_certificate_issuer = false
-          Capybara.register_driver :selenium do |app|
+          Capybara.register_driver Capybara.default_driver do |app|
+            profile = Selenium::WebDriver::Firefox::Profile.new
+            get_user_agent(profile)
             Capybara::Selenium::Driver.new(app, :profile => profile)
           end
 
@@ -113,10 +138,15 @@ module CapybaraSupport
 
     def self.resize_browser_window()
       self.set_browser_size
-      if ($device_name == :desktop)
-        Capybara.current_session.driver.browser.manage.window.maximize
-      else
-        Capybara.current_session.driver.browser.manage.window.resize_to(@browser_size[:width], @browser_size[:height])
+      case $device_name
+        when :desktop
+          Capybara.current_session.driver.browser.manage.window.maximize
+        when :phone
+          Capybara.current_session.driver.browser.manage.window.resize_to(@browser_size[:width], @browser_size[:height])
+        when :tablet
+          Capybara.current_session.driver.browser.manage.window.resize_to(@browser_size[:width], @browser_size[:height])
+        else
+          puts 'Invalid device name..Running on default device DESKTOP !!!!'
       end
     end
   end
