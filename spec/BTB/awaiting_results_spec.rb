@@ -1,4 +1,4 @@
-require 'spec/support/shared_example_BTB'
+# encoding: utf-8
 require 'spec/support/common_helper'
 
 describe 'Awaiting Results page' do

@@ -1,13 +1,12 @@
 require 'spec/support/common_helper'
 
 describe 'Phone Header' do
-  before(:all) do
-    go_to_BTB_page
-    wait_for_script
-    click_sign_in_link
-    sign_in
-  end
+
   context 'UI' do
+    before(:all) do
+      go_to_BTB_page
+      wait_for_script
+    end
 
     it 'Verify clicking on modcloth logo loads modcloth home page.' do
       page.find(:xpath, "//div[@class = 'logo']").click
@@ -58,12 +57,12 @@ describe 'Phone Header' do
       page.find(:xpath, "//a[@id = 'mc-phone-header-bag']").text.should == "0"
     end
 
-    #it 'Verify user see Join or Sign in link' do
-    #  page.should have_xpath("//a[@id = 'mc-phone-header-join']")
-    #  page.find(:xpath, "//a[@id = 'mc-phone-header-join']").text.should == "Join or Sign In"
-    #end
+    it 'Verify user see Join or Sign in link' do
+      page.should have_xpath("//a[@id = 'mc-phone-header-join']")
+      page.find(:xpath, "//a[@id = 'mc-phone-header-join']").text.should == "Join or Sign In"
+    end
 
-    it 'Verify Menu links are working correctly.' do
+    it 'PENDING Verify Menu links are working correctly.' do #Need to add style gallary & BTB links
       menu_count = 1
       begin
         page.find(:xpath, "//div[@id = 'mc-header-menu-toggle']").click
@@ -110,12 +109,6 @@ describe 'Phone Header' do
     #  wait_for_script
     #  page.should have_xpath("//div[@id = 'btb-logo']")
     #end
-
-    after(:all) do
-      go_to_BTB_page
-      wait_for_script
-      sign_out
-    end
   end
 
   context "Functional Tests" do
@@ -186,7 +179,6 @@ describe 'Phone Header' do
     it 'Valid case' do
       go_to_available_now_page
       get_product = page.evaluate_script('$("#product-grid li:eq(0) p").text()').to_s
-      puts "Prdouct is: #{get_product}"
       if (get_product == '')
         fail "No product found for Search test cases."
       else
@@ -216,6 +208,14 @@ describe 'Phone Header' do
       page.find(:xpath, "//h1[@id = 'category-header']/span").text.should == "\""+search_text+"\""
       page.find(:xpath, "//div[@id = 'no-results-block']/p").text.should == "Sorry, no results were found."
       page.find(:xpath, "//div[@id = 'no-results-block']/p[@class = 'try-again']").text.should == "Please try another search."
+    end
+
+    it 'Verify user see correct shopping bag count on BTB site and on modcloth site.' do
+      btb_bag_count = page.find(:xpath, "//a[@id = 'mc-phone-header-bag']").text
+      page.find(:xpath, "//a[@id = 'mc-phone-header-bag']").click
+      wait_for_script
+      modcloth_bag_count = page.find(:xpath, "//a[@id = 'header-shopping-bag-link']/span").text
+      btb_bag_count.to_i.should == modcloth_bag_count.to_i
     end
   end
 
