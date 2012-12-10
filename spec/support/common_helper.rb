@@ -3,16 +3,18 @@ require 'spec/support/data_helper'
 require 'spec/support/query_helper'
 
 def go_to_BTB_page
-  case $device_name
-    when :phone
-      #visit '/'+'be-the-buyer/voting-in-progress?device_type=phone'
-      visit '/'+'be-the-buyer/voting-in-progress'
-    when :tablet
-      #visit '/'+'be-the-buyer/voting-in-progress?device_type=tablet'
-      visit '/'+'be-the-buyer/voting-in-progress'
-    else
-      visit '/'+'be-the-buyer/voting-in-progress'
-  end
+  visit '/'+'be-the-buyer/voting-in-progress'
+
+  #case $device_name
+  #  when :phone
+  #    #visit '/'+'be-the-buyer/voting-in-progress?device_type=phone'
+  #    visit '/'+'be-the-buyer/voting-in-progress'
+  #  when :tablet
+  #    #visit '/'+'be-the-buyer/voting-in-progress?device_type=tablet'
+  #    visit '/'+'be-the-buyer/voting-in-progress'
+  #  else
+  #    visit '/'+'be-the-buyer/voting-in-progress'
+  #end
 end
 
 def register_user()
@@ -24,7 +26,7 @@ def register_user()
       "password" => "testing"}
   write_json_data(RegularUserData, tempHash)
 
-  user_data = get_regular_user_data      #set email & password constant values
+  user_data = get_regular_user_data #set email & password constant values
   $email = user_data['email']
   $password = user_data['password']
   puts "Email is: #{$email}"
@@ -95,9 +97,7 @@ def join_desktop(email_address)
 end
 
 def join_tablet(email_address)
-  #within ('#mc-header-welcome') do
-    page.find(:xpath, "//a[@id='mc-header-join']").click
-  #end
+  page.find(:xpath, "//a[@id='mc-header-join']").click
   within ('#account-form') do
     fill_in 'Email Address', :with => email_address
     fill_in 'Password', :with => $password
@@ -106,7 +106,8 @@ def join_tablet(email_address)
   end
   wait_until {
     name = should_be_signed_in_as_user('', email_address)
-    page.find(:xpath, "//div[@class='name-and-arrow']").text.should eq('Hi, '+name+'!')
+    page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
+    page.find(:xpath, "//div[@id='mc-header-hello']/a").text.should eq(name)
   }
   return email_address
 end
@@ -147,8 +148,8 @@ def click_phone_sign_in_link
 end
 
 def click_tablet_sign_in_link
-    page.find(:xpath, "//a[@id='mc-header-sign-in']").click
-    wait_for_script
+  page.find(:xpath, "//a[@id='mc-header-sign-in']").click
+  wait_for_script
 end
 
 def click_desktop_sign_in_link
@@ -190,7 +191,8 @@ def sign_in_tablet
   wait_for_script
   wait_until {
     name = should_be_signed_in_as_user('', $email)
-    page.find(:xpath, "//div[@class='name-and-arrow']").text.should eq('Hi, '+name+'!')
+    page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
+    page.find(:xpath, "//div[@id='mc-header-hello']/a").text.should eq(name)
   }
 end
 
@@ -236,18 +238,17 @@ def sign_in_facebook_desktop
     end
   end
 
-  new_window = page.driver.browser.window_handles.last
-  page.within_window new_window do
+  #new_window = page.driver.browser.window_handles.last
+  #page.within_window new_window do
     go_to_BTB_page
     page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
     page.find(:xpath, "//a[@id='mc-header-welcome-name']").text.should eq(name)
-  end
+  #end
 end
 
 def sign_in_facebook_tablet
   page.find(:xpath, "//a[@class = 'facebook-connect-button']").click
   user_data = get_facebook_user_data
-  #user_data = get_user_data['facebook']
   email = user_data['email']
   password = user_data['password']
   name = user_data['name']
@@ -261,13 +262,9 @@ def sign_in_facebook_tablet
       click_button('Log In')
     end
   end
-
-  new_window = page.driver.browser.window_handles.last
-  page.within_window new_window do
     go_to_BTB_page
-    page.find(:xpath, "//div[@id='mc-phone-header-welcome']/span").text.should eq('Hello')
-    page.find(:xpath, "//div[@id='mc-phone-header-welcome']/a").text.should eq(name)
-  end
+    page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
+    page.find(:xpath, "//div[@id='mc-header-hello']/a").text.should eq(name)
 end
 
 def sign_in_facebook_phone
@@ -287,12 +284,12 @@ def sign_in_facebook_phone
     end
   end
 
-  new_window = page.driver.browser.window_handles.last
-  page.within_window new_window do
+  #new_window = page.driver.browser.window_handles.last
+  #page.within_window new_window do
     go_to_BTB_page
     page.find(:xpath, "//div[@id='mc-phone-header-welcome']/span").text.should eq('Hello')
     page.find(:xpath, "//div[@id='mc-phone-header-welcome']/a").text.should eq(name)
-  end
+  #end
 end
 
 def sign_out()
@@ -317,13 +314,9 @@ def sign_out_desktop()
 end
 
 def sign_out_tablet()
-  page.find(:xpath, "//div[@class = 'name-and-arrow']/div").click
+  page.find(:xpath, "//a[@id = 'mc-header-sign-out']").click
   wait_until {
-    page.find(:xpath, "//a[@class = 'sign-out']").visible? == true
-  }
-  page.find(:xpath, "//a[@class = 'sign-out']").click
-  wait_until {
-    page.find(:xpath, "//div[@id = 'mc-header-join-or-sign-in']").visible? == true
+    page.find(:xpath, "//a[@id = 'mc-header-sign-in']").visible? == true
   }
 end
 

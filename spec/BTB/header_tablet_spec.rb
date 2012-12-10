@@ -1,6 +1,6 @@
 require 'spec/support/common_helper'
 
-describe 'Desktop header', :no_phone => true, :no_tablet => true do
+describe 'Tablet header', :no_desktop => true, :no_phone => true do
 
   context "UI" do
     before(:all) do
@@ -63,23 +63,23 @@ describe 'Desktop header', :no_phone => true, :no_tablet => true do
         wait_for_script
         case menu_count
           when 1
-            page.find(:xpath, "//div[@id = 'page_title']/h1").text.should == "New Arrivals"
+            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == "New Arrivals"
           when 2
-            page.find(:xpath, "//div[@id = 'page_title']/h1").text.should == 'Vintage-Inspired Clothing'
+            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == 'Clothing'
           when 3
-            page.find(:xpath, "//div[@id = 'page_title']/h1").text.should == 'Cute Shoes'
+            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == 'Shoes'
           when 4
-            page.find(:xpath, "//div[@id = 'page_title']/h1").text.should == 'Cute Accessories'
+            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == 'Bags & Accessories'
           when 5
-            page.find(:xpath, "//div[@id = 'page_title']/h1").text.should == 'Apartment Decor & Accessories'
+            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == 'Apartment'
           when 6
-            #page.find(:xpath, "//div[@id = 'page_title']/h1").text.should == ''
+            #page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == ''
           when 7
-            page.find(:xpath, "//div[@id = 'page_title']/h1").text.should == "Women's Vintage Clothes"
+            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == "Vintage"
           when 8
-            #page.find(:xpath, "//h1[@id = 'category-header']").text.should == ''
+            #page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == ''
           when 9
-            page.find(:xpath, "//div[@id = 'page_title']/h1").text.should == 'Sale Clothing & Accessories'
+            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == 'Sale'
         end
         go_to_BTB_page
         wait_for_script
@@ -89,7 +89,7 @@ describe 'Desktop header', :no_phone => true, :no_tablet => true do
 
     it 'Verify when user clicks on "Shopping bag" link then user navigates to correct link' do
       page.find(:xpath, "//a[@id = 'mc-header-shopping-bag']").click
-      page.should have_xpath("//h2[@id = 'shopping-bag-header']")
+      page.should have_xpath("//div[@class = 'shopping-bag']")
     end
 
     it 'Verify when user clicks on username then user navigates to dashboard.' do
@@ -171,8 +171,8 @@ describe 'Desktop header', :no_phone => true, :no_tablet => true do
 
     it 'Valid case' do
       page.find(:xpath, "//a[@href = '/be-the-buyer/available-now']").click
-      get_product = page.evaluate_script('$(".product_list li:eq(0) p").text()').to_s
-      puts "product is:#{get_product} "
+      wait_for_script
+      get_product = page.evaluate_script('$("#product-grid a:eq(0) div:eq(0)").text()').to_s
       if (get_product == '')
         fail "No product found for Search test cases."
       else
@@ -181,9 +181,7 @@ describe 'Desktop header', :no_phone => true, :no_tablet => true do
         wait_for_script
         click_button('GO')
         wait_for_script
-        page.should have_xpath("//div[@id = 'page_title']/h1")
-        page.find(:xpath, "//ul[@class = 'product_list']/li/a/p").text.should == get_product.strip
-        #page.find(:xpath, "//p[@class = 'title']").text().should == get_product.strip
+        page.find(:xpath, "//ul[@id = 'product-grid']/a/div[1]").text.should == get_product.strip
       end
     end
 
@@ -192,8 +190,7 @@ describe 'Desktop header', :no_phone => true, :no_tablet => true do
       wait_for_script
       click_button('GO')
       wait_for_script
-      page.should have_xpath("//div[@class = 'header']")
-      page.find(:xpath, "//div[@class = 'message']").text().should == "Search term must be at least 3 characters in length"
+      page.should have_xpath("//a[@id = 'mc-header-logo']")
     end
 
     it 'Invalid case - with no result found' do
@@ -202,9 +199,8 @@ describe 'Desktop header', :no_phone => true, :no_tablet => true do
       wait_for_script
       click_button('GO')
       wait_for_script
-      page.should have_xpath("//div[@id = 'page_title']/h1")
-      expected = 'Sorry, no results found for '+'"'+search_text+'"'+'. Please try another search'
-      page.find(:xpath, "//div[@class = 'search-no-results']").text().should == expected
+      expected = 'Search: '+search_text+' (0)'
+      page.find(:xpath, "//div[@class = 'category-sort']/h1").text().should == expected
     end
     after(:all) do
       go_to_BTB_page
@@ -221,17 +217,10 @@ describe 'Desktop header', :no_phone => true, :no_tablet => true do
   end
 
   context "Facebook" do
-        it 'Verify "Facebook Sign In" functionality' do
-          go_to_BTB_page
-          click_sign_in_link
-          sign_in_with_facebook()
-        end
+    it 'Verify "Facebook Sign In" functionality' do
+      go_to_BTB_page
+      click_sign_in_link
+      sign_in_with_facebook()
     end
+  end
 end
-
-
-
-
-
-
-

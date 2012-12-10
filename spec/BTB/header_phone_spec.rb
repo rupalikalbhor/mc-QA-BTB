@@ -1,6 +1,6 @@
 require 'spec/support/common_helper'
 
-describe 'Phone Header' do
+describe 'Phone Header', :no_desktop => true, :no_tablet => true do
 
   context 'UI' do
     before(:all) do

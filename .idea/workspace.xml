@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6682fde1-b658-49b7-ba04-4a173cb53270" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spec/support/data/products.json" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/BTB/header_tablet_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/BTB/header_desktop_spec.rb" afterPath="$PROJECT_DIR$/spec/BTB/header_desktop_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/BTB/header_phone_spec.rb" afterPath="$PROJECT_DIR$/spec/BTB/header_phone_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/Test/test_spec.rb" afterPath="$PROJECT_DIR$/spec/Test/test_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/support/common_helper.rb" afterPath="$PROJECT_DIR$/spec/support/common_helper.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/support/data_helper.rb" afterPath="$PROJECT_DIR$/spec/support/data_helper.rb" />
     </list>
     <ignored path="mc-QA-BTB.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,46 +32,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="common_helper.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/support/common_helper.rb">
+      <file leaf-file-name="header_tablet_spec.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/spec/BTB/header_tablet_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="36" selection-start="1810" selection-end="1810" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="53" column="29" selection-start="1605" selection-end="1605" vertical-scroll-proportion="0.39646018">
+              <folding>
+                <element signature="e#6339#7678#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="spec_helper.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/spec_helper.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="21" selection-start="537" selection-end="537" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="header_desktop_spec.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="header_desktop_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/BTB/header_desktop_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="40" selection-start="781" selection-end="781" vertical-scroll-proportion="0.679646">
-              <folding />
+            <state line="62" column="39" selection-start="1894" selection-end="1894" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#6368#8103#0" expanded="false" />
+                <element signature="e#8122#8229#0" expanded="false" />
+                <element signature="e#8252#8418#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header_phone_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/BTB/header_phone_spec.rb">
+      <file leaf-file-name="voting_in_progress_grid_spec.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/BTB/voting_in_progress_grid_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="30" selection-start="4023" selection-end="4023" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/Test/test_spec.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="5" selection-start="347" selection-end="347" vertical-scroll-proportion="0.0">
+            <state line="60" column="33" selection-start="2385" selection-end="2385" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -92,7 +78,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/spec/BTB/header_spec.rb" />
         <option value="$PROJECT_DIR$/capybara_support/window_resize.rb" />
         <option value="$PROJECT_DIR$/capybara_support/user_agent.rb" />
         <option value="$PROJECT_DIR$/spec/support/data/users.json" />
@@ -101,18 +86,20 @@
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/capybara_support/configuration.rb" />
         <option value="$PROJECT_DIR$/spec/BTB/awaiting_results_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/BTB/header_phone_spec.rb" />
         <option value="$PROJECT_DIR$/tmp/screenshots/test.rb" />
         <option value="$PROJECT_DIR$/spec/support/data_helper.rb" />
         <option value="$PROJECT_DIR$/spec/Test/test_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/support/common_helper.rb" />
         <option value="$PROJECT_DIR$/spec/spec_helper.rb" />
+        <option value="$PROJECT_DIR$/spec/BTB/header_phone_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/support/common_helper.rb" />
         <option value="$PROJECT_DIR$/spec/BTB/header_desktop_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/BTB/header_tablet_spec.rb" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
+    <option name="x" value="82" />
+    <option name="y" value="47" />
     <option name="width" value="1280" />
     <option name="height" value="687" />
   </component>
@@ -539,7 +526,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1280" height="687" extended-state="0" />
+    <frame x="82" y="47" width="1280" height="687" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -615,21 +602,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/spec/BTB/agree_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="16" selection-start="3121" selection-end="3121" vertical-scroll-proportion="1.7101449" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/BTB/comments_pagination_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="157" column="8" selection-start="6789" selection-end="6789" vertical-scroll-proportion="0.6231884" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/support/data/regular_user.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="48" selection-start="48" selection-end="48" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="16" selection-start="273" selection-end="273" vertical-scroll-proportion="0.39646018" />
@@ -643,11 +615,6 @@
     <entry file="file://$PROJECT_DIR$/spec/support/data/facebook_user.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="77" selection-start="97" selection-end="97" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/BTB/voting_in_progress_comments_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="17" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/BTB/awaiting_results_spec.rb">
@@ -665,9 +632,9 @@
         <state line="27" column="35" selection-start="637" selection-end="637" vertical-scroll-proportion="0.76460177" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/support/common_helper.rb">
+    <entry file="file://$PROJECT_DIR$/spec/Test/test_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="36" selection-start="1810" selection-end="1810" vertical-scroll-proportion="0.0" />
+        <state line="12" column="5" selection-start="347" selection-end="347" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/spec_helper.rb">
@@ -675,20 +642,63 @@
         <state line="17" column="21" selection-start="537" selection-end="537" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/BTB/header_phone_spec.rb">
+    <entry file="file://$PROJECT_DIR$/spec/BTB/agree_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="30" selection-start="4023" selection-end="4023" vertical-scroll-proportion="0.0" />
+        <state line="59" column="16" selection-start="3121" selection-end="3121" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/Test/test_spec.rb">
+    <entry file="file://$PROJECT_DIR$/spec/BTB/in_production_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="5" selection-start="347" selection-end="347" vertical-scroll-proportion="0.0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/BTB/voting_in_progress_comments_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="17" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/BTB/header_phone_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="64" selection-start="61" selection-end="102" vertical-scroll-proportion="0.057971016">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/support/common_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="286" column="17" selection-start="7756" selection-end="7756" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/BTB/header_desktop_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="40" selection-start="781" selection-end="781" vertical-scroll-proportion="0.679646">
+        <state line="62" column="39" selection-start="1894" selection-end="1894" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#6368#8103#0" expanded="false" />
+            <element signature="e#8122#8229#0" expanded="false" />
+            <element signature="e#8252#8418#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/BTB/voting_in_progress_grid_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="33" selection-start="2385" selection-end="2385" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/BTB/header_tablet_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="29" selection-start="1605" selection-end="1605" vertical-scroll-proportion="0.39646018">
+          <folding>
+            <element signature="e#6339#7678#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
