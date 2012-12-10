@@ -33,7 +33,6 @@ describe 'Phone Header' do
       page.find(:xpath, "//ul[@id = 'menu-options']/a[@href = '/be-the-buyer/available-now']/li/div").text.should == "Available Now"
     end
 
-
     it "Verify when user clicks on 'MENU' option then all category links gets displayed." do
       page.find(:xpath, "//div[@id = 'mc-header-menu-toggle']").click
       page.find(:xpath, "//div[@id = 'mc-header-menu-dropdown']/ul/a[1]/li").text.should == "NEW ARRIVALS"

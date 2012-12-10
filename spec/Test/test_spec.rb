@@ -8,9 +8,8 @@ describe 'Testing' do
   it '3. Verify after clicking on "Sign in Comment" button and successful login user navigates back to SDP page.' do
     go_to_BTB_page
     wait_for_script
-    puts "User is on BTB page"
-    click_sign_in_link
-    sign_in_with_facebook()
+    join()
+
   end
 end
 #----------------------------------------------------------

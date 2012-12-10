@@ -7,7 +7,6 @@ end
 
 RegularUserData = get_file('regular_user.json')
 FacebookUserData =  get_file('facebook_user.json')
-ProductData = get_file('products.json')
 
 def parse_json_data(path)
   json = File.new(path, 'r')
@@ -21,10 +20,6 @@ end
 
 def get_facebook_user_data
   @facebook_user_data ||= parse_json_data(FacebookUserData)
-end
-
-def get_product_data
-  @product_data ||= parse_json_data(ProductData)
 end
 
 def write_json_data(path,tempHash)

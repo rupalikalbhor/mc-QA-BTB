@@ -85,11 +85,9 @@ def join_desktop(email_address)
     fill_in 'Confirm Password', :with => $password
     click_button('Join')
   end
-  wait_for_script
-  go_to_BTB_page #Need to delete this once issue gets fixed
-  wait_for_script #Need to delete this once issue gets fixed
-  name = should_be_signed_in_as_user('', email_address)
+  #wait_for_script
   wait_until {
+    name = should_be_signed_in_as_user('', email_address)
     page.find(:xpath, "//div[@id='mc-header-hello']/span").text == 'Hello,'
     page.find(:xpath, "//a[@id='mc-header-welcome-name']").text == name
   }
@@ -97,9 +95,9 @@ def join_desktop(email_address)
 end
 
 def join_tablet(email_address)
-  within ('#mc-header-welcome') do
-    page.find(:xpath, "//div[@id='mc-header-join']").click
-  end
+  #within ('#mc-header-welcome') do
+    page.find(:xpath, "//a[@id='mc-header-join']").click
+  #end
   within ('#account-form') do
     fill_in 'Email Address', :with => email_address
     fill_in 'Password', :with => $password
@@ -334,24 +332,6 @@ def sign_out_phone()
   page.find(:xpath, "//a[@class = 'button button-medium']").click
   wait_for_script
   page.should have_xpath("//a[@id = 'mc-phone-header-join']")
-end
-
-def get_available_product()
-  product_data = get_product_data[$environment.to_s]
-  product_name = product_data['name']
-  return product_name
-end
-
-def add_product_into_shopping_bag
-  go_to_BTB_page
-  available_product = get_available_product
-  fill_in 'mc-header-keyword', :with => available_product
-  click_button('GO')
-  wait_for_script
-  page.find(:xpath, "//p[@class = 'title']").click
-  wait_for_script
-  page.find(:xpath, "//button[@id = 'variant-button']").click
-  page.should have_content(available_product)
 end
 
 def remove_product_from_shopping_bag
