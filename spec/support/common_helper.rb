@@ -394,6 +394,21 @@ def go_to_voting_in_progress_page
   end
 end
 
+def go_to_awaiting_results_page
+  go_to_BTB_page
+  case $device_name
+    when :phone
+      #page.find(:xpath, "//div[@id='menu-toggle']").click
+      #page.find(:xpath, "//a[@href='/be-the-buyer/voting-in-progress']/li/div[contains(text(),'Voting In Progress')]").click
+      #page.find(:xpath, "//div[@id = 'menu-toggle']").text.should == "Voting In Progress"
+    else
+      page.find(:xpath, "//a[@href='/be-the-buyer/awaiting-results']/li/div[contains(text(),'Awaiting Results')]").click
+      wait_until{
+      page.find(:xpath, "//h2[@class='page-title awaiting-results']").text.should == 'Awaiting Results'
+      }
+  end
+end
+
 def go_to_SDP_page(sample_product_id)
   page.find(:xpath, "//div[@data-product-id="+sample_product_id+"]/div[@class = 'photo']/a").click
   wait_until {

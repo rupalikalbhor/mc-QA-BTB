@@ -99,7 +99,7 @@ def query_collection(query_name)
       sql = "delete from comments where account_email =" + "'" + $email + "'" + ""
 
     when :Voting_in_progress_SampleDetails
-      sql = "SELECT s.name, s.price, s.voting_starts_at,date_trunc('hour',s.voting_ends_at - now()) as voting_time, count(v.product_id)
+      sql = "SELECT s.name, s.price, s.voting_starts_at,to_char(s.voting_ends_at,'mm/dd/yy'),date_trunc('hour',s.voting_ends_at - now()) as voting_time, count(v.product_id)
              FROM samples s FULL OUTER JOIN votes v ON s.product_id = v.product_id
              WHERE s.product_id =" +@product_id+
              "GROUP BY v.product_id, s.name, s.voting_starts_at, s.price, s.voting_starts_at,s.voting_ends_at
@@ -110,6 +110,11 @@ def query_collection(query_name)
       sql = "SELECT count(*)
              FROM samples
              WHERE state ='active' AND (voting_starts_at <= now() AND voting_ends_at > now())"
+
+    when :Awaiting_results_SampleCount
+          sql = "SELECT count(*)
+                 FROM samples
+                 WHERE (state = 'pending' or state = 'active' or state = 'picked' or state = 'skipped' or state = 'not_picked') AND voting_ends_at <= now() and (announced_at is null OR announced_at > now())"
 
     when :Voting_in_progress_CommentCount
       sql = "SELECT count(*) FROM comments where commentable_name = " + "'" + @commentable_name + "'" + " and status = 'active'"
@@ -137,14 +142,17 @@ def query_result(query_name, res)
     when :Voting_in_progress_SampleDetails
       $sample_name = res.getvalue(0, 0)
       $sample_price = res.getvalue(0, 1)
-      $voting_time =  res.getvalue(0, 3)
-      $vote_count = res.getvalue(0, 4)
+      $voting_ends_at = res.getvalue(0, 3)
+      $voting_time =  res.getvalue(0, 4)
+      $vote_count = res.getvalue(0, 5)
       #puts "Sample name is ****************- #{$sample_name}"
       #puts "Sample price is ****************- #{$sample_price}"
       #puts "Vote count is ****************- #{$vote_count}"
       #puts "voting time is ****************- #{$voting_time}"
+      #puts "voting ends at is ****************- #{$voting_ends_at}"
     else
       value = res.getvalue(0, 0)
+      puts "Vlue is: #{value}"
       return value
   end
 end
