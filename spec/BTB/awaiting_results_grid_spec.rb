@@ -66,54 +66,54 @@ describe 'Grid page - Awaiting Results' do
     before (:all) do
       go_to_awaiting_results_page
     end
-      it '' do
-        FIRST_SAMPLE_PRODUCT_ID = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
-        get_voting_in_progress_SampleDetails(FIRST_SAMPLE_PRODUCT_ID) #Get sample details from database
-      end
+    it '' do
+      FIRST_SAMPLE_PRODUCT_ID = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
+      get_voting_in_progress_SampleDetails(FIRST_SAMPLE_PRODUCT_ID) #Get sample details from database
+    end
 
-      it '1. Verify sample number is displaying correctly' do
-        expected_sample_name = $sample_name #Get sample name from database
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class='name']").text.should == expected_sample_name
-      end
+    it '1. Verify sample number is displaying correctly' do
+      expected_sample_name = $sample_name #Get sample name from database
+      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class='name']").text.should == expected_sample_name
+    end
 
-      it '2. Verify pin icon is displaying in sample box' do
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'pin']")
-      end
+    it '2. Verify pin icon is displaying in sample box' do
+      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'pin']")
+    end
 
-      it '3. Verify correct dollar amount appears above each sample' do
-        expected_sample_price = $sample_price
-        expected_sample_price = "$"+expected_sample_price.insert(-3, '.')
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'price']").text.should == expected_sample_price
-      end
+    it '3. Verify correct dollar amount appears above each sample' do
+      expected_sample_price = $sample_price
+      expected_sample_price = "$"+expected_sample_price.insert(-3, '.')
+      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'price']").text.should == expected_sample_price
+    end
 
-      it '4. Verify all the samples on this page have "KEEP ME POSTED" button.' do
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'voting-and-notification clearfix']/a").text.should == "KEEP ME POSTED"
-      end
+    it '4. Verify all the samples on this page have "KEEP ME POSTED" button.' do
+      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'voting-and-notification clearfix']/a").text.should == "KEEP ME POSTED"
+    end
 
-      it '5. Verify sample displays Vote count' do
-        expected_vote_count = $vote_count
-        vote_count = page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class = 'vote-count']").text
-        actual_vote_count = vote_count.gsub(",", "")
-        expected_vote_count.should == actual_vote_count
-      end
+    it '5. Verify sample displays Vote count' do
+      expected_vote_count = $vote_count
+      vote_count = page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class = 'vote-count']").text
+      actual_vote_count = vote_count.gsub(",", "")
+      expected_vote_count.should == actual_vote_count
+    end
 
-      it '6. Verify sample displays comment count' do
-        commentable_name = $sample_name
-        expected_comment_count = get_voting_in_progress_CommentCount(commentable_name)
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class = 'comments-count']").text.should == expected_comment_count
-      end
+    it '6. Verify sample displays comment count' do
+      commentable_name = $sample_name
+      expected_comment_count = get_voting_in_progress_CommentCount(commentable_name)
+      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class = 'comments-count']").text.should == expected_comment_count
+    end
 
-      it '7. Verify sample displays "Voting End date" with clock icon.' do
-        voting_ends_at_from_db = $voting_ends_at
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'awaiting-results status']").text.should == "Ended "+voting_ends_at_from_db
-      end
+    it '7. Verify sample displays "Voting End date" with clock icon.' do
+      voting_ends_at_from_db = $voting_ends_at
+      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'awaiting-results status']").text.should == "Ended "+voting_ends_at_from_db
+    end
 
-      it '8. Verify when user clicks on sample image then user navigates to SDP' do
-        sample_number = $sample_name.gsub("Sample ", '')
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'photo']/a[@href='/be-the-buyer/samples/"+FIRST_SAMPLE_PRODUCT_ID+"-sample-"+sample_number+"']").click
-        page.should have_xpath("//div[@class='sdp']")
-        go_to_BTB_page
-      end
+    it '8. Verify when user clicks on sample image then user navigates to SDP' do
+      sample_number = $sample_name.gsub("Sample ", '')
+      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'photo']/a[@href='/be-the-buyer/samples/"+FIRST_SAMPLE_PRODUCT_ID+"-sample-"+sample_number+"']").click
+      page.should have_xpath("//div[@class='sdp']")
+      go_to_BTB_page
+    end
   end
 
   context "C. Keep Me Posted functionality - Logged in user" do
@@ -122,7 +122,6 @@ describe 'Grid page - Awaiting Results' do
       wait_for_script
       click_sign_in_link
       sign_in
-
     end
 
     it '2. Verify if a logged in user clicks on "Keep me posted" then
@@ -138,7 +137,7 @@ describe 'Grid page - Awaiting Results' do
         wait_for_script
         page.find(:xpath, "//div[@data-product-id ="+keep_me_posted_product_id+"]/div[@class = 'voting-and-notification clearfix subscribed']/a").text.should == "WE'LL KEEP YOU POSTED!"
       else
-        fail "No sample found to pick..so This test case is not executed."
+        fail "No sample found in Awaiting Results section..so This test case is not executed."
       end
     end
 
@@ -156,7 +155,7 @@ describe 'Grid page - Awaiting Results' do
         after_comments_count = page.find(:xpath, "//div[@data-product-id="+product_id+"]/div[@class='counters']/div[@class='comments-count']").text
         after_comments_count.to_i.should == before_comments_count.to_i + 1
       else
-        fail "No picked sample found..so This test case is not executed."
+        fail "No sample found in Awaiting Results section..so This test case is not executed."
       end
     end
 
@@ -171,7 +170,7 @@ describe 'Grid page - Awaiting Results' do
         wait_for_script
         page.find(:xpath, "//div[@data-product-id ="+keep_me_posted_product_id1+"]/div[@class = 'voting-and-notification clearfix']/a").text.should == "KEEP ME POSTED"
       else
-        fail "No sample found to pick..so This test case is not executed."
+        fail "No sample found in Awaiting Results section..so This test case is not executed."
       end
     end
     after (:all) do
@@ -179,9 +178,9 @@ describe 'Grid page - Awaiting Results' do
     end
   end
 
-  context "D. Keep Me Posted functionality - Logged out user" do
-    it "2. Logged out - Verify when user clicks on 'Keep me posted' then user see login in window, after successful login -
-    Button changes to 'We'll keep you posted'"  do
+  context "BUGGGG - D. Keep Me Posted functionality - Logged out user" do
+    it "1. Logged out - Verify when user clicks on 'Keep me posted' then user see login in window, after successful login -
+    Button changes to 'We'll keep you posted'" do
 
       product_id = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
       if (product_id != "")
@@ -195,7 +194,7 @@ describe 'Grid page - Awaiting Results' do
         wait_for_script
         page.find(:xpath, "//div[@data-product-id ="+product_id+"]/div[@class = 'voting-and-notification clearfix subscribed']/a").text.should == "WE'LL KEEP YOU POSTED!"
       else
-        fail "No sample found to pick..so This test case is not executed."
+        fail "No sample found in Awaiting Results section..so This test case is not executed."
       end
     end
   end

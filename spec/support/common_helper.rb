@@ -398,9 +398,9 @@ def go_to_awaiting_results_page
   go_to_BTB_page
   case $device_name
     when :phone
-      #page.find(:xpath, "//div[@id='menu-toggle']").click
-      #page.find(:xpath, "//a[@href='/be-the-buyer/voting-in-progress']/li/div[contains(text(),'Voting In Progress')]").click
-      #page.find(:xpath, "//div[@id = 'menu-toggle']").text.should == "Voting In Progress"
+      page.find(:xpath, "//div[@id='menu-toggle']").click
+      page.find(:xpath, "//a[@href='/be-the-buyer/awaiting-results']/li/div[contains(text(),'Awaiting Results')]").click
+      page.find(:xpath, "//div[@id = 'menu-toggle']").text.should == "Awaiting Results"
     else
       page.find(:xpath, "//a[@href='/be-the-buyer/awaiting-results']/li/div[contains(text(),'Awaiting Results')]").click
       wait_until{

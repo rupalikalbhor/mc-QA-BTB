@@ -152,7 +152,6 @@ def query_result(query_name, res)
       #puts "voting ends at is ****************- #{$voting_ends_at}"
     else
       value = res.getvalue(0, 0)
-      puts "Vlue is: #{value}"
       return value
   end
 end

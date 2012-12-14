@@ -18,8 +18,7 @@ describe 'SDP - Voting In Progress' do
   end
 
   it '2. Verify when user clicks on sample image then user navigates to SDP' do
-    sample_number = $sample_name.gsub("Sample ", '')
-    page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div[@class = 'photo']/a[@href='/be-the-buyer/samples/"+First_sample_product_id+"-sample-"+sample_number+"']").click
+    page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div[@class = 'photo']/a").click
     wait_until {
       page.should have_xpath("//div[@class='sdp']")
     }
@@ -108,158 +107,158 @@ describe 'SDP - Voting In Progress' do
     end
   end
 
-  #context 'E. Pick or skip functionality' do
-  #  it '1. Verify user successfully Sign in and after successful sign in user navigates back to SDP page.' do
-  #    expected_url = current_url
-  #    join()
-  #    current_url.should == expected_url
-  #    go_to_voting_in_progress_page
-  #  end
-  #
-  #  it '2. Verify if a logged in user clicks on "Pick" then
-  #      - button changes to "Picked,
-  #      - Pick violater displays on sample image.
-  #      - voting count increments by 1.' do
-  #    go_to_voting_in_progress_page
-  #    wait_for_script
-  #    No_pick_product_id = page.evaluate_script('$("div[class=\"voting-and-notification clearfix\"]").eq(0).parent().attr("data-product-id")').to_s
-  #
-  #    if (No_pick_product_id != "")
-  #      page.find(:xpath, "//div[@data-product-id="+No_pick_product_id+"]/div[@class = 'photo']/a").click
-  #      wait_until {
-  #        page.should have_xpath("//div[@class='sdp']")
-  #      }
-  #      if ($device_name != :phone)
-  #        before_vote_count1 = page.find(:xpath, "//aside/div[@data-product-id="+No_pick_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
-  #        before_vote_count = before_vote_count1.gsub(",", "")
-  #      end
-  #
-  #      page.find(:xpath, "//div[@data-product-id="+No_pick_product_id+"]/div/div[@class='sample']/div/a[@class = 'pick']").click
-  #      wait_for_script
-  #      visit(current_path)
-  #      wait_until {
-  #        page.find(:xpath, "//div[@data-product-id="+No_pick_product_id+"]/div/div[@class='sample']/div/a[@class = 'pick picked']").text.should == "PICKED"
-  #        page.find(:xpath, "//div[@data-product-id="+No_pick_product_id+"]/div/div[@class='sample']/div/a[@class = 'skip']").text.should == "SKIP"
-  #        page.should have_xpath("//div[@data-product-id="+No_pick_product_id+"]/div/div[@class='sample']/div[@class='violator picked']")
-  #      }
-  #      if ($device_name != :phone)
-  #        after_vote_count1 = page.find(:xpath, "//aside/div[@data-product-id="+No_pick_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
-  #        after_vote_count = after_vote_count1.gsub(",", "")
-  #        after_vote_count.to_i.should == before_vote_count.to_i + 1
-  #      end
-  #
-  #    else
-  #      fail "No sample found to pick..so This test case is not executed."
-  #    end
-  #  end
-  #
-  #  it '3. Verify user can post comment on a sample which he has picked.' do
-  #    if ($device_name == :phone)
-  #      page.find(:xpath, "//div[@id = 'comment-section']/h2").click
-  #    end
-  #    before_comments_count = page.body.match(/of (\d+)/)[1]
-  #    puts "Comment count is*********: #{before_comments_count}"
-  #    #before_comments_count = page.find(:xpath, "//aside/div[@data-product-id="+No_pick_product_id+"]/div[@class='counter'][2]/div[@class = 'comment-count']").text
-  #    within('.new-comment') do
-  #      fill_in 'new-comment-text', :with => 'Great Dress'
-  #      click_button('Comment')
-  #      wait_for_script
-  #    end
-  #    visit(current_path)
-  #    sleep(20)
-  #    wait_for_script
-  #    if ($device_name == :phone)
-  #      page.find(:xpath, "//div[@id = 'comment-section']/h2").click
-  #    end
-  #    after_comments_count = page.body.match(/of (\d+)/)[1]
-  #    puts "Comment count is*********: #{after_comments_count}"
-  #    #after_comments_count = page.find(:xpath, "//aside/div[@data-product-id="+No_pick_product_id+"]/div[@class='counter'][2]/div[@class = 'comment-count']").text
-  #    after_comments_count.to_i.should == before_comments_count.to_i + 1
-  #
-  #  end
-  #
-  #  it '4. Verify if a logged in user clicks on "Skip" then
-  #      - button changes to "Skipped,
-  #      - Skip violater displays on sample image.
-  #      - voting count increments by 1.' do
-  #    go_to_voting_in_progress_page
-  #    wait_for_script
-  #    No_skip_product_id = page.evaluate_script('$("div[class=\"voting-and-notification clearfix\"]").eq(0).parent().attr("data-product-id")').to_s
-  #    if (No_skip_product_id != "")
-  #      page.find(:xpath, "//div[@data-product-id="+No_skip_product_id+"]/div[@class = 'photo']/a").click
-  #      wait_until {
-  #        page.should have_xpath("//div[@class='sdp']")
-  #      }
-  #      if ($device_name != :phone)
-  #        before_vote_count1 = page.find(:xpath, "//aside/div[@data-product-id="+No_skip_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
-  #        before_vote_count = before_vote_count1.gsub(",", "")
-  #      end
-  #      page.find(:xpath, "//div[@data-product-id="+No_skip_product_id+"]/div/div[@class='sample']/div/a[@class = 'skip']").click
-  #      wait_for_script
-  #
-  #      visit(current_path)
-  #      wait_until {
-  #        page.find(:xpath, "//div[@data-product-id="+No_skip_product_id+"]/div/div[@class='sample']/div/a[@class = 'pick']").text.should == "PICK"
-  #        page.find(:xpath, "//div[@data-product-id="+No_skip_product_id+"]/div/div[@class='sample']/div/a[@class = 'skip skipped']").text.should == "SKIPPED"
-  #        page.should have_xpath("//div[@data-product-id="+No_skip_product_id+"]/div/div[@class='sample']/div[@class='violator skipped']")
-  #      }
-  #      if ($device_name != :phone)
-  #        after_vote_count1 = page.find(:xpath, "//aside/div[@data-product-id="+No_skip_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
-  #        after_vote_count = after_vote_count1.gsub(",", "")
-  #        after_vote_count.to_i.should == before_vote_count.to_i + 1
-  #      end
-  #    else
-  #      fail "No sample found to skip..so This test case is not executed."
-  #    end
-  #  end
-  #
-  #  it '5. Verify user can post comment on a sample which he has skipped.' do
-  #    if ($device_name == :phone)
-  #      page.find(:xpath, "//div[@id = 'comment-section']/h2").click
-  #    end
-  #    before_comments_count = page.body.match(/of (\d+)/)[1]
-  #    #before_comments_count = page.find(:xpath, "//aside/div[@data-product-id="+No_skip_product_id+"]/div[@class='counter'][2]/div[@class = 'comment-count']").text
-  #    within('.new-comment') do
-  #      fill_in 'new-comment-text', :with => 'Great Dress'
-  #      click_button('Comment')
-  #      wait_for_script
-  #    end
-  #    visit(current_path)
-  #    sleep(20)
-  #    wait_for_script
-  #    if ($device_name == :phone)
-  #      page.find(:xpath, "//div[@id = 'comment-section']/h2").click
-  #    end
-  #    after_comments_count = page.body.match(/of (\d+)/)[1]
-  #    #after_comments_count = page.find(:xpath, "//aside/div[@data-product-id="+No_skip_product_id+"]/div[@class='counter'][2]/div[@class = 'comment-count']").text
-  #    after_comments_count.to_i.should == before_comments_count.to_i + 1
-  #  end
-  #
-  #  it '6. Verify after user changes the vote, vote count remains unchangeed.', :no_phone => true do
-  #    go_to_voting_in_progress_page
-  #    wait_for_script
-  #
-  #    picked_product_id = page.evaluate_script('$("div[class=\"voting-and-notification clearfix picked\"]").eq(0).parent().attr("data-product-id")').to_s
-  #    if (picked_product_id != "")
-  #      page.find(:xpath, "//div[@data-product-id="+picked_product_id+"]/div[@class = 'photo']/a").click
-  #      wait_until {
-  #        page.should have_xpath("//div[@class='sdp']")
-  #      }
-  #      wait_for_script
-  #      before_vote_count = page.find(:xpath, "//aside/div[@data-product-id="+picked_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
-  #      page.find(:xpath, "//div[@data-product-id="+picked_product_id+"]/div/div[@class='sample']/div/a[@class = 'skip']").click
-  #      wait_for_script
-  #
-  #      visit(current_path)
-  #      wait_for_script
-  #      after_vote_count = page.find(:xpath, "//aside/div[@data-product-id="+picked_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
-  #      after_vote_count.to_i.should == before_vote_count.to_i
-  #      page.find(:xpath, "//div[@data-product-id="+picked_product_id+"]/div/div[@class='sample']/div/a[@class = 'pick']").click
-  #    else
-  #      fail "No sample found to skip..so This test case is not executed."
-  #    end
-  #  end
-  #end
+  context 'E. Pick or skip functionality' do
+    it '1. Verify user successfully Sign in and after successful sign in user navigates back to SDP page.' do
+      expected_url = current_url
+      join()
+      current_url.should == expected_url
+      go_to_voting_in_progress_page
+    end
+
+    it '2. Verify if a logged in user clicks on "Pick" then
+        - button changes to "Picked,
+        - Pick violater displays on sample image.
+        - voting count increments by 1.' do
+      go_to_voting_in_progress_page
+      wait_for_script
+      No_pick_product_id = page.evaluate_script('$("div[class=\"voting-and-notification clearfix\"]").eq(0).parent().attr("data-product-id")').to_s
+
+      if (No_pick_product_id != "")
+        page.find(:xpath, "//div[@data-product-id="+No_pick_product_id+"]/div[@class = 'photo']/a").click
+        wait_until {
+          page.should have_xpath("//div[@class='sdp']")
+        }
+        if ($device_name != :phone)
+          before_vote_count1 = page.find(:xpath, "//aside/div[@data-product-id="+No_pick_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
+          before_vote_count = before_vote_count1.gsub(",", "")
+        end
+
+        page.find(:xpath, "//div[@data-product-id="+No_pick_product_id+"]/div/div[@class='sample']/div/a[@class = 'pick']").click
+        wait_for_script
+        visit(current_path)
+        wait_until {
+          page.find(:xpath, "//div[@data-product-id="+No_pick_product_id+"]/div/div[@class='sample']/div/a[@class = 'pick picked']").text.should == "PICKED"
+          page.find(:xpath, "//div[@data-product-id="+No_pick_product_id+"]/div/div[@class='sample']/div/a[@class = 'skip']").text.should == "SKIP"
+          page.should have_xpath("//div[@data-product-id="+No_pick_product_id+"]/div/div[@class='sample']/div[@class='violator picked']")
+        }
+        if ($device_name != :phone)
+          after_vote_count1 = page.find(:xpath, "//aside/div[@data-product-id="+No_pick_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
+          after_vote_count = after_vote_count1.gsub(",", "")
+          after_vote_count.to_i.should == before_vote_count.to_i + 1
+        end
+
+      else
+        fail "No sample found to pick..so This test case is not executed."
+      end
+    end
+
+    it '3. Verify user can post comment on a sample which he has picked.' do
+      if ($device_name == :phone)
+        page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+      end
+      before_comments_count = page.body.match(/of (\d+)/)[1]
+      puts "Comment count is*********: #{before_comments_count}"
+      #before_comments_count = page.find(:xpath, "//aside/div[@data-product-id="+No_pick_product_id+"]/div[@class='counter'][2]/div[@class = 'comment-count']").text
+      within('.new-comment') do
+        fill_in 'new-comment-text', :with => 'Great Dress'
+        click_button('Comment')
+        wait_for_script
+      end
+      visit(current_path)
+      sleep(20)
+      wait_for_script
+      if ($device_name == :phone)
+        page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+      end
+      after_comments_count = page.body.match(/of (\d+)/)[1]
+      puts "Comment count is*********: #{after_comments_count}"
+      #after_comments_count = page.find(:xpath, "//aside/div[@data-product-id="+No_pick_product_id+"]/div[@class='counter'][2]/div[@class = 'comment-count']").text
+      after_comments_count.to_i.should == before_comments_count.to_i + 1
+
+    end
+
+    it '4. Verify if a logged in user clicks on "Skip" then
+        - button changes to "Skipped,
+        - Skip violater displays on sample image.
+        - voting count increments by 1.' do
+      go_to_voting_in_progress_page
+      wait_for_script
+      No_skip_product_id = page.evaluate_script('$("div[class=\"voting-and-notification clearfix\"]").eq(0).parent().attr("data-product-id")').to_s
+      if (No_skip_product_id != "")
+        page.find(:xpath, "//div[@data-product-id="+No_skip_product_id+"]/div[@class = 'photo']/a").click
+        wait_until {
+          page.should have_xpath("//div[@class='sdp']")
+        }
+        if ($device_name != :phone)
+          before_vote_count1 = page.find(:xpath, "//aside/div[@data-product-id="+No_skip_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
+          before_vote_count = before_vote_count1.gsub(",", "")
+        end
+        page.find(:xpath, "//div[@data-product-id="+No_skip_product_id+"]/div/div[@class='sample']/div/a[@class = 'skip']").click
+        wait_for_script
+
+        visit(current_path)
+        wait_until {
+          page.find(:xpath, "//div[@data-product-id="+No_skip_product_id+"]/div/div[@class='sample']/div/a[@class = 'pick']").text.should == "PICK"
+          page.find(:xpath, "//div[@data-product-id="+No_skip_product_id+"]/div/div[@class='sample']/div/a[@class = 'skip skipped']").text.should == "SKIPPED"
+          page.should have_xpath("//div[@data-product-id="+No_skip_product_id+"]/div/div[@class='sample']/div[@class='violator skipped']")
+        }
+        if ($device_name != :phone)
+          after_vote_count1 = page.find(:xpath, "//aside/div[@data-product-id="+No_skip_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
+          after_vote_count = after_vote_count1.gsub(",", "")
+          after_vote_count.to_i.should == before_vote_count.to_i + 1
+        end
+      else
+        fail "No sample found to skip..so This test case is not executed."
+      end
+    end
+
+    it '5. Verify user can post comment on a sample which he has skipped.' do
+      if ($device_name == :phone)
+        page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+      end
+      before_comments_count = page.body.match(/of (\d+)/)[1]
+      #before_comments_count = page.find(:xpath, "//aside/div[@data-product-id="+No_skip_product_id+"]/div[@class='counter'][2]/div[@class = 'comment-count']").text
+      within('.new-comment') do
+        fill_in 'new-comment-text', :with => 'Great Dress'
+        click_button('Comment')
+        wait_for_script
+      end
+      visit(current_path)
+      sleep(20)
+      wait_for_script
+      if ($device_name == :phone)
+        page.find(:xpath, "//div[@id = 'comment-section']/h2").click
+      end
+      after_comments_count = page.body.match(/of (\d+)/)[1]
+      #after_comments_count = page.find(:xpath, "//aside/div[@data-product-id="+No_skip_product_id+"]/div[@class='counter'][2]/div[@class = 'comment-count']").text
+      after_comments_count.to_i.should == before_comments_count.to_i + 1
+    end
+
+    it '6. Verify after user changes the vote, vote count remains unchangeed.', :no_phone => true do
+      go_to_voting_in_progress_page
+      wait_for_script
+
+      picked_product_id = page.evaluate_script('$("div[class=\"voting-and-notification clearfix picked\"]").eq(0).parent().attr("data-product-id")').to_s
+      if (picked_product_id != "")
+        page.find(:xpath, "//div[@data-product-id="+picked_product_id+"]/div[@class = 'photo']/a").click
+        wait_until {
+          page.should have_xpath("//div[@class='sdp']")
+        }
+        wait_for_script
+        before_vote_count = page.find(:xpath, "//aside/div[@data-product-id="+picked_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
+        page.find(:xpath, "//div[@data-product-id="+picked_product_id+"]/div/div[@class='sample']/div/a[@class = 'skip']").click
+        wait_for_script
+
+        visit(current_path)
+        wait_for_script
+        after_vote_count = page.find(:xpath, "//aside/div[@data-product-id="+picked_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
+        after_vote_count.to_i.should == before_vote_count.to_i
+        page.find(:xpath, "//div[@data-product-id="+picked_product_id+"]/div/div[@class='sample']/div/a[@class = 'pick']").click
+      else
+        fail "No sample found to skip..so This test case is not executed."
+      end
+    end
+  end
 
   context 'F. Arrows' do
     it "1. Verify when user is on 1st sample SDP page then user see only 'Next' arrow." do
@@ -303,19 +302,18 @@ describe 'SDP - Voting In Progress' do
     end
   end
 
-  #context "G. Sign out functionality" do
-  #  it '1. Verify when user clicks on "Sign out" link then user successfully signed out' do
-  #    wait_for_script
-  #    sign_out
-  #  end
-  #end
+  context "G. Sign out functionality" do
+    it '1. Verify when user clicks on "Sign out" link then user successfully signed out' do
+      wait_for_script
+      sign_out
+    end
+  end
 
   context "Logged out user functionality" do
     it '1. Go to 1st sample detail page' do
       register_user
       go_to_voting_in_progress_page
       wait_for_script
-      #FIRST_SAMPLE_PRODUCT_ID = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
       go_to_SDP_page(First_sample_product_id)
     end
 
