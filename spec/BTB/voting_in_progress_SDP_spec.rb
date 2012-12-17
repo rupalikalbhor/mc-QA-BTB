@@ -332,7 +332,7 @@ describe 'SDP - Voting In Progress' do
         page.should have_content ('Write a Comment')
       end
       page.find(:xpath, "//textarea[@name = 'new-comment-text' and @placeholder = 'Write a comment...']")
-
+      sign_out()
     end
 
     it ' 5. Verify when user click on "Pick" button, Log in window gets displayed and upon successful login following operations happens -

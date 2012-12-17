@@ -21,6 +21,7 @@ def register_user()
   go_to_BTB_page
   wait_for_script
   email_address = join()
+  wait_for_script
   tempHash = {
       "email" => email_address,
       "password" => "testing"}
@@ -30,6 +31,8 @@ def register_user()
   $email = user_data['email']
   $password = user_data['password']
   puts "Email is: #{$email}"
+  wait_for_script
+  page.driver.browser.navigate.refresh
   sign_out
   return email_address
 end
@@ -117,15 +120,18 @@ def join_phone(email_address)
     page.find(:xpath, "//a[@id='mc-phone-header-join']").click
     wait_for_script
   end
-  #page.find(:xpath, "//a[@href = '/customers/accounts/new']").click
-  wait_for_script
   within ('#signup-form') do
     fill_in 'account_email', :with => email_address
     fill_in 'account_password', :with => $password
     fill_in 'account-password-confirmation', :with => $password
     click_button('Join')
   end
-  wait_for_script
+  #wait_for_script
+  wait_until {
+    name = should_be_signed_in_as_user('', email_address)
+    page.find(:xpath, "//div[@id='mc-phone-header-welcome']/span").text.should eq('Hello')
+    page.find(:xpath, "//div[@id='mc-phone-header-welcome']/a").text.should eq(name)
+  }
   return email_address
 end
 
@@ -240,9 +246,9 @@ def sign_in_facebook_desktop
 
   #new_window = page.driver.browser.window_handles.last
   #page.within_window new_window do
-    go_to_BTB_page
-    page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
-    page.find(:xpath, "//a[@id='mc-header-welcome-name']").text.should eq(name)
+  go_to_BTB_page
+  page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
+  page.find(:xpath, "//a[@id='mc-header-welcome-name']").text.should eq(name)
   #end
 end
 
@@ -262,9 +268,9 @@ def sign_in_facebook_tablet
       click_button('Log In')
     end
   end
-    go_to_BTB_page
-    page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
-    page.find(:xpath, "//div[@id='mc-header-hello']/a").text.should eq(name)
+  go_to_BTB_page
+  page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
+  page.find(:xpath, "//div[@id='mc-header-hello']/a").text.should eq(name)
 end
 
 def sign_in_facebook_phone
@@ -286,9 +292,9 @@ def sign_in_facebook_phone
 
   #new_window = page.driver.browser.window_handles.last
   #page.within_window new_window do
-    go_to_BTB_page
-    page.find(:xpath, "//div[@id='mc-phone-header-welcome']/span").text.should eq('Hello')
-    page.find(:xpath, "//div[@id='mc-phone-header-welcome']/a").text.should eq(name)
+  go_to_BTB_page
+  page.find(:xpath, "//div[@id='mc-phone-header-welcome']/span").text.should eq('Hello')
+  page.find(:xpath, "//div[@id='mc-phone-header-welcome']/a").text.should eq(name)
   #end
 end
 
@@ -321,10 +327,14 @@ def sign_out_tablet()
 end
 
 def sign_out_phone()
-  page.find(:xpath, "//a[@class = 'member-dropdown']").click
-  page.find(:xpath, "//a[@class = 'button button-medium']").click
-  wait_for_script
-  page.should have_xpath("//a[@id = 'mc-phone-header-join']")
+  page.find(:xpath, "//div[@id = 'mc-phone-header-welcome']/a").click
+  wait_until {
+    page.find(:xpath, "//a[@href = '/logout']")
+  }
+  page.find(:xpath, "//a[@href = '/logout']").click
+  wait_until {
+    page.find(:xpath, "//a[@id = 'mc-phone-header-join']").visible? == true
+  }
 end
 
 def remove_product_from_shopping_bag
@@ -396,15 +406,19 @@ end
 
 def go_to_awaiting_results_page
   go_to_BTB_page
+  wait_for_script
   case $device_name
     when :phone
       page.find(:xpath, "//div[@id='menu-toggle']").click
       page.find(:xpath, "//a[@href='/be-the-buyer/awaiting-results']/li/div[contains(text(),'Awaiting Results')]").click
-      page.find(:xpath, "//div[@id = 'menu-toggle']").text.should == "Awaiting Results"
+      wait_until {
+        page.find(:xpath, "//div[@id = 'menu-toggle']").text.should == "Awaiting Results"
+      }
+      wait_for_script
     else
       page.find(:xpath, "//a[@href='/be-the-buyer/awaiting-results']/li/div[contains(text(),'Awaiting Results')]").click
-      wait_until{
-      page.find(:xpath, "//h2[@class='page-title awaiting-results']").text.should == 'Awaiting Results'
+      wait_until {
+        page.find(:xpath, "//h2[@class='page-title awaiting-results']").text.should == 'Awaiting Results'
       }
   end
 end

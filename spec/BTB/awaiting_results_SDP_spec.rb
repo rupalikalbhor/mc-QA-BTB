@@ -154,21 +154,19 @@ describe 'SDP - Awaiting Results' do
       after_comments_count = page.find(:xpath, "//div[@data-product-id="+Product_id+"]/div[@class='counters']/div[@class='comments-count']").text
       after_comments_count.to_i.should == Before_comments_count.to_i + 1
     end
-
-    after (:all) do
-      sign_out
-    end
   end
 
   context 'F. Arrows' do
     it "1. Verify when user is on 1st sample SDP page then user see only 'Next' arrow." do
       go_to_awaiting_results_page
       page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div[@class = 'photo']/a").click
+      wait_for_script
       wait_until {
-        page.should have_xpath("//div[@class='sdp']")
+        page.find(:xpath, "//div[@class='sdp']")
+        page.find(:xpath, "//a[@class ='invisible prev']")
+        page.find(:xpath, "//a[@class = 'next']")
+        page.driver.browser.navigate.refresh
       }
-      page.should have_xpath("//a[@class ='invisible prev']")
-      page.should have_xpath("//a[@class = 'next']")
     end
 
     it "2. Verify when user is on last sample SDP page then user see only 'Prev' arrow." do
@@ -183,29 +181,43 @@ describe 'SDP - Awaiting Results' do
       end
       last_sample_product_id = page.evaluate_script("$('.sample-data:last').attr('data-product-id')").to_s
       page.find(:xpath, "//div[@data-product-id="+last_sample_product_id+"]/div[@class = 'photo']/a").click
+      wait_for_script
       wait_until {
-        page.should have_xpath("//div[@class = 'sdp']")
+        page.find(:xpath, "//div[@class = 'sdp']")
+        page.find(:xpath, "//a[@class = 'prev']")
+        page.find(:xpath, "//a[@class = 'invisible next']")
+        page.driver.browser.navigate.refresh
       }
-      page.should have_xpath("//a[@class = 'prev']")
-      page.should have_xpath("//a[@class = 'invisible next']")
     end
 
     it "3. Verify when user is NOT on 1st or last sample then user see both arrows." do
       go_to_awaiting_results_page
       second_sample_product_id = page.evaluate_script("$('.sample-data').eq(1).attr('data-product-id')").to_s
       page.find(:xpath, "//div[@data-product-id="+second_sample_product_id +"]/div[@class = 'photo']/a").click
+      wait_for_script
       wait_until {
-        page.should have_xpath("//div[@class='sdp']")
+        page.find(:xpath, "//div[@class='sdp']")
+        page.find(:xpath, "//a[@class = 'prev']")
+        page.find(:xpath, "//a[@class = 'next']")
       }
-      page.should have_xpath("//a[@class = 'prev']")
-      page.should have_xpath("//a[@class = 'next']")
+      page.driver.browser.navigate.refresh
+    end
+  end
+
+  context "Sign out" do
+    it 'Verify user can sign out successfully.' do
+      sign_out
+      wait_for_script
     end
   end
 
   context "Logged out user functionality" do
+    it 'Register new user' do
+      register_user
+      wait_for_script
+    end
 
     it '1. Go to 1st sample detail page' do
-      register_user
       go_to_awaiting_results_page
       wait_for_script
       go_to_SDP_page(First_sample_product_id)
@@ -221,16 +233,22 @@ describe 'SDP - Awaiting Results' do
       expected_url.should == actual_url
     end
 
-    it "3 Verify user see 'Write a comment' text." do
-      within('.new-comment .new-comment-header') do
-        page.should have_content ('Write a Comment')
-      end
+    it "3. Verify user see 'Write a comment' text." do
+      #within('.new-comment .new-comment-header') do
+      #  page.should have_content ('Write a Comment')
+      #end
       page.find(:xpath, "//textarea[@name = 'new-comment-text' and @placeholder = 'Write a comment...']")
-      sign_out
+      wait_for_script
     end
 
-    it ' 5. Verify if a logged out user clicks on "Keep me posted" then after successful sign in, button changes to "We will Keep You Posted!" ' do
+    it '4. Sign out' do
+      sign_out
+      wait_for_script
+    end
+
+    it '5. Verify if a logged out user clicks on "Keep me posted" then after successful sign in, button changes to "We will Keep You Posted!" ' do
       go_to_awaiting_results_page
+      wait_for_script
       first_sample_product_id = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
       go_to_SDP_page(first_sample_product_id)
       page.find(:xpath, "//div[@data-product-id ="+first_sample_product_id+"]/div/div[@class = 'sample']/div[@class = 'voting-and-notification clearfix']/a").click
@@ -241,6 +259,9 @@ describe 'SDP - Awaiting Results' do
       wait_until {
         page.find(:xpath, "//div[@data-product-id ="+first_sample_product_id+"]/div/div[@class = 'sample']/div[@class = 'voting-and-notification clearfix subscribed']/a").text.should == "WE'LL KEEP YOU POSTED!"
       }
+    end
+
+    it '6. Sign out' do
       sign_out
     end
   end
