@@ -4,17 +4,8 @@ require 'spec/support/query_helper'
 
 def go_to_BTB_page
   visit '/'+'be-the-buyer/voting-in-progress'
-
-  #case $device_name
-  #  when :phone
-  #    #visit '/'+'be-the-buyer/voting-in-progress?device_type=phone'
-  #    visit '/'+'be-the-buyer/voting-in-progress'
-  #  when :tablet
-  #    #visit '/'+'be-the-buyer/voting-in-progress?device_type=tablet'
-  #    visit '/'+'be-the-buyer/voting-in-progress'
-  #  else
-  #    visit '/'+'be-the-buyer/voting-in-progress'
-  #end
+  wait_for_script
+  page.has_xpath?("//div[@id = 'btb-logo']", :visible => true)
 end
 
 def register_user()
@@ -37,8 +28,8 @@ def register_user()
   return email_address
 end
 
-def wait_for_script
-  wait_until do
+def wait_for_script(wait_time = Capybara.default_wait_time)
+  wait_until(wait_time) do
     page.evaluate_script('$.active') == 0
   end
 end
@@ -83,6 +74,8 @@ end
 def join_desktop(email_address)
   within ('#mc-header-personalization') do
     page.find(:xpath, "//a[@id='mc-header-join']").click
+    wait_for_script
+    #wait_until (Capybara.default_wait_time){page.find(:xpath,"//input[@id = 'account_email']").visible? == true}
   end
   within ('#account-form') do
     fill_in 'Email Address', :with => email_address
@@ -101,6 +94,8 @@ end
 
 def join_tablet(email_address)
   page.find(:xpath, "//a[@id='mc-header-join']").click
+  wait_for_script
+  #wait_until (Capybara.default_wait_time){page.find(:xpath,"//input[@id = 'account_email']").visible? == true}
   within ('#account-form') do
     fill_in 'Email Address', :with => email_address
     fill_in 'Password', :with => $password
@@ -116,18 +111,20 @@ def join_tablet(email_address)
 end
 
 def join_phone(email_address)
+  page.has_xpath?("//a[@id = 'mc-phone-header-join']", :visible => true)
   within ('#mc-phone-header-welcome') do
     page.find(:xpath, "//a[@id='mc-phone-header-join']").click
     wait_for_script
   end
+  page.has_xpath?("//input[@id = 'account_email']", :visible => true)
   within ('#signup-form') do
     fill_in 'account_email', :with => email_address
     fill_in 'account_password', :with => $password
     fill_in 'account-password-confirmation', :with => $password
     click_button('Join')
   end
-  #wait_for_script
   wait_until {
+    page.has_xpath?("//div[@id='mc-phone-header-welcome']/span", :visible => true)
     name = should_be_signed_in_as_user('', email_address)
     page.find(:xpath, "//div[@id='mc-phone-header-welcome']/span").text.should eq('Hello')
     page.find(:xpath, "//div[@id='mc-phone-header-welcome']/a").text.should eq(name)
@@ -290,11 +287,12 @@ def sign_in_facebook_phone
     end
   end
 
-  #new_window = page.driver.browser.window_handles.last
-  #page.within_window new_window do
   go_to_BTB_page
-  page.find(:xpath, "//div[@id='mc-phone-header-welcome']/span").text.should eq('Hello')
-  page.find(:xpath, "//div[@id='mc-phone-header-welcome']/a").text.should eq(name)
+  wait_until {
+    page.has_xpath?("//div[@id='mc-phone-header-welcome']/span", :visible => true)
+    page.find(:xpath, "//div[@id='mc-phone-header-welcome']/span").text.should eq('Hello')
+    page.find(:xpath, "//div[@id='mc-phone-header-welcome']/a").text.should eq(name)
+  }
   #end
 end
 
@@ -327,14 +325,12 @@ def sign_out_tablet()
 end
 
 def sign_out_phone()
-  page.find(:xpath, "//div[@id = 'mc-phone-header-welcome']/a").click
-  wait_until {
-    page.find(:xpath, "//a[@href = '/logout']")
-  }
-  page.find(:xpath, "//a[@href = '/logout']").click
-  wait_until {
-    page.find(:xpath, "//a[@id = 'mc-phone-header-join']").visible? == true
-  }
+  page.has_xpath?("//div[@id = 'mc-phone-header-welcome']/a[@class = 'member-dropdown']", :visible => true)
+  page.find(:xpath, "//div[@id = 'mc-phone-header-welcome']/a[@class = 'member-dropdown']").click
+  page.find(:xpath, "//a[@class = 'button button-medium']", :visible => true).click
+  page.has_xpath?("//a[@id = 'mc-phone-header-join']", :visible => true)
+  page.should have_xpath("//a[@id = 'mc-phone-header-join']", :text => "Join or Sign In")
+  page.should have_xpath("//div[@id = 'btb-logo']")
 end
 
 def remove_product_from_shopping_bag
@@ -441,3 +437,4 @@ def go_to_available_now_page
     #page.find(:xpath, "//div[@class='sample-grid']/nav/h2[@class='page-title voting-in-progress']").text.should == 'Voting In Progress'
   end
 end
+

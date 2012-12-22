@@ -2,7 +2,7 @@ require 'spec/support/common_helper'
 
 describe 'Desktop header', :no_phone => true, :no_tablet => true do
 
-  context "UI" do
+  context "Non Logged In User" do
     before(:all) do
       go_to_BTB_page
       wait_for_script
@@ -44,18 +44,18 @@ describe 'Desktop header', :no_phone => true, :no_tablet => true do
   end
 
   context "Header" do
-    before(:all) do
-      go_to_BTB_page
-      wait_for_script
-      click_sign_in_link
-      sign_in()
-      wait_for_script
-    end
-
     before(:each) do
       go_to_BTB_page
       wait_for_script
     end
+
+    it 'Verify Sign in functionality and after successful sign in user navigates to BTB homepage.' do
+      click_sign_in_link
+      sign_in
+      wait_for_script
+      page.should have_xpath("//div[@id = 'btb-logo']")
+    end
+
     it 'Verify top nav links navigate user to correct page.' do
       menu_count = 1
       begin
@@ -213,20 +213,24 @@ describe 'Desktop header', :no_phone => true, :no_tablet => true do
   end
 
   context "Join" do
-    it 'Verify "Join" functionality' do
+    it 'Verify "Join" functionality and after scuccessful join user navigates to BTB homepage.' do
       go_to_BTB_page
       join()
+      wait_for_script
+      page.should have_xpath("//div[@id = 'btb-logo']")
       sign_out()
     end
   end
 
   context "Facebook" do
-        it 'Verify "Facebook Sign In" functionality' do
-          go_to_BTB_page
-          click_sign_in_link
-          sign_in_with_facebook()
-        end
+    it 'Verify "Facebook Sign In" functionality' do
+      go_to_BTB_page
+      click_sign_in_link
+      sign_in_with_facebook()
+      wait_for_script
+      page.should have_xpath("//div[@id = 'btb-logo']")
     end
+  end
 end
 
 

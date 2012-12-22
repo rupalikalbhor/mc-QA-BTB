@@ -2,39 +2,42 @@ require 'spec/support/common_helper'
 
 describe 'Phone Header', :no_desktop => true, :no_tablet => true do
 
-  context 'UI' do
+  context 'I. UI' do
     before(:all) do
       go_to_BTB_page
-      wait_for_script
     end
 
-    it 'Verify clicking on modcloth logo loads modcloth home page.' do
-      page.find(:xpath, "//div[@class = 'logo']").click
-      wait_for_script
-      page.should have_selector(:xpath, "//a[@id = 'logo']")
+    it '1. Verify clicking on modcloth logo loads modcloth home page.' do
+      page.find(:xpath, "//div[@class = 'logo']", :visible => true).click
+      page.find(:xpath, "//a[@id = 'logo']",:visible => true)
+      page.should have_xpath("//a[@id = 'logo']")
       go_to_BTB_page
     end
 
-    it 'Verify clicking on BTB logo loads Be The Buyer page.' do
-      page.find(:xpath, "//div[@id = 'btb-logo']").click
-      wait_for_script
-      page.should have_content('Voting In Progress')
+    it '2. Verify clicking on BTB logo loads Be The Buyer page.' do
+      page.find(:xpath, "//div[@id = 'btb-logo']", :visible => true).click
+      wait_until { page.should have_content('Voting In Progress') }
     end
 
-    it "Verify user see text 'Showing' with drop down option displays following options with correct text & icon -
+    it "3. Verify user see text 'Showing' with drop down option displays following options with correct text & icon -
       - Voting in Progress
       - Awaiting Results
       - In Production
       - Avaialble Now" do
-      page.find(:xpath, "//div[@id='menu-toggle']").click
+
+      page.find(:xpath, "//div[@id='menu-toggle']", :visible => true).click
+      page.has_xpath?("//ul[@id = 'menu-options']/a[@href = '/be-the-buyer/voting-in-progress']/li/div", :visible => true)
+      #wait_until { page.find(:xpath, "//ul[@id = 'menu-options']/a[@href = '/be-the-buyer/voting-in-progress']/li/div").visible? == true }
       page.find(:xpath, "//ul[@id = 'menu-options']/a[@href = '/be-the-buyer/voting-in-progress']/li/div").text.should == "Voting In Progress"
       page.find(:xpath, "//ul[@id = 'menu-options']/a[@href = '/be-the-buyer/awaiting-results']/li/div").text.should == "Awaiting Results"
       page.find(:xpath, "//ul[@id = 'menu-options']/a[@href = '/be-the-buyer/in-production']/li/div").text.should == "In Production"
       page.find(:xpath, "//ul[@id = 'menu-options']/a[@href = '/be-the-buyer/available-now']/li/div").text.should == "Available Now"
     end
 
-    it "Verify when user clicks on 'MENU' option then all category links gets displayed." do
-      page.find(:xpath, "//div[@id = 'mc-header-menu-toggle']").click
+    it "4. Verify when user clicks on 'MENU' option then all category links gets displayed." do
+      #page.has_xpath?("//div[@id = 'mc-header-menu-toggle']", :visible => true)
+      page.find(:xpath, "//div[@id = 'mc-header-menu-toggle']", :visible => true).click
+      page.has_xpath?("//div[@id = 'mc-header-menu-dropdown']/ul/a", :visible => true)
       page.find(:xpath, "//div[@id = 'mc-header-menu-dropdown']/ul/a[1]/li").text.should == "NEW ARRIVALS"
       page.find(:xpath, "//div[@id = 'mc-header-menu-dropdown']/ul/a[2]/li").text.should == "CLOTHING"
       page.find(:xpath, "//div[@id = 'mc-header-menu-dropdown']/ul/a[3]/li").text.should == "SHOES"
@@ -46,134 +49,132 @@ describe 'Phone Header', :no_desktop => true, :no_tablet => true do
       page.find(:xpath, "//div[@id = 'mc-header-menu-dropdown']/ul/a[9]/li").text.should == "VINTAGE"
     end
 
-    it 'Verify user see Search text box with submit button.' do
+    it '5. Verify user see Search text box with submit button.' do
       page.should have_xpath("//input[@id = 'mc-header-keyword']")
       page.should have_xpath("//input[@id = 'mc-header-search-button']")
     end
 
-    it 'Verify user see shopping bag with count 0' do
-      page.should have_xpath("//a[@id = 'mc-phone-header-bag']")
-      page.find(:xpath, "//a[@id = 'mc-phone-header-bag']").text.should == "0"
-    end
-
-    it 'Verify user see Join or Sign in link' do
+    it '6. Verify user see Join or Sign in link' do
       page.should have_xpath("//a[@id = 'mc-phone-header-join']")
-      page.find(:xpath, "//a[@id = 'mc-phone-header-join']").text.should == "Join or Sign In"
+      page.should have_xpath("//a[@id = 'mc-phone-header-join']", :text => 'Join or Sign In')
     end
 
-    it 'PENDING Verify Menu links are working correctly.' do #Need to add style gallary & BTB links
+    it '7. Verify user see shopping bag with count 0' do
+      page.should have_xpath("//a[@id = 'mc-phone-header-bag']")
+      page.should have_xpath("//a[@id = 'mc-phone-header-bag']", :text => "0")
+    end
+
+    it '8. PENDING Verify all Menu category links are working correctly.' do #Need to add style gallary & BTB links
       menu_count = 1
       begin
-        page.find(:xpath, "//div[@id = 'mc-header-menu-toggle']").click
+        page.find(:xpath, "//div[@id = 'mc-header-menu-toggle']", :visible => true).click
+        page.has_xpath?("//div[@id = 'mc-header-menu-dropdown']", :visible => true)
+
         page.find(:xpath, "//div[@id = 'mc-header-menu-dropdown']/ul/a["+menu_count.to_s+"]/li").click
         wait_for_script
+        page.has_xpath("//h1[@id = 'category-header']", :visible => true)
         case menu_count
           when 1
-            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'New Arrivals'
+            page.should have_xpath("//h1[@id = 'category-header']", :text => 'New Arrivals')
+            #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'New Arrivals'
           when 2
-            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Clothing'
+            page.should have_xpath("//h1[@id = 'category-header']", :text => 'Clothing')
           when 3
-            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Shoes'
+            page.has_xpath?("//h1[@id = 'category-header']", :text => 'Shoes')
+            #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Shoes'
           when 4
-            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Bags & Accessories'
+            page.should have_xpath("//h1[@id = 'category-header']", :text => 'Bags & Accessories')
+            #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Bags & Accessories'
           when 5
-            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Apartment'
+            page.should have_xpath("//h1[@id = 'category-header']", :text => 'Apartment')
+            #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Apartment'
           when 6
-            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Sale'
+            page.should have_xpath("//h1[@id = 'category-header']", :text => 'Sale')
+            #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Sale'
           when 7
             #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Be The Buyer'
           when 8
             #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Clothing'
           when 9
-            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Vintage'
+            page.should have_xpath("//h1[@id = 'category-header']", :text => 'Vintage')
+            #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Vintage'
         end
         go_to_BTB_page
-        wait_for_script
         menu_count = menu_count + 1
       end while (menu_count != 10)
     end
 
-    it 'Verify when user clicks on Shopping bag icon, user navigates to shopping bag page.' do
+    it '9. Verify when user clicks on Shopping bag icon, user navigates to shopping bag page.' do
       page.find(:xpath, "//a[@id = 'mc-phone-header-bag']").click
-      wait_for_script
-      page.find(:xpath, "//h1[@id = 'category-header']/span").text.should == "Shopping Bag"
-      go_to_BTB_page
-      wait_for_script
-    end
+      page.has_xpath?("//h1[@id = 'category-header']/span", :visible => true)
 
-    # Bug
-    #it 'Verify when user clicks on "Be the buyer" text then user navigates to BTB homepage.' do
-    #  page.find(:xpath, "//div[@id = 'mc-header-menu-toggle']").click
-    #  page.find(:xpath, "//div[@id = 'mc-header-menu-dropdown']/ul/a[@href = '/storefront/products/be_the_buyer']").click
-    #  wait_for_script
-    #  page.should have_xpath("//div[@id = 'btb-logo']")
-    #end
+      page.should have_xpath("//h1[@id = 'category-header']/span", :text => 'Shopping Bag')
+      go_to_BTB_page
+    end
   end
 
-  context "Functional Tests" do
-    before(:all) do
+  context "Sign In" do
+    it '1. Verify Sign in functionality and after successful sign in user navigates to BTB homepage.' do
       go_to_BTB_page
-      wait_for_script
       click_sign_in_link
       sign_in
+      wait_for_script
+      page.should have_xpath("//div[@id = 'btb-logo']")
     end
+  end
 
+  context "II. Functional Tests" do
     before(:each) do
       go_to_BTB_page
-      wait_for_script
+      page.find(:xpath, "//div[@id = 'mc-phone-header-welcome']/a[@class = 'member-dropdown']", :visible => true).click
     end
 
-    it 'Verify when user clicks on username then user see following options -
+    it '2. Verify when user clicks on username then user see following options -
             Wishlist
             Order history
             Loved items
             Sign out' do
 
-      page.find(:xpath, "//div[@id = 'mc-phone-header-welcome']/a").click
-      wait_for_script
+      page.has_xpath?("//nav[@id = 'signed-in-menu']/div/a[@href = '/storefront/wishlists']", :visible => true)
       page.find(:xpath, "//nav[@id = 'signed-in-menu']/div/a[@href = '/storefront/wishlists']").text.should == "WISHLISTS"
       page.find(:xpath, "//nav[@id = 'signed-in-menu']/div/a[@href = '/customers/orders']").text.should == "ORDER HISTORY"
       page.find(:xpath, "//nav[@id = 'signed-in-menu']/div/a[@href = '/storefront/lovelists/show']").text.should == "LOVED ITEMS"
       page.find(:xpath, "//nav[@id = 'signed-in-menu']/div/a[@href = '/logout']").text.should == "SIGN OUT"
+      wait_for_script
     end
 
-    it 'Verify when user clicks on Wishlist then user navigates to wishlist page' do
-      page.find(:xpath, "//div[@id = 'mc-phone-header-welcome']/a").click
-      wait_for_script
-      page.find(:xpath, "//nav[@id = 'signed-in-menu']/div/a[@href = '/storefront/wishlists']").click
-      wait_for_script
-      page.find(:xpath, "//div[@id = 'mobile-wishlists']/h1").text.should == "Wishlists"
+    it '3. Verify when user clicks on Wishlist then user navigates to wishlist page' do
+      #page.has_xpath?("//a[@href = '/storefront/wishlists']", :visible => true)
+      page.find(:xpath, "//nav[@id = 'signed-in-menu']/div/a[@href = '/storefront/wishlists']", :visible => true).click
+      page.has_xpath?("//div[@id = 'mobile-wishlists']/h1", :visible => true)
+      #wait_until(Capybara.default_wait_time) {
+        #page.find(:xpath, "//div[@id = 'mobile-wishlists']/h1").text.should == "Wishlists" }
+      page.should have_xpath("//div[@id = 'mobile-wishlists']/h1", :text => 'Wishlists')
     end
 
-    it 'Verify when user clicks on Order History then user navigates to Order History page' do
-      page.find(:xpath, "//div[@id = 'mc-phone-header-welcome']/a").click
-      wait_for_script
-      page.find(:xpath, "//a[@href = '/customers/orders']").click
-      wait_for_script
-      page.find(:xpath, "//div[@id = 'mobile-order-history-header']/h1").text.should == "Order History"
+    it '4. Verify when user clicks on Order History then user navigates to Order History page' do
+      page.find(:xpath, "//a[@href = '/customers/orders']", :visible => true).click
+      page.has_xpath?("//div[@id = 'mobile-order-history-header']/h1", :visible => true)
+      page.should have_xpath("//div[@id = 'mobile-order-history-header']/h1", :text =>"Order History")
     end
 
-    it 'Verify when user clicks on Loved Items then user navigates to Loved Items page' do
-      page.find(:xpath, "//div[@id = 'mc-phone-header-welcome']/a").click
-      wait_for_script
-      page.find(:xpath, "//a[@href = '/storefront/lovelists/show']").click
-      wait_for_script
-      page.find(:xpath, "//h1[@id = 'category-header']").text.should == "My Loved Items"
+    it '5. Verify when user clicks on Loved Items then user navigates to Loved Items page' do
+      page.find(:xpath, "//a[@href = '/storefront/lovelists/show']", :visible => true).click
+      page.has_xpath?("//h1[@id = 'category-header']", :visible => true)
+      page.should have_xpath("//h1[@id = 'category-header']", :text => "My Loved Items")
     end
 
-    it 'Verify when user clicks on Sign out option then user gets signed out and user remains on same page.' do
-      page.find(:xpath, "//div[@id = 'mc-phone-header-welcome']/a").click
-      wait_for_script
-      page.find(:xpath, "//a[@href = '/logout']").click
-      wait_for_script
-      page.should have_selector(:xpath, "//div[@id = 'btb-logo']")
+    it '6. Verify when user clicks on Sign out option then user gets signed out and user remains on same page.' do
+      page.find(:xpath, "//a[@class = 'button button-medium']", :visible => true).click
+      page.has_xpath?("//a[@id = 'mc-phone-header-join']", :visible => true)
+      page.should have_xpath("//a[@id = 'mc-phone-header-join']", :text => "Join or Sign In")
+      page.should have_xpath("//div[@id = 'btb-logo']")
     end
   end
 
-  context 'Search' do
+  context 'III. Search' do
     before(:each) do
       go_to_BTB_page
-      wait_for_script
     end
     it 'Valid case' do
       go_to_available_now_page
@@ -218,12 +219,21 @@ describe 'Phone Header', :no_desktop => true, :no_tablet => true do
     end
   end
 
-  context "Facebook Sign in" do
+  context "IV. Join" do
+    it 'Verify "Join" functionality and after scuccessful join user navigates to BTB homepage.' do
+      go_to_BTB_page
+      join()
+      page.should have_xpath("//div[@id = 'btb-logo']", :visible => true)
+      sign_out()
+    end
+  end
+
+  context "V. Facebook Sign in" do
     it 'Verify after successful facebook sign in user navigates to BTB homepage' do
       go_to_BTB_page
-      wait_for_script
       click_sign_in_link
       sign_in_with_facebook()
+      page.should have_xpath("//div[@id = 'btb-logo']", :visible => true)
     end
   end
 end

@@ -87,8 +87,8 @@ describe 'SDP - Awaiting Results' do
     end
   end
 
-  context 'D. Right side widget', :no_phone => true do
-    it '1. Verify sample displays Vote count' do
+  context 'D. Right side widget' do
+    it '1. Verify sample displays Vote count', :no_phone => true do
       expected_vote_count = $vote_count
 
       actual = page.find(:xpath, "//aside/div[@data-product-id="+First_sample_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']").text
@@ -96,18 +96,22 @@ describe 'SDP - Awaiting Results' do
       actual_vote_count.should == expected_vote_count
     end
 
-    it '2. Verify sample displays comment count' do
+    it '2. Verify sample displays comment count',:no_phone => true do
       commentable_name = $sample_name
       expected_comment_count = get_voting_in_progress_CommentCount(commentable_name)
       page.find(:xpath, "//aside/div[@data-product-id="+First_sample_product_id+"]/div[@class='counter'][2]/div[@class = 'comment-count']").text.should == expected_comment_count
     end
 
-    it '3. Verify user see message "More Samples - Keep Voting!"' do
+    it '3. Verify user see message "More Samples - Keep Voting!"',:no_phone => true do
       page.find(:xpath, "//div[@class = 'vote-more engagement-widget']").text.should == "More Samples - Keep Voting!"
+    end
+
+    it '4. Verify user do not see Your Sample section.', :no_desktop =>true, :no_tablet => true do
+      page.find(:xpath, "//div[@class = 'vote-more engagement-widget']").visible? == false
     end
   end
 
-  context "C. Keep Me Posted functionality - Logged in user" do
+  context "E. Keep Me Posted functionality - Logged in user" do
     it '1. Verify user can sign in successfully.' do
       click_sign_in_link
       sign_in
@@ -201,17 +205,18 @@ describe 'SDP - Awaiting Results' do
         page.find(:xpath, "//a[@class = 'next']")
       }
       page.driver.browser.navigate.refresh
+      wait_for_script
     end
   end
 
-  context "Sign out" do
+  context "G. Sign out" do
     it 'Verify user can sign out successfully.' do
       sign_out
       wait_for_script
     end
   end
 
-  context "Logged out user functionality" do
+  context "H. Logged out user functionality" do
     it 'Register new user' do
       register_user
       wait_for_script
@@ -234,9 +239,6 @@ describe 'SDP - Awaiting Results' do
     end
 
     it "3. Verify user see 'Write a comment' text." do
-      #within('.new-comment .new-comment-header') do
-      #  page.should have_content ('Write a Comment')
-      #end
       page.find(:xpath, "//textarea[@name = 'new-comment-text' and @placeholder = 'Write a comment...']")
       wait_for_script
     end
@@ -252,7 +254,7 @@ describe 'SDP - Awaiting Results' do
       first_sample_product_id = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
       go_to_SDP_page(first_sample_product_id)
       page.find(:xpath, "//div[@data-product-id ="+first_sample_product_id+"]/div/div[@class = 'sample']/div[@class = 'voting-and-notification clearfix']/a").click
-
+      wait_for_script
       sign_in()
       wait_for_script
       visit(current_path)

@@ -12,7 +12,6 @@ RSpec.configure do |config|
     CapybaraSupport::Configuration.reset_capybara
     #email = register_user() #Write register users value into jason file
     #puts "Following user registered successfully: #{email}"
-
   end
   config.include Capybara::DSL
   CapybaraSupport::Configuration.configure_environment

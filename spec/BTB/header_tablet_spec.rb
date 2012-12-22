@@ -5,7 +5,6 @@ describe 'Tablet header', :no_desktop => true, :no_phone => true do
   context "UI" do
     before(:all) do
       go_to_BTB_page
-      wait_for_script
     end
 
     it 'Verify user see "Curstomer Care" link.' do

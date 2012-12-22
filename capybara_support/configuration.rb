@@ -14,9 +14,9 @@ module CapybaraSupport
 
     def self.reset_capybara
       Capybara.reset!
-      #Capybara.current_driver = Capybara.default_driver
+
       Capybara.javascript_driver = Capybara.default_driver #default driver when you using @javascript tag
-      Capybara.default_wait_time = 60 #When testing AJAX, we can set a default wait time
+      Capybara.default_wait_time = 15 #When testing AJAX, we can set a default wait time
       Capybara.server_boot_timeout = 30
       Capybara.default_selector = :css #:xpath #default selector , you can change to :css
       Capybara.ignore_hidden_elements = false #Ignore hidden elements when testing, make helpful when you hide or show elements using javascript
@@ -28,9 +28,7 @@ module CapybaraSupport
       $device_name = ENV.fetch('DEVICE_NAME', @default_device).to_sym
 
       Capybara.app_host = self.get_environment_url
-      #Capybara.default_driver = ENV.fetch('DEFAULT_DRIVER', 'selenium').to_sym
       Capybara.default_driver = ENV.fetch('DEFAULT_DRIVER', self.set_default_driver).to_sym
-      #Capybara.default_driver = :selenium
       puts "Set the Capybara default driver to #{Capybara.default_driver}"
       puts "Tests are running on environment: #{$environment}"
       puts "Window size is set for: #{$device_name}"
@@ -72,8 +70,6 @@ module CapybaraSupport
     #end
 
     def self.user_info
-      #self.set_user
-      #user_data = get_user_data['modcloth']
       user_data = get_regular_user_data
       $email = user_data['email']
       $password = user_data['password']
@@ -94,8 +90,8 @@ module CapybaraSupport
       case $device_name
         when :desktop
           ""
-        when :phone  #iPhone with ios = 5.0
-          #"iPhone"
+        when :phone #iPhone with ios = 5.0
+                    #"iPhone"
 
           profile['general.useragent.override'] = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3"
         when :tablet #iPad with ios = 5.0
