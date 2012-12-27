@@ -9,7 +9,7 @@ describe 'Phone Header', :no_desktop => true, :no_tablet => true do
 
     it '1. Verify clicking on modcloth logo loads modcloth home page.' do
       page.find(:xpath, "//div[@class = 'logo']", :visible => true).click
-      page.find(:xpath, "//a[@id = 'logo']",:visible => true)
+      page.find(:xpath, "//a[@id = 'logo']", :visible => true)
       page.should have_xpath("//a[@id = 'logo']")
       go_to_BTB_page
     end
@@ -72,32 +72,35 @@ describe 'Phone Header', :no_desktop => true, :no_tablet => true do
 
         page.find(:xpath, "//div[@id = 'mc-header-menu-dropdown']/ul/a["+menu_count.to_s+"]/li").click
         wait_for_script
-        page.has_xpath("//h1[@id = 'category-header']", :visible => true)
+        page.has_xpath?("//h1[@id = 'category-header']", :visible => true)
         case menu_count
           when 1
-            page.should have_xpath("//h1[@id = 'category-header']", :text => 'New Arrivals')
-            #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'New Arrivals'
+            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'New Arrivals'
+
           when 2
-            page.should have_xpath("//h1[@id = 'category-header']", :text => 'Clothing')
+            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Clothing'
+
           when 3
-            page.has_xpath?("//h1[@id = 'category-header']", :text => 'Shoes')
-            #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Shoes'
+            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Shoes'
+
           when 4
-            page.should have_xpath("//h1[@id = 'category-header']", :text => 'Bags & Accessories')
-            #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Bags & Accessories'
+            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Bags & Accessories'
+
           when 5
-            page.should have_xpath("//h1[@id = 'category-header']", :text => 'Apartment')
-            #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Apartment'
+            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Apartment'
+
           when 6
-            page.should have_xpath("//h1[@id = 'category-header']", :text => 'Sale')
-            #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Sale'
+            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Sale'
+
           when 7
             #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Be The Buyer'
+
           when 8
             #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Clothing'
+
           when 9
-            page.should have_xpath("//h1[@id = 'category-header']", :text => 'Vintage')
-            #page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Vintage'
+            page.find(:xpath, "//h1[@id = 'category-header']").text.should == 'Vintage'
+
         end
         go_to_BTB_page
         menu_count = menu_count + 1
@@ -107,9 +110,7 @@ describe 'Phone Header', :no_desktop => true, :no_tablet => true do
     it '9. Verify when user clicks on Shopping bag icon, user navigates to shopping bag page.' do
       page.find(:xpath, "//a[@id = 'mc-phone-header-bag']").click
       page.has_xpath?("//h1[@id = 'category-header']/span", :visible => true)
-
       page.should have_xpath("//h1[@id = 'category-header']/span", :text => 'Shopping Bag')
-      go_to_BTB_page
     end
   end
 
@@ -148,14 +149,14 @@ describe 'Phone Header', :no_desktop => true, :no_tablet => true do
       page.find(:xpath, "//nav[@id = 'signed-in-menu']/div/a[@href = '/storefront/wishlists']", :visible => true).click
       page.has_xpath?("//div[@id = 'mobile-wishlists']/h1", :visible => true)
       #wait_until(Capybara.default_wait_time) {
-        #page.find(:xpath, "//div[@id = 'mobile-wishlists']/h1").text.should == "Wishlists" }
+      #page.find(:xpath, "//div[@id = 'mobile-wishlists']/h1").text.should == "Wishlists" }
       page.should have_xpath("//div[@id = 'mobile-wishlists']/h1", :text => 'Wishlists')
     end
 
     it '4. Verify when user clicks on Order History then user navigates to Order History page' do
       page.find(:xpath, "//a[@href = '/customers/orders']", :visible => true).click
       page.has_xpath?("//div[@id = 'mobile-order-history-header']/h1", :visible => true)
-      page.should have_xpath("//div[@id = 'mobile-order-history-header']/h1", :text =>"Order History")
+      page.should have_xpath("//div[@id = 'mobile-order-history-header']/h1", :text => "Order History")
     end
 
     it '5. Verify when user clicks on Loved Items then user navigates to Loved Items page' do
@@ -183,15 +184,17 @@ describe 'Phone Header', :no_desktop => true, :no_tablet => true do
         fail "No product found for Search test cases."
       else
         go_to_BTB_page
+        page.has_xpath?("//input[@id = 'mc-header-keyword']", :visible => true)
         fill_in 'mc-header-keyword', :with => get_product.strip
         wait_for_script
         click_button('GO')
         wait_for_script
-        page.find(:xpath, "//p[@class = 'title']").text().should == get_product.strip
+        page.find(:xpath, "//p[@class = 'title']", :visible => true).text.should == get_product.strip
       end
     end
 
     it 'Invalid case - with blank search' do
+      page.has_xpath?("//input[@id = 'mc-header-keyword']", :visible => true)
       fill_in 'mc-header-keyword', :with => ''
       wait_for_script
       click_button('GO')
@@ -200,6 +203,7 @@ describe 'Phone Header', :no_desktop => true, :no_tablet => true do
     end
 
     it 'Invalid case - with no result found' do
+      page.has_xpath?("//input[@id = 'mc-header-keyword']", :visible => true)
       search_text = 'Ffhkjdhfgkhdfgkjdfhgkjhdfkjfhgkj'.strip
       fill_in 'mc-header-keyword', :with => search_text
       wait_for_script
@@ -211,10 +215,10 @@ describe 'Phone Header', :no_desktop => true, :no_tablet => true do
     end
 
     it 'Verify user see correct shopping bag count on BTB site and on modcloth site.' do
-      btb_bag_count = page.find(:xpath, "//a[@id = 'mc-phone-header-bag']").text
+      btb_bag_count = page.find(:xpath, "//a[@id = 'mc-phone-header-bag']", :visible => true).text
       page.find(:xpath, "//a[@id = 'mc-phone-header-bag']").click
       wait_for_script
-      modcloth_bag_count = page.find(:xpath, "//a[@id = 'header-shopping-bag-link']/span").text
+      modcloth_bag_count = page.find(:xpath, "//a[@id = 'header-shopping-bag-link']/span", :visible => true).text
       btb_bag_count.to_i.should == modcloth_bag_count.to_i
     end
   end

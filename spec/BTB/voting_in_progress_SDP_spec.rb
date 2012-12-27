@@ -7,7 +7,6 @@ describe 'SDP - Voting In Progress' do
 
   before(:all) do
     go_to_BTB_page
-    wait_for_script
   end
 
   it '1. Get first sample from grid' do

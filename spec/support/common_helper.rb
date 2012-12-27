@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "spec/spec_helper"
 require 'spec/support/data_helper'
 require 'spec/support/query_helper'
@@ -72,41 +73,43 @@ def join()
 end
 
 def join_desktop(email_address)
+  page.has_xpath?("//a[@href = '/join?gate=join']", :visible => true)
   within ('#mc-header-personalization') do
     page.find(:xpath, "//a[@id='mc-header-join']").click
     wait_for_script
     #wait_until (Capybara.default_wait_time){page.find(:xpath,"//input[@id = 'account_email']").visible? == true}
   end
+  page.has_xpath?("//input[@id = 'account_email']", :visible => true)
   within ('#account-form') do
     fill_in 'Email Address', :with => email_address
     fill_in 'Password', :with => $password
     fill_in 'Confirm Password', :with => $password
     click_button('Join')
   end
-  #wait_for_script
-  wait_until {
     name = should_be_signed_in_as_user('', email_address)
+
+    page.has_xpath?("//div[@id='mc-header-hello']/span", :visible => true)
     page.find(:xpath, "//div[@id='mc-header-hello']/span").text == 'Hello,'
     page.find(:xpath, "//a[@id='mc-header-welcome-name']").text == name
-  }
   return email_address
 end
 
 def join_tablet(email_address)
-  page.find(:xpath, "//a[@id='mc-header-join']").click
+  page.find(:xpath, "//a[@id='mc-header-join']", :visible => true).click
   wait_for_script
-  #wait_until (Capybara.default_wait_time){page.find(:xpath,"//input[@id = 'account_email']").visible? == true}
+
+  page.has_xpath?("//input[@id = 'account_email']", :visible => true)
   within ('#account-form') do
     fill_in 'Email Address', :with => email_address
     fill_in 'Password', :with => $password
     fill_in 'Confirm Password', :with => $password
     click_button('Join')
   end
-  wait_until {
     name = should_be_signed_in_as_user('', email_address)
+    page.has_xpath?("//div[@id='mc-header-hello']/span", :visible => true)
+
     page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
     page.find(:xpath, "//div[@id='mc-header-hello']/a").text.should eq(name)
-  }
   return email_address
 end
 
@@ -181,6 +184,7 @@ def sign_in_desktop()
     wait_for_script
   end
   name = should_be_signed_in_as_user('', $email)
+  page.has_xpath?("//div[@id='mc-header-hello']/span", :visible => true)
   page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
   page.find(:xpath, "//a[@id='mc-header-welcome-name']").text.should eq(name)
 end
@@ -190,13 +194,12 @@ def sign_in_tablet
     fill_in 'email', :with => $email
     fill_in 'sign_in_password', :with => $password
     click_button('Sign In')
+    wait_for_script
   end
-  wait_for_script
-  wait_until {
-    name = should_be_signed_in_as_user('', $email)
-    page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
-    page.find(:xpath, "//div[@id='mc-header-hello']/a").text.should eq(name)
-  }
+  name = should_be_signed_in_as_user('', $email)
+  page.has_xpath?("//div[@id='mc-header-hello']/span", :visible => true)
+  page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
+  page.find(:xpath, "//div[@id='mc-header-hello']/a").text.should eq(name)
 end
 
 def sign_in_phone
@@ -204,9 +207,10 @@ def sign_in_phone
     fill_in 'email', :with => $email
     fill_in 'password', :with => $password
     click_button('Sign In')
+    wait_for_script
   end
-  wait_for_script
   name = should_be_signed_in_as_user('', $email)
+  page.has_xpath?("//div[@id='mc-phone-header-welcome']/span", :visible => true)
   page.find(:xpath, "//div[@id='mc-phone-header-welcome']/span").text.should eq('Hello')
   page.find(:xpath, "//div[@id='mc-phone-header-welcome']/a").text.should eq(name)
 end
@@ -241,12 +245,9 @@ def sign_in_facebook_desktop
     end
   end
 
-  #new_window = page.driver.browser.window_handles.last
-  #page.within_window new_window do
   go_to_BTB_page
   page.find(:xpath, "//div[@id='mc-header-hello']/span").text.should eq('Hello,')
   page.find(:xpath, "//a[@id='mc-header-welcome-name']").text.should eq(name)
-  #end
 end
 
 def sign_in_facebook_tablet
@@ -391,12 +392,12 @@ def go_to_voting_in_progress_page
   go_to_BTB_page
   case $device_name
     when :phone
-      page.find(:xpath, "//div[@id='menu-toggle']").click
-      page.find(:xpath, "//a[@href='/be-the-buyer/voting-in-progress']/li/div[contains(text(),'Voting In Progress')]").click
-      page.find(:xpath, "//div[@id = 'menu-toggle']").text.should == "Voting In Progress"
+      page.find(:xpath, "//div[@id='menu-toggle']", :visible => true).click
+      page.find(:xpath, "//a[@href='/be-the-buyer/voting-in-progress']/li/div[contains(text(),'Voting In Progress')]", :visible => true).click
+      page.find(:xpath, "//div[@id = 'menu-toggle']", :visible => true).text.should == "Voting In Progress"
     else
-      page.find(:xpath, "//a[@href='/be-the-buyer/voting-in-progress']/li/div[contains(text(),'Voting In Progress')]").click
-      page.find(:xpath, "//div[@class='sample-grid']/nav/h2[@class='page-title voting-in-progress']").text.should == 'Voting In Progress'
+      page.find(:xpath, "//a[@href='/be-the-buyer/voting-in-progress']/li/div[contains(text(),'Voting In Progress')]", :visible => true).click
+      page.find(:xpath, "//div[@class='sample-grid']/nav/h2[@class='page-title voting-in-progress']", :visible => true).text.should == 'Voting In Progress'
   end
 end
 
@@ -429,12 +430,17 @@ end
 def go_to_available_now_page
   case $device_name
     when :phone
-      page.find(:xpath, "//div[@id='menu-toggle']").click
-      page.find(:xpath, "//a[@href='/be-the-buyer/available-now']/li/div[contains(text(),'Available Now')]").click
+      page.find(:xpath, "//div[@id='menu-toggle']", :visible => true).click
+      page.find(:xpath, "//a[@href='/be-the-buyer/available-now']/li/div[contains(text(),'Available Now')]", :visible => true).click
+    #page.find(:xpath, "//div[@id ='page_title']/h1", :visible => true).text.should == "Be the Buyer » Available Now"
     else
-      page.find(:xpath, "//a[@href = '/be-the-buyer/available-now']").click
-    #page.find(:xpath, "//a[@href='/be-the-buyer/voting-in-progress']/li/div[contains(text(),'Voting In Progress')]").click
-    #page.find(:xpath, "//div[@class='sample-grid']/nav/h2[@class='page-title voting-in-progress']").text.should == 'Voting In Progress'
+      page.find(:xpath, "//a[@href = '/be-the-buyer/available-now']", :visible => true).click
+      if($device_name == :desktop)
+        page.find(:xpath, "//div[@id ='page_title']/h1", :visible => true).text.should == "Be the Buyer » Available Now"
+      else
+        page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true).text.should == "Be the Buyer » Available Now"
+      end
+
   end
 end
 
