@@ -89,16 +89,8 @@ end
 private
 def query_collection(query_name)
   case query_name
-    when :SDP_no_comment_for_logged_in_user
-      sql = "SELECT commentable_id, commentable_name, id
-     FROM comments where account_email !=" + "'" + $email + "'" + "
-     AND status = 'active'
-     AND agreement_count = 0 order by id desc limit 1;"
 
-    when :DeleteComments
-      sql = "delete from comments where account_email =" + "'" + $email + "'" + ""
-
-    when :Voting_in_progress_SampleDetails
+    when :SampleDetails
       sql = "SELECT s.name, s.price, s.voting_starts_at,to_char(s.voting_ends_at,'mm/dd/yy'),date_trunc('hour',s.voting_ends_at - now()) as voting_time, count(v.product_id)
              FROM samples s FULL OUTER JOIN votes v ON s.product_id = v.product_id
              WHERE s.product_id =" +@product_id+
@@ -116,7 +108,12 @@ def query_collection(query_name)
                  FROM samples
                  WHERE (state = 'pending' or state = 'active' or state = 'picked' or state = 'skipped' or state = 'not_picked') AND voting_ends_at <= now() and (announced_at is null OR announced_at > now())"
 
-    when :Voting_in_progress_CommentCount
+    when :In_Production_SampleCount
+              sql = "SELECT count(*)
+                     FROM samples
+                     WHERE (state = 'picked' AND announced_at <= now() AND (initially_launched_at is null or initially_launched_at > now()))"
+
+    when :CommentCount
       sql = "SELECT count(*) FROM comments where commentable_name = " + "'" + @commentable_name + "'" + " and status = 'active'"
 
     else
@@ -129,22 +126,13 @@ end
 private
 def query_result(query_name, res)
   case query_name
-    when :SDP_no_comment_for_logged_in_user
-      commentable_id = res.getvalue(0, 0)
-      commentable_name = res.getvalue(0, 1)
-      $comment_id = res.getvalue(0, 2)
-      @url = @url + '/samples/' + commentable_id+'-sample-'+ commentable_name
-      return @url
-
-    when :DeleteComments
-      puts "Comments deleted successfully for user #{$email}"
-
-    when :Voting_in_progress_SampleDetails
+    when :SampleDetails
       $sample_name = res.getvalue(0, 0)
       $sample_price = res.getvalue(0, 1)
       $voting_ends_at = res.getvalue(0, 3)
       $voting_time =  res.getvalue(0, 4)
       $vote_count = res.getvalue(0, 5)
+
       #puts "Sample name is ****************- #{$sample_name}"
       #puts "Sample price is ****************- #{$sample_price}"
       #puts "Vote count is ****************- #{$vote_count}"

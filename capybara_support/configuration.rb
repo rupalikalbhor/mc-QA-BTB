@@ -16,7 +16,7 @@ module CapybaraSupport
       Capybara.reset!
 
       Capybara.javascript_driver = Capybara.default_driver #default driver when you using @javascript tag
-      Capybara.default_wait_time = 15 #When testing AJAX, we can set a default wait time
+      Capybara.default_wait_time = 50 #When testing AJAX, we can set a default wait time
       Capybara.server_boot_timeout = 30
       Capybara.default_selector = :css #:xpath #default selector , you can change to :css
       Capybara.ignore_hidden_elements = false #Ignore hidden elements when testing, make helpful when you hide or show elements using javascript
@@ -53,21 +53,6 @@ module CapybaraSupport
           puts 'Invalid environment name..Running on default environment STAGE !!!!'
       end
     end
-
-    #def self.set_user
-    #  case $environment
-    #    when :demo
-    #      $user = 'demo'
-    #    when :stage
-    #      $user = 'stage_sign_in'
-    #    when :preview
-    #      $user = 'preview_sign_in'
-    #    when :production
-    #      $user = 'prod_sign_in'
-    #    else
-    #      puts 'Invalid environment name..Running on default environment STAGE !!!!'
-    #  end
-    #end
 
     def self.user_info
       user_data = get_regular_user_data
