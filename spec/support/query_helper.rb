@@ -24,6 +24,6 @@ def get_in_production_SampleCount
 end
 
 def get_product_id_for_skipped_sample
-  connection({:query_name => :Skipped_sample, :database_name => :btb})
+  connection({:query_name => :Skipped_Sample, :database_name => :btb})
 end
 
