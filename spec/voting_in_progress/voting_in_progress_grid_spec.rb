@@ -97,33 +97,33 @@ describe 'Grid page - Voting In Progress' do
 
   context 'B. Sample Box' do
     it '' do
-      FIRST_SAMPLE_PRODUCT_ID = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
-      get_sample_details(FIRST_SAMPLE_PRODUCT_ID) #Get sample details from database
+      First_Sample_Product_id = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
+      get_sample_details(First_Sample_Product_id) #Get sample details from database
     end
 
     it '1. Verify sample number is displaying correctly' do
       expected_sample_name = $sample_name #Get sample name from database
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class='name']",:visible =>true).text.should == expected_sample_name
+      page.find(:xpath, "//div[@data-product-id="+First_Sample_Product_id+"]/div[@class='name']",:visible =>true).text.should == expected_sample_name
     end
 
     it '2. Verify pin icon is displaying in sample box' do
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'pin']",:visible =>true)
+      page.find(:xpath, "//div[@data-product-id="+First_Sample_Product_id+"]/div[@class = 'pin']",:visible =>true)
     end
 
     it '3. Verify correct dollar amount appears above each sample' do
       expected_sample_price = $sample_price
       expected_sample_price = "$"+expected_sample_price.insert(-3, '.')
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'price']",:visible =>true).text.should == expected_sample_price
+      page.find(:xpath, "//div[@data-product-id="+First_Sample_Product_id+"]/div[@class = 'price']",:visible =>true).text.should == expected_sample_price
     end
 
     it '4. Verify all the samples on this page have "Pick","Skip" buttons.' do
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/a[@class = 'skip']",:visible =>true).text.should == "SKIP"
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/a[@class = 'pick']",:visible =>true).text.should == "PICK"
+      page.find(:xpath, "//div[@data-product-id="+First_Sample_Product_id+"]/div/a[@class = 'skip']",:visible =>true).text.should == "SKIP"
+      page.find(:xpath, "//div[@data-product-id="+First_Sample_Product_id+"]/div/a[@class = 'pick']",:visible =>true).text.should == "PICK"
     end
 
     it '5. Verify sample displays Vote count' do
       expected_vote_count = $vote_count
-      vote_count = page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class = 'vote-count']",:visible =>true).text
+      vote_count = page.find(:xpath, "//div[@data-product-id="+First_Sample_Product_id+"]/div/div[@class = 'vote-count']",:visible =>true).text
       actual_vote_count = vote_count.gsub(",", "")
       expected_vote_count.should == actual_vote_count
     end
@@ -131,18 +131,18 @@ describe 'Grid page - Voting In Progress' do
     it '6. Verify sample displays comment count' do
       commentable_name = $sample_name
       expected_comment_count = get_comment_count(commentable_name)
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class = 'comments-count']",:visible =>true).text.should == expected_comment_count
+      page.find(:xpath, "//div[@data-product-id="+First_Sample_Product_id+"]/div/div[@class = 'comments-count']",:visible =>true).text.should == expected_comment_count
     end
 
     it '7. Verify sample displays "Voting End date" with clock icon.' do
       voting_time_from_db = $voting_time
       expected_voting_time = get_voting_date_time(voting_time_from_db)
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'status voting-in-progress']",:visible =>true).text.should == expected_voting_time
+      page.find(:xpath, "//div[@data-product-id="+First_Sample_Product_id+"]/div[@class = 'status voting-in-progress']",:visible =>true).text.should == expected_voting_time
     end
 
     it '8. Verify when user clicks on sample image then user navigates to SDP' do
       sample_number = $sample_name.gsub("Sample ", '')
-      page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'photo']/a[@href='/be-the-buyer/samples/"+FIRST_SAMPLE_PRODUCT_ID+"-sample-"+sample_number+"']",:visible =>true).click
+      page.find(:xpath, "//div[@data-product-id="+First_Sample_Product_id+"]/div[@class = 'photo']/a[@href='/be-the-buyer/samples/"+First_Sample_Product_id+"-sample-"+sample_number+"']",:visible =>true).click
       page.should have_xpath("//div[@class='sdp']")
       go_to_BTB_page
     end
