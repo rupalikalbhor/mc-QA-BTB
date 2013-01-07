@@ -104,18 +104,22 @@ def query_collection(query_name)
              WHERE state ='active' AND (voting_starts_at <= now() AND voting_ends_at > now())"
 
     when :Awaiting_results_SampleCount
-          sql = "SELECT count(*)
-                 FROM samples
-                 WHERE (state = 'pending' or state = 'active' or state = 'picked' or state = 'skipped' or state = 'not_picked') AND voting_ends_at <= now() and (announced_at is null OR announced_at > now())"
+      sql = "SELECT count(*)
+             FROM samples
+             WHERE (state = 'pending' or state = 'active' or state = 'picked' or state = 'skipped' or state = 'not_picked') AND voting_ends_at <= now() and (announced_at is null OR announced_at > now())"
 
     when :In_Production_SampleCount
-              sql = "SELECT count(*)
-                     FROM samples
-                     WHERE (state = 'picked' AND announced_at <= now() AND (initially_launched_at is null or initially_launched_at > now()))"
+      sql = "SELECT count(*)
+             FROM samples
+             WHERE (state = 'picked' AND announced_at <= now() AND (initially_launched_at is null or initially_launched_at > now()))"
 
     when :CommentCount
       sql = "SELECT count(*) FROM comments where commentable_name = " + "'" + @commentable_name + "'" + " and status = 'active'"
 
+    when :Skipped_Sample
+      sql = "SELECT product_id FROM samples
+             WHERE state = 'skipped' or state = 'not_picked'
+             limit 1"
     else
       print "\n No matching query..Please check your typos.... \n"
       sql = nil
@@ -130,14 +134,14 @@ def query_result(query_name, res)
       $sample_name = res.getvalue(0, 0)
       $sample_price = res.getvalue(0, 1)
       $voting_ends_at = res.getvalue(0, 3)
-      $voting_time =  res.getvalue(0, 4)
+      $voting_time = res.getvalue(0, 4)
       $vote_count = res.getvalue(0, 5)
 
-      #puts "Sample name is ****************- #{$sample_name}"
-      #puts "Sample price is ****************- #{$sample_price}"
-      #puts "Vote count is ****************- #{$vote_count}"
-      #puts "voting time is ****************- #{$voting_time}"
-      #puts "voting ends at is ****************- #{$voting_ends_at}"
+    #puts "Sample name is ****************- #{$sample_name}"
+    #puts "Sample price is ****************- #{$sample_price}"
+    #puts "Vote count is ****************- #{$vote_count}"
+    #puts "voting time is ****************- #{$voting_time}"
+    #puts "voting ends at is ****************- #{$voting_ends_at}"
     else
       value = res.getvalue(0, 0)
       return value
