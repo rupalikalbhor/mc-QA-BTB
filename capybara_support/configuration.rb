@@ -4,7 +4,6 @@ require 'support/data_helper'
 require 'selenium-webdriver'
 require 'webdriver-user-agent'
 
-
 module CapybaraSupport
   class Configuration
     @default_env = :demo

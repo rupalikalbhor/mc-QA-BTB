@@ -3,8 +3,9 @@ require 'rspec'
 require 'capybara/dsl'
 require 'capybara_support/configuration'
 require 'screenshot_support/screenshot_helper'
-require 'support/common_helper'
+require 'spec/support/common_helper'
 require 'spec/support/query_helper'
+require 'capybara/rspec'
 
 i = 0
 RSpec.configure do |config|
@@ -12,11 +13,11 @@ RSpec.configure do |config|
     CapybaraSupport::Configuration.reset_capybara
 
     #This function will execute register_user only onces
-    #if (i == 0)
-    #  email = register_user() #Write register users value into jason file
-    #  puts "Following user registered successfully: #{email}"
-    #  i = i + 1
-    #end
+    if (i == 0)
+      email = register_user() #Write register users value into jason file
+      puts "Following user registered successfully: #{email}"
+      i = i + 1
+    end
 
   end
   config.include Capybara::DSL

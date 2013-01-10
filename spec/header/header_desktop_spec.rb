@@ -1,4 +1,4 @@
-require "spec/spec_helper"
+require 'spec/spec_helper'
 
 describe 'Header - header_desktop', :no_phone => true, :no_tablet => true do
 
@@ -235,54 +235,6 @@ describe 'Header - header_desktop', :no_phone => true, :no_tablet => true do
       wait_for_script
       page.find(:xpath, "//div[@id = 'btb-logo']", :visible => true)
     end
-  end
-end
-
-describe 'Header - header_desktop', :no_phone => true, :no_tablet => true do
-
-  context "I. Non Logged In User" do
-    it '' do
-#      visit 'http://www.stage.modcloth.com/shop/special-occasion-dresses#?price=26,350&sort=price%20desc&page=1'
-#      product_count = page.evaluate_script("$('.product_list li').length").to_s
-#      sleep(2)
-#      i = 1
-#      if (product_count.to_i > 1)
-#        begin
-#          span_text = page.find(:xpath, "//ul[@class='product_list']/li["+i.to_s+"]/a/span").text
-#          puts "span text is: #{span_text}"
-#          if (span_text.include? '$')
-#            page.find(:xpath, "//ul[@class='product_list']/li["+i.to_s+"]/a").click
-#            break
-#          else
-#            i = i+1
-#          end
-#        end while (i != product_count.to_i)
-#      else
-#        puts "No products found in this category.."
-#      end
-
-
-#visit 'http://www.stage.modcloth.com/shop/dresses'
-#go_to_available_product_PDP
-#      visit 'http://www.stage.modcloth.com/shop/dresses/afternoon-getaway-dress'
-#      wait_for_script
-#      page.find(:xpath, "//input[@class = 'ui-variant-value size-button ui-corner-all in-stock']").click
-#      sleep(2)
-#get_available_variant
-
-      go_to_BTB_page
-      #  page.find(:xpath, "//a[@id = 'mc-header-shopping-bag']").click
-      expected_count = page.find(:xpath, "//a[@id = 'mc-header-cart-count']").text
-      visit '/'+'shop/dresses'
-      add_item_into_bag
-    end
-  end
-end
-
-describe 'Test' do
-  it '' do
-    visit 'http://www.stage.modcloth.com/shop/dresses/afternoon-getaway-dress'
-    go_to_BTB_page
   end
 end
 
