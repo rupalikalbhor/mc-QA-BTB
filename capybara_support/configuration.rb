@@ -14,9 +14,8 @@ module CapybaraSupport
 
     def self.reset_capybara
       Capybara.reset!
-
       Capybara.javascript_driver = Capybara.default_driver #default driver when you using @javascript tag
-      Capybara.default_wait_time = 50 #When testing AJAX, we can set a default wait time
+      Capybara.default_wait_time = 30 #When testing AJAX, we can set a default wait time
       Capybara.server_boot_timeout = 30
       Capybara.default_selector = :css #:xpath #default selector , you can change to :css
       Capybara.ignore_hidden_elements = false #Ignore hidden elements when testing, make helpful when you hide or show elements using javascript

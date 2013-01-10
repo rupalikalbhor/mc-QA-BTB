@@ -1,7 +1,7 @@
 # encoding: utf-8
 require "spec/spec_helper"
 
-describe 'SDP - Awaiting Results' do
+describe 'Awaiting Results - Awaiting_results_SDP_spec' do
   let(:page_title) { 'Awaiting Results' }
 
   before(:all) do
@@ -164,13 +164,13 @@ describe 'SDP - Awaiting Results' do
         page.find(:xpath, "//div[@class='sdp']",:visible => true)
         page.find(:xpath, "//a[@class ='invisible prev']")
         page.find(:xpath, "//a[@class = 'next']",:visible => true)
-        page.driver.browser.navigate.refresh
       }
     end
 
     it "2. Verify when user is on last sample SDP page then user see only 'Prev' arrow." do
       go_to_awaiting_results_page
       sample_count = get_awaiting_results_SampleCount
+      wait_until{
       if ($device_name == :phone)
         if (sample_count.to_i > 10)
           go_to_last_page
@@ -178,6 +178,7 @@ describe 'SDP - Awaiting Results' do
       elsif ($device_name == :tablet || $device_name == :desktop)
         go_to_last_page
       end
+      }
       last_sample_product_id = page.evaluate_script("$('.sample-data:last').attr('data-product-id')").to_s
       page.find(:xpath, "//div[@data-product-id="+last_sample_product_id+"]/div[@class = 'photo']/a",:visible => true).click
       wait_for_script
@@ -185,7 +186,6 @@ describe 'SDP - Awaiting Results' do
         page.find(:xpath, "//div[@class = 'sdp']",:visible => true)
         page.find(:xpath, "//a[@class = 'prev']",:visible => true)
         page.find(:xpath, "//a[@class = 'invisible next']")
-                page.driver.browser.navigate.refresh
       }
     end
 
@@ -268,4 +268,7 @@ def go_to_last_page
   last_page_number = page.evaluate_script("$('.bottom-pagination .pagination .pages .next_page').prev().text()").to_s
   page.find(:xpath, "//div[@class = 'bottom-pagination']/div/span[@class = 'pages']/a[@href ='/be-the-buyer/awaiting-results?page="+last_page_number+"']",:visible => true).click
   wait_for_script
+  wait_until{
+    page.find(:xpath, "//div[@class = 'bottom-pagination']/div/span[@class = 'pages']/em[@class = 'current']",:visible => true).text.should == last_page_number
+  }
 end

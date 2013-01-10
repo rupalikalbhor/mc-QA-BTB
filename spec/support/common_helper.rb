@@ -1,7 +1,5 @@
 # encoding: utf-8
 require "spec/spec_helper"
-#require 'spec/support/data_helper'
-#require 'spec/support/query_helper'
 
 def go_to_BTB_page
   visit '/'+'be-the-buyer/voting-in-progress'
@@ -444,7 +442,10 @@ def go_to_available_now_page
       if ($device_name == :desktop)
         page.find(:xpath, "//div[@id ='page_title']/h1", :visible => true).text.should == "Be the Buyer » Available Now"
       else
-        page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true).text.should == "Be the Buyer » Available Now"
+        breadcrumb_text = page.find(:xpath, "//div[@id='breadcrumbs']", :visible => true).text
+        breadcrumb = breadcrumb_text.tr("\n", "")
+        breadcrumb.should == 'ModCloth »Be the Buyer » Available Now'
+        #page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true).text.should == "Be the Buyer » Available Now"
       end
   end
   wait_for_script
@@ -464,5 +465,41 @@ def go_to_in_production_page
       }
   end
   wait_for_script
+end
+
+def go_to_available_product_PDP
+  product_count = page.evaluate_script("$('.product_list li').length").to_s
+  sleep(2)
+  i = 1
+  if (product_count.to_i > 1)
+    begin
+      span_text = page.find(:xpath, "//ul[@class='product_list']/li["+i.to_s+"]/a/span").text
+      puts "span text is: #{span_text}"
+      #if (span_text.include? '$')
+      if(span_text!='Out of Stock!' || span_text!= 'Coming Soon!' || span_text!= 'Sold')
+        page.find(:xpath, "//ul[@class='product_list']/li["+i.to_s+"]/a").click
+        break
+      else
+        i = i+1
+      end
+    end while (i != product_count.to_i)
+  else
+    puts "No products found in this category.."
+  end
+end
+
+def add_item_into_bag
+  go_to_available_product_PDP
+  wait_for_script
+  page.find(:xpath, "//div[@class = 'product-detail-page ']", :visible => true)
+  page.find(:xpath, "//input[@class = 'ui-variant-value size-button ui-corner-all in-stock']", :visible => true).click
+  wait_until{
+  page.find(:xpath, "//input[@class = 'ui-variant-value size-button ui-corner-all in-stock selected in-stock-selected']", :visible => true)
+  }
+  click_button ('Add to Bag')
+  wait_for_script
+  wait_until{
+    page.find(:xpath, "//div[@id = 'shopping-bag-header-container']", :visible => true)
+  }
 end
 

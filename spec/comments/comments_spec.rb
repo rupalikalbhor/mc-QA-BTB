@@ -3,7 +3,7 @@
 #require 'spec/support/query_helper'
 require "spec/spec_helper"
 
-describe 'Posting comment on a sample for logged-in user' do
+describe 'Comments - Comments_spec' do
   before(:all) do
     go_to_BTB_page
     click_sign_in_link()

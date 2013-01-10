@@ -1,7 +1,7 @@
 # encoding: utf-8
 require "spec/spec_helper"
 
-describe 'Skipped Sample page' do
+describe 'Voting_in_progress - Skipped_sample_page' do
 
   before(:all) do
     go_to_BTB_page

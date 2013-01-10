@@ -12,7 +12,7 @@ RSpec.configure do |config|
     CapybaraSupport::Configuration.reset_capybara
 
     #This function will execute register_user only onces
-    #if(i == 0)
+    #if (i == 0)
     #  email = register_user() #Write register users value into jason file
     #  puts "Following user registered successfully: #{email}"
     #  i = i + 1

@@ -1,7 +1,6 @@
-#require 'spec/support/common_helper'
 require "spec/spec_helper"
 
-describe 'Desktop header', :no_phone => true, :no_tablet => true do
+describe 'Header - header_desktop', :no_phone => true, :no_tablet => true do
 
   context "I. Non Logged In User" do
     before(:all) do
@@ -20,17 +19,17 @@ describe 'Desktop header', :no_phone => true, :no_tablet => true do
       new_window = page.driver.browser.window_handles.last
       page.within_window new_window do
         page.has_xpath?("//div[@id = 'mc-modal-dialog-header']", :visible => true)
-        page.find(:xpath, "//div[@id = 'mc-modal-dialog-title']").text.should == "ModCloth Customer Care"
-        page.find(:xpath, "//div[@id = 'mc-modal-dialog-close']").click
+        page.find(:xpath, "//div[@id = 'mc-modal-dialog-title']", :visible => true).text.should == "ModCloth Customer Care"
+        page.find(:xpath, "//div[@id = 'mc-modal-dialog-close']", :visible => true).click
       end
     end
 
     it '3. Verify user see Join link' do
-      page.find(:xpath, "//a[@id = 'mc-header-join']").text.should == "Join"
+      page.find(:xpath, "//a[@id = 'mc-header-join']", :visible => true).text.should == "Join"
     end
 
     it '4. Verify user see Sign in link' do
-      page.find(:xpath, "//a[@id = 'mc-header-sign-in']").text.should == "Sign In"
+      page.find(:xpath, "//a[@id = 'mc-header-sign-in']", :visible => true).text.should == "Sign In"
     end
 
     it '5. Verify user see "Search" text box with text "Search"' do
@@ -38,7 +37,7 @@ describe 'Desktop header', :no_phone => true, :no_tablet => true do
     end
 
     it '6. Verify user see text "Shopping bag"' do
-      page.find(:xpath, "//a[@id = 'mc-header-shopping-bag']").text.should == "SHOPPING BAG"
+      page.find(:xpath, "//a[@id = 'mc-header-shopping-bag']", :visible => true).text.should == "SHOPPING BAG"
     end
   end
 
@@ -135,17 +134,24 @@ describe 'Desktop header', :no_phone => true, :no_tablet => true do
       expected_count.should == actual_count
     end
 
+    #ui-variant-value size-button ui-corner-all out-of-stock
+
+
     #it 'Verify user see correct shopping bag count.' do
     #  add_product_into_shopping_bag
-    #  go_to_BTB_page
+      go_to_BTB_page
     #  page.find(:xpath, "//a[@id = 'mc-header-shopping-bag']").click
-    #  expected_count = page.find(:xpath, "//em[@class = 'item_count']").text
-    #  go_to_BTB_page
+      expected_count = page.find(:xpath, "//a[@id = 'mc-header-cart-count']").text
+      visit '/' + 'shop/dresses'
+      #page.find(:xpath, "//li[@class = 'clothing']/a").click
+      #wait_for_page_load
+
     #  a_var = page.find(:xpath, "//a[@id = 'mc-header-cart-count']").text
     #  actual_count = a_var[2..-1].chomp(' )')
     #  expected_count.should == actual_count
     #  remove_product_from_shopping_bag
     #end
+
     #
     #it 'Verify user see "Checkout" button' do
     #  add_product_into_shopping_bag
@@ -231,6 +237,55 @@ describe 'Desktop header', :no_phone => true, :no_tablet => true do
     end
   end
 end
+
+describe 'Header - header_desktop', :no_phone => true, :no_tablet => true do
+
+  context "I. Non Logged In User" do
+    it '' do
+#      visit 'http://www.stage.modcloth.com/shop/special-occasion-dresses#?price=26,350&sort=price%20desc&page=1'
+#      product_count = page.evaluate_script("$('.product_list li').length").to_s
+#      sleep(2)
+#      i = 1
+#      if (product_count.to_i > 1)
+#        begin
+#          span_text = page.find(:xpath, "//ul[@class='product_list']/li["+i.to_s+"]/a/span").text
+#          puts "span text is: #{span_text}"
+#          if (span_text.include? '$')
+#            page.find(:xpath, "//ul[@class='product_list']/li["+i.to_s+"]/a").click
+#            break
+#          else
+#            i = i+1
+#          end
+#        end while (i != product_count.to_i)
+#      else
+#        puts "No products found in this category.."
+#      end
+
+
+#visit 'http://www.stage.modcloth.com/shop/dresses'
+#go_to_available_product_PDP
+#      visit 'http://www.stage.modcloth.com/shop/dresses/afternoon-getaway-dress'
+#      wait_for_script
+#      page.find(:xpath, "//input[@class = 'ui-variant-value size-button ui-corner-all in-stock']").click
+#      sleep(2)
+#get_available_variant
+
+      go_to_BTB_page
+      #  page.find(:xpath, "//a[@id = 'mc-header-shopping-bag']").click
+      expected_count = page.find(:xpath, "//a[@id = 'mc-header-cart-count']").text
+      visit '/'+'shop/dresses'
+      add_item_into_bag
+    end
+  end
+end
+
+describe 'Test' do
+  it '' do
+    visit 'http://www.stage.modcloth.com/shop/dresses/afternoon-getaway-dress'
+    go_to_BTB_page
+  end
+end
+
 
 
 

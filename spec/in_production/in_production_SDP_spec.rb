@@ -1,7 +1,7 @@
 # encoding: utf-8
 require "spec/spec_helper"
 
-describe 'SDP - In Production' do
+describe 'In Production - in_production_SDP' do
   let(:page_title) { 'In Production' }
 
   before(:all) do
@@ -11,12 +11,12 @@ describe 'SDP - In Production' do
   context 'I. Breadcrumb' do
     it '1. Get first sample from grid' do
       go_to_in_production_page
-      First_sample_product_id = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
-      get_sample_details(First_sample_product_id) #Get sample details from database
+      First_in_production_SDP_sample_product_id = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
+      get_sample_details(First_in_production_SDP_sample_product_id) #Get sample details from database
     end
 
     it '2. Verify when user clicks on sample image then user navigates to SDP' do
-      page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div[@class = 'photo']/a", :visible => true).click
+      page.find(:xpath, "//div[@data-product-id="+First_in_production_SDP_sample_product_id+"]/div[@class = 'photo']/a", :visible => true).click
       wait_until {
         page.should have_xpath("//div[@class='sdp']")
       }
@@ -66,21 +66,21 @@ describe 'SDP - In Production' do
   context 'III. Sample detail box' do
     it '1. Verify sample name is displaying correctly' do
       expected_sample_name = $sample_name #Get sample name from database
-      page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div/div[@class='sample']/div[@class='name']", :visible => true).text.should == expected_sample_name
+      page.find(:xpath, "//div[@data-product-id="+First_in_production_SDP_sample_product_id+"]/div/div[@class='sample']/div[@class='name']", :visible => true).text.should == expected_sample_name
     end
 
     it '2. Verify pin icon is displaying in sample box' do
-      page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div/div[@class='sample']/div[@class = 'pin']", :visible => true)
+      page.find(:xpath, "//div[@data-product-id="+First_in_production_SDP_sample_product_id+"]/div/div[@class='sample']/div[@class = 'pin']", :visible => true)
     end
 
     it '3. Verify correct dollar amount appears above each sample' do
       expected_sample_price = $sample_price
       expected_sample_price = "$"+expected_sample_price.insert(-3, '.')
-      page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div/div[@class='sample']/div[@class = 'price']", :visible => true).text.should == expected_sample_price
+      page.find(:xpath, "//div[@data-product-id="+First_in_production_SDP_sample_product_id+"]/div/div[@class='sample']/div[@class = 'price']", :visible => true).text.should == expected_sample_price
     end
 
     it '4. Verify all the samples on this page have "Keep Me Posted" button.' do
-      page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div/div[@class = 'sample']/div[@class = 'voting-and-notification clearfix']/a", :visible => true).text.should == "KEEP ME POSTED"
+      page.find(:xpath, "//div[@data-product-id="+First_in_production_SDP_sample_product_id+"]/div/div[@class = 'sample']/div[@class = 'voting-and-notification clearfix']/a", :visible => true).text.should == "KEEP ME POSTED"
     end
   end
 
@@ -88,7 +88,7 @@ describe 'SDP - In Production' do
     it '1. Verify sample displays Vote count', :no_phone => true do
       expected_vote_count = $vote_count
 
-      actual = page.find(:xpath, "//aside/div[@data-product-id="+First_sample_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']", :visible => true).text
+      actual = page.find(:xpath, "//aside/div[@data-product-id="+First_in_production_SDP_sample_product_id+"]/div[@class='counter'][1]/div[@class = 'vote-count']", :visible => true).text
       actual_vote_count = actual.gsub(",", "")
       actual_vote_count.should == expected_vote_count
     end
@@ -96,7 +96,7 @@ describe 'SDP - In Production' do
     it '2. Verify sample displays comment count', :no_phone => true do
       commentable_name = $sample_name
       expected_comment_count = get_comment_count(commentable_name)
-      page.find(:xpath, "//aside/div[@data-product-id="+First_sample_product_id+"]/div[@class='counter'][2]/div[@class = 'comment-count']", :visible => true).text.should == expected_comment_count
+      page.find(:xpath, "//aside/div[@data-product-id="+First_in_production_SDP_sample_product_idd+"]/div[@class='counter'][2]/div[@class = 'comment-count']", :visible => true).text.should == expected_comment_count
     end
 
     it '3. Verify user see message "More Samples - Keep Voting!"', :no_phone => true do
@@ -118,17 +118,17 @@ describe 'SDP - In Production' do
     it '2. Verify if a logged in user clicks on "Keep me posted" then
            - button changes to "We will Keep You Posted!" ' do
       #Get product id which is in 'Keep me posted' state
-      Product_id = page.evaluate_script('$("div[class=\"voting-and-notification clearfix\"]").eq(0).parent().attr("data-product-id")').to_s
+      Product_id_keep_me_posted = page.evaluate_script('$("div[class=\"voting-and-notification clearfix\"]").eq(0).parent().attr("data-product-id")').to_s
 
-      if (Product_id != "")
-        Before_comments_count = page.find(:xpath, "//div[@data-product-id="+Product_id+"]/div[@class='counters']/div[@class='comments-count']", :visible => true).text
-        page.find(:xpath, "//div[@data-product-id ="+Product_id+"]/div[@class = 'photo']/a", :visible => true).click
-        page.find(:xpath, "//div[@data-product-id ="+Product_id+"]/div/div[@class = 'sample']/div[@class = 'voting-and-notification clearfix']/a", :visible => true).click
+      if (Product_id_keep_me_posted!= "")
+        Before_comments_count = page.find(:xpath, "//div[@data-product-id="+Product_id_keep_me_posted+"]/div[@class='counters']/div[@class='comments-count']", :visible => true).text
+        page.find(:xpath, "//div[@data-product-id ="+Product_id_keep_me_posted+"]/div[@class = 'photo']/a", :visible => true).click
+        page.find(:xpath, "//div[@data-product-id ="+Product_id_keep_me_posted+"]/div/div[@class = 'sample']/div[@class = 'voting-and-notification clearfix']/a", :visible => true).click
         wait_for_script
-        page.find(:xpath, "//div[@data-product-id ="+Product_id+"]/div/div[@class = 'sample']/div[@class = 'voting-and-notification clearfix subscribed']/a", :visible => true).text.should == "WE'LL KEEP YOU POSTED!"
+        page.find(:xpath, "//div[@data-product-id ="+Product_id_keep_me_posted+"]/div/div[@class = 'sample']/div[@class = 'voting-and-notification clearfix subscribed']/a", :visible => true).text.should == "WE'LL KEEP YOU POSTED!"
         page.driver.browser.navigate.refresh
         wait_for_script
-        page.find(:xpath, "//div[@data-product-id ="+Product_id+"]/div/div[@class = 'sample']/div[@class = 'voting-and-notification clearfix subscribed']/a", :visible => true).text.should == "WE'LL KEEP YOU POSTED!"
+        page.find(:xpath, "//div[@data-product-id ="+Product_id_keep_me_posted+"]/div/div[@class = 'sample']/div[@class = 'voting-and-notification clearfix subscribed']/a", :visible => true).text.should == "WE'LL KEEP YOU POSTED!"
       else
         fail "No sample found in Awaiting Results section..so This test case is not executed."
       end
@@ -150,7 +150,7 @@ describe 'SDP - In Production' do
         click_button('Comment')
       end
       go_to_in_production_page
-      after_comments_count = page.find(:xpath, "//div[@data-product-id="+Product_id+"]/div[@class='counters']/div[@class='comments-count']", :visible => true).text
+      after_comments_count = page.find(:xpath, "//div[@data-product-id="+Product_id_keep_me_posted+"]/div[@class='counters']/div[@class='comments-count']", :visible => true).text
       after_comments_count.to_i.should == Before_comments_count.to_i + 1
     end
   end
@@ -158,7 +158,7 @@ describe 'SDP - In Production' do
   context 'VI. Arrows' do
     it "1. Verify when user is on 1st sample SDP page then user see only 'Next' arrow." do
       go_to_in_production_page
-      page.find(:xpath, "//div[@data-product-id="+First_sample_product_id+"]/div[@class = 'photo']/a", :visible => true).click
+      page.find(:xpath, "//div[@data-product-id="+First_in_production_SDP_sample_product_id+"]/div[@class = 'photo']/a", :visible => true).click
       wait_for_script
       wait_until {
         page.find(:xpath, "//div[@class='sdp']", :visible => true)
@@ -219,7 +219,7 @@ describe 'SDP - In Production' do
 
     it '2. Go to 1st sample detail page' do
       go_to_in_production_page
-      go_to_SDP_page(First_sample_product_id)
+      go_to_SDP_page(First_in_production_SDP_sample_product_id)
     end
 
     it '3. Verify after clicking on "Sign in Comment" button and successful login user navigates back to SDP page.' do
@@ -267,4 +267,7 @@ def go_to_last_page
   last_page_number = page.evaluate_script("$('.bottom-pagination .pagination .pages .next_page').prev().text()").to_s
   page.find(:xpath, "//div[@class = 'bottom-pagination']/div/span[@class = 'pages']/a[@href ='/be-the-buyer/in-production?page="+last_page_number+"']", :visible => true).click
   wait_for_script
+  wait_until{
+      page.find(:xpath, "//div[@class = 'bottom-pagination']/div/span[@class = 'pages']/em[@class = 'current']",:visible => true).text.should == last_page_number
+    }
 end

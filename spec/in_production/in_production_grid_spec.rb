@@ -1,7 +1,7 @@
 # encoding: utf-8
 require "spec/spec_helper"
 
-describe 'Grid page - In Production' do
+describe 'In Production - in_production_grid_spec' do
   let(:page_title) { 'In Production' }
   expected_sample_count = get_in_production_SampleCount
 
@@ -70,32 +70,32 @@ describe 'Grid page - In Production' do
         go_to_in_production_page
       end
       it '' do
-        FIRST_SAMPLE_PRODUCT_ID = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
-        get_sample_details(FIRST_SAMPLE_PRODUCT_ID) #Get sample details from database
+        First_awaiting_sample_product_id = page.evaluate_script("$('.sample-data').eq(0).attr('data-product-id')").to_s
+        get_sample_details(First_awaiting_sample_product_id) #Get sample details from database
       end
 
       it '1. Verify sample number is displaying correctly' do
         expected_sample_name = $sample_name #Get sample name from database
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class='name']", :visible => true).text.should == expected_sample_name
+        page.find(:xpath, "//div[@data-product-id="+First_awaiting_sample_product_id+"]/div[@class='name']", :visible => true).text.should == expected_sample_name
       end
 
       it '2. Verify pin icon is displaying in sample box' do
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'pin']", :visible => true)
+        page.find(:xpath, "//div[@data-product-id="+First_awaiting_sample_product_id+"]/div[@class = 'pin']", :visible => true)
       end
 
       it '3. Verify correct dollar amount appears above each sample' do
         expected_sample_price = $sample_price
         expected_sample_price = "$"+expected_sample_price.insert(-3, '.')
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'price']", :visible => true).text.should == expected_sample_price
+        page.find(:xpath, "//div[@data-product-id="+First_awaiting_sample_product_id+"]/div[@class = 'price']", :visible => true).text.should == expected_sample_price
       end
 
       it '4. Verify all the samples on this page have "KEEP ME POSTED" button.' do
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'voting-and-notification clearfix']/a", :visible => true).text.should == "KEEP ME POSTED"
+        page.find(:xpath, "//div[@data-product-id="+First_awaiting_sample_product_id+"]/div[@class = 'voting-and-notification clearfix']/a", :visible => true).text.should == "KEEP ME POSTED"
       end
 
       it '5. Verify sample displays Vote count' do
         expected_vote_count = $vote_count
-        vote_count = page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class = 'vote-count']", :visible => true).text
+        vote_count = page.find(:xpath, "//div[@data-product-id="+First_awaiting_sample_product_id+"]/div/div[@class = 'vote-count']", :visible => true).text
         actual_vote_count = vote_count.gsub(",", "")
         expected_vote_count.should == actual_vote_count
       end
@@ -103,16 +103,16 @@ describe 'Grid page - In Production' do
       it '6. Verify sample displays comment count' do
         commentable_name = $sample_name
         expected_comment_count = get_comment_count(commentable_name)
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div/div[@class = 'comments-count']", :visible => true).text.should == expected_comment_count
+        page.find(:xpath, "//div[@data-product-id="+First_awaiting_sample_product_id+"]/div/div[@class = 'comments-count']", :visible => true).text.should == expected_comment_count
       end
 
       it '7. Verify sample displays "Voting End date" with clock icon.' do
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'in-production status']", :visible => true).text.should == "Available Soon"
+        page.find(:xpath, "//div[@data-product-id="+First_awaiting_sample_product_id+"]/div[@class = 'in-production status']", :visible => true).text.should == "Available Soon"
       end
 
       it '8. Verify when user clicks on sample image then user navigates to SDP' do
         sample_number = $sample_name.gsub("Sample ", '')
-        page.find(:xpath, "//div[@data-product-id="+FIRST_SAMPLE_PRODUCT_ID+"]/div[@class = 'photo']/a[@href='/be-the-buyer/samples/"+FIRST_SAMPLE_PRODUCT_ID+"-sample-"+sample_number+"']", :visible => true).click
+        page.find(:xpath, "//div[@data-product-id="+First_awaiting_sample_product_id+"]/div[@class = 'photo']/a[@href='/be-the-buyer/samples/"+First_awaiting_sample_product_id+"-sample-"+sample_number+"']", :visible => true).click
         page.should have_xpath("//div[@class='sdp']")
         go_to_BTB_page
       end

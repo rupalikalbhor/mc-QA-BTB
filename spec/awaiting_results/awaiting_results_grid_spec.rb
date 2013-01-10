@@ -2,7 +2,7 @@
 #require 'spec/support/query_helper'
 require "spec/spec_helper"
 
-describe 'Grid page - Awaiting Results' do
+describe 'Awaiting Results - Awaiting_results_grid_spec' do
   let(:page_title) { 'Awaiting Results' }
   expected_sample_count = get_awaiting_results_SampleCount
 

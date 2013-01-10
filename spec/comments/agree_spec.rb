@@ -2,7 +2,7 @@
 require "spec/spec_helper"
 #require 'spec/support/query_helper'
 
-describe 'Agree - Logged-in user' do
+describe 'Comments - Agree_spec' do
   before(:all) do
     go_to_BTB_page
     click_sign_in_link

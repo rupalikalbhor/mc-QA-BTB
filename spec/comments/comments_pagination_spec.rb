@@ -2,7 +2,7 @@
 #require 'spec/support/query_helper'
 require "spec/spec_helper"
 
-describe 'I. Pagination for comments page', :no_phone => true do
+describe 'I. Comments - Comments_pagination_spec', :no_phone => true do
   before(:all) do
     go_to_BTB_page
   end
@@ -34,14 +34,14 @@ describe 'I. Pagination for comments page', :no_phone => true do
   #  page.find(:xpath, "//p[@class = 'comment-results']").text.should eq(page.find(:xpath, "(//p[@class = 'comment-results'])[2]").text)
   #end
 
-  it '4. Verify Show X More button displays.' do
-    #comment_count = page.body.match(/of (\d+)/)[1]
-    if (Comment_count.to_i > 30)
-      page.find(:xpath, '//div[@class = "show-more"]', :visible => true).text.should eq('Show 30 More')
-    else
-      page.find(:xpath, "//div[@class = 'pagination']", :visible => true).text.should eq('Showing All ' +Comment_count+ ' Comments')
-    end
-  end
+  #it '4. Verify Show X More button displays.' do
+  #  #comment_count = page.body.match(/of (\d+)/)[1]
+  #  if (Comment_count.to_i > 30)
+  #    page.find(:xpath, '//div[@class = "show-more"]', :visible => true).text.should eq('Show 30 More')
+  #  else
+  #    page.find(:xpath, "//div[@class = 'pagination']", :visible => true).text.should eq('Showing All ' +Comment_count+ ' Comments')
+  #  end
+  #end
 
   it '5. Verify when user clicks on "Show 30 More" button, it displays 30 more records and pagination text updates correctly.' do
     go_to_BTB_page

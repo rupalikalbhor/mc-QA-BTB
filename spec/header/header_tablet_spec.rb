@@ -1,7 +1,7 @@
 require "spec/spec_helper"
 #require 'spec/support/common_helper'
 
-describe 'Tablet header', :no_desktop => true, :no_phone => true do
+describe 'Header - header_tablet', :no_desktop => true, :no_phone => true do
 
   context "UI" do
     before(:all) do
@@ -62,36 +62,40 @@ describe 'Tablet header', :no_desktop => true, :no_phone => true do
         page.find(:xpath, "//ul[@id = 'mc-header-navigation']", :visible => true)
         page.find(:xpath, "//ul[@id = 'mc-header-navigation']/li["+menu_count.to_s+"]/a").click
         wait_for_script
-        case menu_count
-          when 1
-            page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true)
-            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == "New Arrivals"
-          when 2
-            page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true)
-            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == 'Clothing'
-          when 3
-            page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true)
-            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == 'Shoes'
-          when 4
-            page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true)
-            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == 'Bags & Accessories'
-          when 5
-            page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true)
-            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == 'Apartment'
-          when 6
-            #page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == ''
-          when 7
-            page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true)
-            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == "Vintage"
-          when 8
-            #page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == ''
-          when 9
-            page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true)
-            page.find(:xpath, "//div[@class = 'category-sort']/h1").text.should == 'Sale'
-        end
-        go_to_BTB_page
-        menu_count = menu_count + 1
-      end while (menu_count != 10)
+        within('#grid-page-view') do
+          case menu_count
+            when 1
+              page.should have_content('New Arrivals')
+            #page.find(:xpath, "//div[@id = 'grid-page-view']/h1 text() = 'New Arrivals'", :visible => true)
+            #page.find(:xpath, "//div[@id = 'grid-page-view']/h1").text.should == "New Arrivals"
+            when 2
+              page.find(:xpath, "//div[@id = 'grid-page-view']/h1", :visible => true)
+              page.find(:xpath, "//div[@id = 'grid-page-view']/h1").text.should == 'Clothing'
+            when 3
+              page.find(:xpath, "//div[@id = 'grid-page-view']/h1", :visible => true)
+              page.find(:xpath, "//div[@id = 'grid-page-view']/h1").text.should == 'Shoes'
+            when 4
+              page.find(:xpath, "//div[@id = 'grid-page-view']/h1", :visible => true)
+              page.find(:xpath, "//div[@id = 'grid-page-view']/h1").text.should == 'Bags & Accessories'
+            when 5
+              page.find(:xpath, "//div[@id = 'grid-page-view']/h1", :visible => true)
+              page.find(:xpath, "//div[@id = 'grid-page-view']/h1").text.should == 'Apartment'
+            when 6
+              #page.find(:xpath, "//div[@id = 'grid-page-view']/h1").text.should == ''
+            when 7
+              page.find(:xpath, "//div[@id = 'grid-page-view']/h1", :visible => true)
+              page.find(:xpath, "//div[@id = 'grid-page-view']/h1").text.should == "Vintage"
+            when 8
+              #page.find(:xpath, "//div[@id = 'grid-page-view']/h1").text.should == ''
+            when 9
+              page.find(:xpath, "//div[@id = 'grid-page-view']/h1", :visible => true)
+              page.find(:xpath, "//div[@id = 'grid-page-view']/h1").text.should == 'Sale'
+          end
+          go_to_BTB_page
+          menu_count = menu_count + 1
+
+        end while (menu_count != 10)
+      end
     end
 
     it 'Verify when user clicks on "Shopping bag" link then user navigates to correct link' do
@@ -182,7 +186,7 @@ describe 'Tablet header', :no_desktop => true, :no_phone => true do
         wait_for_script
         click_button('GO')
         wait_for_script
-        page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true)
+        page.find(:xpath, "//div[@id = 'grid-page-view']/h1", :visible => true)
         page.find(:xpath, "//ul[@id = 'product-grid']/a/div[1]").text.should == get_product.strip
       end
     end
@@ -204,8 +208,8 @@ describe 'Tablet header', :no_desktop => true, :no_phone => true do
       click_button('GO')
       wait_for_script
       expected = 'Search: '+search_text+' (0)'
-      page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true)
-      page.find(:xpath, "//div[@class = 'category-sort']/h1").text().should == expected
+      page.find(:xpath, "//div[@id = 'grid-page-view']/h1", :visible => true)
+      page.find(:xpath, "//div[@id = 'grid-page-view']/h1").text().should == expected
     end
   end
 
