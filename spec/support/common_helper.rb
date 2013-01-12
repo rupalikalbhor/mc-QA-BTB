@@ -467,16 +467,29 @@ def go_to_in_production_page
   wait_for_script
 end
 
-def go_to_available_product_PDP
+
+def add_item_into_bag_desktop
+  go_to_available_product_PDP
+  wait_until { page.find(:xpath, "//div[@class = 'product-detail-page ']", :visible => true) }
+  page.find(:xpath, "//input[@class = 'ui-variant-value size-button ui-corner-all in-stock']", :visible => true).click
+  wait_until {
+    page.find(:xpath, "//input[@class = 'ui-variant-value size-button ui-corner-all in-stock selected in-stock-selected']", :visible => true)
+  }
+  click_button ('Add to Bag')
+  wait_for_script
+end
+
+def go_to_available_product_PDP_desktop
+  visit '/' + 'shop/dresses'
+  wait_until {
+    page.find(:xpath, "//div[@id = 'page_title']", :visible => true) }
   product_count = page.evaluate_script("$('.product_list li').length").to_s
-  sleep(2)
+  sleep(3)
   i = 1
   if (product_count.to_i > 1)
     begin
       span_text = page.find(:xpath, "//ul[@class='product_list']/li["+i.to_s+"]/a/span").text
-      puts "span text is: #{span_text}"
-      #if (span_text.include? '$')
-      if(span_text!='Out of Stock!' || span_text!= 'Coming Soon!' || span_text!= 'Sold')
+      if (span_text!='Out of Stock!' || span_text!= 'Coming Soon!' || span_text!= 'Sold')
         page.find(:xpath, "//ul[@class='product_list']/li["+i.to_s+"]/a").click
         break
       else
@@ -488,18 +501,87 @@ def go_to_available_product_PDP
   end
 end
 
-def add_item_into_bag
-  go_to_available_product_PDP
-  wait_for_script
-  page.find(:xpath, "//div[@class = 'product-detail-page ']", :visible => true)
-  page.find(:xpath, "//input[@class = 'ui-variant-value size-button ui-corner-all in-stock']", :visible => true).click
-  wait_until{
-  page.find(:xpath, "//input[@class = 'ui-variant-value size-button ui-corner-all in-stock selected in-stock-selected']", :visible => true)
-  }
-  click_button ('Add to Bag')
-  wait_for_script
-  wait_until{
-    page.find(:xpath, "//div[@id = 'shopping-bag-header-container']", :visible => true)
-  }
+def sign_in_on_desktop_for_checkout()
+  find(:xpath, "//form[@action='/customers/logins']/div[@class='login-register-field']/input[@id='email']").set $email
+  find(:xpath, "//form[@action='/customers/logins']/div[@class='login-register-field']/input[@id='password']").set $password
+  find(:xpath, "//form[@action='/customers/logins']/input[@id = 'checkout-login']").click
+  wait_until {
+    page.find(:xpath, "//div[@id = 'checkout-title-container']/h2", :visible => true).text.should == "Shipping Information" }
 end
 
+def add_item_into_bag_phone
+  go_to_available_product_PDP_phone
+  wait_for_script
+  page.find(:xpath, "//div[@id = 'pdp-container']", :visible => true)
+  variant = page.evaluate_script("$('#sizing-buttons li[class!=out-of-stock]').eq(0).text()").to_s
+  page.find(:xpath, "//ul[@id = 'sizing-buttons']/li[text() = '"+variant+"']").click
+  wait_until { page.find(:xpath, "//ul[@id = 'sizing-buttons']/li[@class = 'selected']").text.should == variant }
+  click_button ('ADD TO BAG')
+  wait_for_script
+  page.find(:xpath, "//div[@id = 'add-to-bag-success-panel']", :visible => true)
+  page.find(:xpath, "//div[@class = 'modal-header']/a").click
+  page.driver.browser.navigate.refresh
+  wait_for_script
+  page.find(:xpath, "//a[@id = 'header-shopping-bag-link']", :visible => true)
+end
+
+def go_to_available_product_PDP_phone
+  visit '/' + 'shop/dresses'
+  wait_until {
+    page.find(:xpath, "//h1[@id = 'category-header']", :visible => true) }
+  product_count = page.evaluate_script("$('ul li').length").to_s
+  sleep(3)
+  i = 1
+  if (product_count.to_i > 1)
+    begin
+      span_text = page.find(:xpath, "//ul[@id='product-grid']/li["+i.to_s+"]/a/div[@class = 'product-info']/span").text
+      if (span_text!='Out of Stock!' || span_text!= 'Coming Soon!' || span_text!= 'Sold')
+        page.find(:xpath, "//ul[@id='product-grid']/li["+i.to_s+"]/a").click
+
+        break
+      else
+        i = i+1
+      end
+    end while (i != product_count.to_i)
+  else
+    puts "No products found in this category.."
+  end
+end
+
+def add_item_into_bag_tablet
+  go_to_available_product_PDP_tablet
+  wait_for_script
+  wait_until { page.find(:xpath, "//div[@id = 'pdp']", :visible => true) }
+  variant = page.evaluate_script("$('#sizing-buttons li[class!=out-of-stock]').eq(0).text()").to_s
+  page.find(:xpath, "//ul[@id = 'sizing-buttons']/li[text() = '"+variant+"']").click
+  wait_until { page.find(:xpath, "//ul[@id = 'sizing-buttons']/li[@class = 'selected']").text.should == variant }
+  click_button ('ADD TO BAG')
+  wait_for_script
+  page.find(:xpath, "//div[@id = 'add-to-bag-success-panel']", :visible => true)
+  page.find(:xpath, "//div[@class = 'modal-header']/a").click
+  page.driver.browser.navigate.refresh
+  wait_for_script
+  page.find(:xpath, "//a[@id = 'mc-header-cart-count']", :visible => true)
+end
+
+def go_to_available_product_PDP_tablet
+  visit '/' + 'shop/dresses'
+  wait_until {
+    page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true) }
+  product_count = page.evaluate_script("$('#product-grid li').length").to_s
+  sleep(3)
+  i = 1
+  if (product_count.to_i > 1)
+    begin
+      span_text = page.find(:xpath, "//ul[@id='product-grid']/li["+i.to_s+"]/div/span").text
+      if (span_text!='Out of Stock!' || span_text!= 'Coming Soon!' || span_text!= 'Sold')
+        page.find(:xpath, "//ul[@id='product-grid']/li["+i.to_s+"]/img").click
+        break
+      else
+        i = i+1
+      end
+    end while (i != product_count.to_i)
+  else
+    puts "No products found in this category.."
+  end
+end

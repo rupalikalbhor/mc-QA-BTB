@@ -108,7 +108,16 @@ describe 'Header - header_phone', :no_desktop => true, :no_tablet => true do
       end while (menu_count != 10)
     end
 
-    it '9. Verify when user clicks on Shopping bag icon, user navigates to shopping bag page.' do
+    it '9. Verify when user add item into shopping bag then bag count gets updated.' do
+      go_to_BTB_page
+      actual_count = page.find(:xpath, "//a[@id = 'mc-phone-header-bag']", :visible => true).text
+      add_item_into_bag_phone
+      go_to_BTB_page
+      expected_count = page.find(:xpath, "//a[@id = 'mc-phone-header-bag']", :visible => true).text
+      expected_count.to_i.should == actual_count.to_i + 1
+    end
+
+    it '10. Verify when user clicks on Shopping bag icon, user navigates to shopping bag page.' do
       page.find(:xpath, "//a[@id = 'mc-phone-header-bag']").click
       page.has_xpath?("//h1[@id = 'category-header']/span", :visible => true)
       page.should have_xpath("//h1[@id = 'category-header']/span", :text => 'Shopping Bag')
@@ -166,7 +175,16 @@ describe 'Header - header_phone', :no_desktop => true, :no_tablet => true do
       page.should have_xpath("//h1[@id = 'category-header']", :text => "My Loved Items")
     end
 
-    it '6. Verify when user clicks on Sign out option then user gets signed out and user remains on same page.' do
+    it '6. Verify when user add item into shopping bag then bag count gets updated.' do
+      go_to_BTB_page
+      actual_count = page.find(:xpath, "//a[@id = 'mc-phone-header-bag']", :visible => true).text
+      add_item_into_bag_phone
+      go_to_BTB_page
+      expected_count = page.find(:xpath, "//a[@id = 'mc-phone-header-bag']", :visible => true).text
+      expected_count.to_i.should == actual_count.to_i + 1
+    end
+
+    it '7. Verify when user clicks on Sign out option then user gets signed out and user remains on same page.' do
       page.find(:xpath, "//a[@class = 'button button-medium']", :visible => true).click
       page.has_xpath?("//a[@id = 'mc-phone-header-join']", :visible => true)
       page.should have_xpath("//a[@id = 'mc-phone-header-join']", :text => "Join or Sign In")

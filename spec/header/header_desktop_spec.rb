@@ -1,6 +1,6 @@
 require 'spec/spec_helper'
 
-describe 'Header - header_desktop', :no_phone => true, :no_tablet => true do
+describe 'Header - header_desktop_spec', :no_phone => true, :no_tablet => true do
 
   context "I. Non Logged In User" do
     before(:all) do
@@ -38,6 +38,16 @@ describe 'Header - header_desktop', :no_phone => true, :no_tablet => true do
 
     it '6. Verify user see text "Shopping bag"' do
       page.find(:xpath, "//a[@id = 'mc-header-shopping-bag']", :visible => true).text.should == "SHOPPING BAG"
+    end
+
+    it '7. Verify when user click on Checkout button, user navigates to sign in page. After successful sign in user should see regular checkout flow. ' do
+      add_item_into_bag_desktop
+      go_to_BTB_page
+      page.find(:xpath, "//a[@id = 'mc-header-checkout-button']", :visible => true).click
+      wait_until {
+        page.find(:xpath, "//div[@id = 'checkout-title-container']", :visible => true)
+        sign_in_on_desktop_for_checkout
+      }
     end
   end
 
@@ -120,49 +130,37 @@ describe 'Header - header_desktop', :no_phone => true, :no_tablet => true do
 
     it '7. Verify when user clicks on Loved items then user navigates to loved items page.' do
       page.find(:xpath, "//div[@id = 'mc-header-loved-items']/a", :visible => true).click
-      page.find(:xpath, "//div[@id = 'category-header']/h1", :visible => true)
-      page.find(:xpath, "//div[@id = 'category-header']/h1").text.should == 'My Loved Items'
+      page.find(:xpath, "//div[@id = 'page_title']/h1", :visible => true)
+      page.find(:xpath, "//div[@id = 'page_title']/h1").text.should == 'My Loved Items'
     end
 
     it '8. Verify "Loved item" count displays correctly.' do
       page.has_xpath?("//div[@id = 'mc-header-loved-items']/a", :visible => true)
       expected_count = page.find(:xpath, "//div[@id = 'mc-header-loved-items']/a").text
-
-      #actual_love_count = a_var[1..-1].chomp(')')
       page.find(:xpath, "//div[@id = 'mc-header-loved-items']/a").click
-      actual_count = page.find(:xpath, "//a[@id = 'header-loved-items-link-with-count']", :visible => true).text
+      actual_count = page.find(:xpath, "//div[@id = 'mc-header-loved-items']/a", :visible => true).text
       expected_count.should == actual_count
     end
 
-    #ui-variant-value size-button ui-corner-all out-of-stock
-
-
-    #it 'Verify user see correct shopping bag count.' do
-    #  add_product_into_shopping_bag
+    it '9. Verify user see correct shopping bag count.' do
+      add_item_into_bag_desktop
+      actual_count = page.find(:xpath, "//a[@id = 'mc-header-cart-count']", :visible => true).text
+      #actual_count = a_var[2..-1].chomp('item )')
       go_to_BTB_page
-    #  page.find(:xpath, "//a[@id = 'mc-header-shopping-bag']").click
-      expected_count = page.find(:xpath, "//a[@id = 'mc-header-cart-count']").text
-      visit '/' + 'shop/dresses'
-      #page.find(:xpath, "//li[@class = 'clothing']/a").click
-      #wait_for_page_load
+      expected_count = page.find(:xpath, "//a[@id = 'mc-header-cart-count']", :visible => true).text
+      expected_count.should == actual_count
+    end
 
-    #  a_var = page.find(:xpath, "//a[@id = 'mc-header-cart-count']").text
-    #  actual_count = a_var[2..-1].chomp(' )')
-    #  expected_count.should == actual_count
-    #  remove_product_from_shopping_bag
-    #end
+    it '10. Verify user see "Checkout" button' do
+      go_to_BTB_page
+      page.should have_xpath("//a[@id = 'mc-header-checkout-button' and text() = 'CHECKOUT']")
+    end
 
-    #
-    #it 'Verify user see "Checkout" button' do
-    #  add_product_into_shopping_bag
-    #  go_to_BTB_page
-    #  page.should have_xpath("//a[@id = 'mc-header-checkout-button' and text() = 'CHECKOUT']")
-    #  remove_product_from_shopping_bag
-    #end
-    #
-    #it 'Verify when user clicks on "Checkout" button then user see checkout flow' do
-    #  puts "PENDING"
-    #end
+    it '11. Verify when user clicks on "Checkout" button then user see verification page.' do
+      page.find(:xpath, "//a[@id = 'mc-header-checkout-button']", :visible => true).click
+      wait_until {
+        page.find(:xpath, "//div[@id = 'checkout-title-container']", :visible => true) }
+    end
   end
 
   context 'IV. Search functionality' do
@@ -238,6 +236,23 @@ describe 'Header - header_desktop', :no_phone => true, :no_tablet => true do
   end
 end
 
+#describe 'Test' do
+#  it 'TT' do
+#    visit '/' + 'shop/dresses'
+#    wait_until {
+#      page.find(:xpath, "//div[@id = 'page_title']", :visible => true) }
+#
+#    add_item_into_bag
+#    actual_count = page.find(:xpath, "//a[@id = 'mc-header-cart-count']", :visible => true).text
+#    #puts "Actual Count is: #{a_var}"
+#    #actual_count = a_var[2..-1].chomp('item )')
+#    puts "actaul count is: #{actual_count}"
+#    go_to_BTB_page
+#    expected_count = page.find(:xpath, "//a[@id = 'mc-header-cart-count']", :visible => true).text
+#    puts "Expected count is: #{expected_count}"
+#    expected_count.should == actual_count
+#  end
+#end
 
 
 

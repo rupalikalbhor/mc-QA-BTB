@@ -40,6 +40,17 @@ describe 'Header - header_tablet', :no_desktop => true, :no_phone => true do
     it 'Verify user see text "Shopping bag"' do
       page.should have_xpath("//a[@id = 'mc-header-shopping-bag' and text() = 'SHOPPING BAG']")
     end
+
+    it '7. Verify when user click on Checkout button, user navigates to sign in page. After successful sign in user should see regular checkout flow. ' do
+      add_item_into_bag_tablet
+      go_to_BTB_page
+      page.find(:xpath, "//a[@id = 'mc-header-checkout-button']", :visible => true).click
+      wait_until {
+        #This part need to update for tablet. There is bug...
+        page.find(:xpath, "//div[@id = 'checkout-title-container']", :visible => true)
+        sign_in_on_desktop_for_checkout
+      }
+    end
   end
 
   context "Sign In" do
@@ -145,28 +156,33 @@ describe 'Header - header_tablet', :no_desktop => true, :no_phone => true do
       expected_count.should == actual_count
     end
 
-    #it 'Verify user see correct shopping bag count.' do
-    #  add_product_into_shopping_bag
-    #  go_to_BTB_page
-    #  page.find(:xpath, "//a[@id = 'mc-header-shopping-bag']").click
-    #  expected_count = page.find(:xpath, "//em[@class = 'item_count']").text
-    #  go_to_BTB_page
-    #  a_var = page.find(:xpath, "//a[@id = 'mc-header-cart-count']").text
-    #  actual_count = a_var[2..-1].chomp(' )')
-    #  expected_count.should == actual_count
-    #  remove_product_from_shopping_bag
-    #end
-    #
-    #it 'Verify user see "Checkout" button' do
-    #  add_product_into_shopping_bag
-    #  go_to_BTB_page
-    #  page.should have_xpath("//a[@id = 'mc-header-checkout-button' and text() = 'CHECKOUT']")
-    #  remove_product_from_shopping_bag
-    #end
-    #
-    #it 'Verify when user clicks on "Checkout" button then user see checkout flow' do
-    #  puts "PENDING"
-    #end
+    it 'Verify user see correct shopping bag count.' do
+      go_to_BTB_page
+      a_var = page.find(:xpath, "//a[@id = 'mc-header-cart-count']", :visible => true).text
+      if (a_var == nil)
+        actual_count = 0
+      else
+        actual_count = a_var[2..-1].chomp('item )')
+      end
+      puts "ac = #{actual_count}"
+      add_item_into_bag_tablet
+      go_to_BTB_page
+
+      e_var = page.find(:xpath, "//a[@id = 'mc-header-cart-count']", :visible => true).text
+      expected_count = e_var[2..-1].chomp('item )')
+      expected_count.to_i.should == actual_count.to_i + 1
+    end
+
+    it '10. Verify user see "Checkout" button' do
+      go_to_BTB_page
+      page.should have_xpath("//a[@id = 'mc-header-checkout-button' and text() = 'CHECKOUT']")
+    end
+
+    it '11. Verify when user clicks on "Checkout" button then user see verification page.' do
+      page.find(:xpath, "//a[@id = 'mc-header-checkout-button']", :visible => true).click
+      wait_until {
+        page.find(:xpath, "//div[@id = 'logged-in-user']/p", :visible => true).text.should == 'Your security is important to us! Please verify your password to checkout.' }
+    end
   end
 
   context 'Search functionality' do
