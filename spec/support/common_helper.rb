@@ -469,7 +469,7 @@ end
 
 
 def add_item_into_bag_desktop
-  go_to_available_product_PDP
+  go_to_available_product_PDP_desktop
   wait_until { page.find(:xpath, "//div[@class = 'product-detail-page ']", :visible => true) }
   page.find(:xpath, "//input[@class = 'ui-variant-value size-button ui-corner-all in-stock']", :visible => true).click
   wait_until {
@@ -537,7 +537,6 @@ def go_to_available_product_PDP_phone
       span_text = page.find(:xpath, "//ul[@id='product-grid']/li["+i.to_s+"]/a/div[@class = 'product-info']/span").text
       if (span_text!='Out of Stock!' || span_text!= 'Coming Soon!' || span_text!= 'Sold')
         page.find(:xpath, "//ul[@id='product-grid']/li["+i.to_s+"]/a").click
-
         break
       else
         i = i+1

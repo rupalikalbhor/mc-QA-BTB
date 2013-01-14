@@ -236,24 +236,6 @@ describe 'Header - header_desktop_spec', :no_phone => true, :no_tablet => true d
   end
 end
 
-#describe 'Test' do
-#  it 'TT' do
-#    visit '/' + 'shop/dresses'
-#    wait_until {
-#      page.find(:xpath, "//div[@id = 'page_title']", :visible => true) }
-#
-#    add_item_into_bag
-#    actual_count = page.find(:xpath, "//a[@id = 'mc-header-cart-count']", :visible => true).text
-#    #puts "Actual Count is: #{a_var}"
-#    #actual_count = a_var[2..-1].chomp('item )')
-#    puts "actaul count is: #{actual_count}"
-#    go_to_BTB_page
-#    expected_count = page.find(:xpath, "//a[@id = 'mc-header-cart-count']", :visible => true).text
-#    puts "Expected count is: #{expected_count}"
-#    expected_count.should == actual_count
-#  end
-#end
-
 
 
 

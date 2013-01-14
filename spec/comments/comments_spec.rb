@@ -135,6 +135,7 @@ describe 'Comments - Comments_spec' do
       within ('.new-comment') do
         page.find(:xpath, "//textarea[@name='new-comment-text']", :visible => true).click
         fill_in 'new-comment-text', :with => New_comment
+        wait_for_script
         page.find("input[@type='submit']", :visible => true).click
         #page.driver.browser.navigate.refresh #Need to delete this line after bug gets fixed
         if ($device_name == :phone)
