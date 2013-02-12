@@ -509,6 +509,14 @@ def sign_in_on_desktop_for_checkout()
     page.find(:xpath, "//div[@id = 'checkout-title-container']/h2", :visible => true).text.should == "Shipping Information" }
 end
 
+def sign_in_on_tablet_for_checkout()
+  find(:xpath, "//form[@action='/customers/logins']/input[@id='email']").set $email
+  find(:xpath, "//form[@action='/customers/logins']/input[@id='password']").set $password
+  find(:xpath, "//div[@class='l-signin-controls']/input[@class = 'primary-action']").click
+  wait_until {
+    page.find(:xpath, "//div[@class = 'accordion']/h1", :visible => true).text.should == "Shipping Address" }
+end
+
 def add_item_into_bag_phone
   go_to_available_product_PDP_phone
   wait_for_script
@@ -566,15 +574,15 @@ end
 def go_to_available_product_PDP_tablet
   visit '/' + 'shop/dresses'
   wait_until {
-    page.find(:xpath, "//div[@class = 'category-sort']/h1", :visible => true) }
-  product_count = page.evaluate_script("$('#product-grid li').length").to_s
+    page.find(:xpath, "//div[@id = 'grid-page-view']/h1", :visible => true) }
+  product_count = page.evaluate_script("$('#product-grid a').length").to_s
   sleep(3)
   i = 1
   if (product_count.to_i > 1)
     begin
-      span_text = page.find(:xpath, "//ul[@id='product-grid']/li["+i.to_s+"]/div/span").text
+      span_text = page.find(:xpath, "//div[@id='product-grid']/a["+i.to_s+"]/div/span").text
       if (span_text!='Out of Stock!' || span_text!= 'Coming Soon!' || span_text!= 'Sold')
-        page.find(:xpath, "//ul[@id='product-grid']/li["+i.to_s+"]/img").click
+        page.find(:xpath, "//div[@id='product-grid']/a["+i.to_s+"]/img").click
         break
       else
         i = i+1

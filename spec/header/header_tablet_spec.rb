@@ -46,9 +46,10 @@ describe 'Header - header_tablet', :no_desktop => true, :no_phone => true do
       go_to_BTB_page
       page.find(:xpath, "//a[@id = 'mc-header-checkout-button']", :visible => true).click
       wait_until {
-        #This part need to update for tablet. There is bug...
-        page.find(:xpath, "//div[@id = 'checkout-title-container']", :visible => true)
-        sign_in_on_desktop_for_checkout
+        page.find(:xpath, "//div[@id = 'existing-user']", :visible => true)
+        sign_in_on_tablet_for_checkout
+        go_to_BTB_page
+        sign_out
       }
     end
   end
@@ -142,16 +143,16 @@ describe 'Header - header_tablet', :no_desktop => true, :no_phone => true do
 
     it 'Verify when user clicks on Loved items then user navigates to loved items page.' do
       page.find(:xpath, "//div[@id = 'mc-header-loved-items']/a", :visible => true).click
-      page.find(:xpath, "//div[@id = 'category-header']/h1", :visible => true)
-      page.find(:xpath, "//div[@id = 'category-header']/h1").text.should == 'My Loved Items'
+      page.find(:xpath, "//div[@id = 'page_title']/h1", :visible => true)
+      page.find(:xpath, "//div[@id = 'page_title']/h1").text.should == 'My Loved Items'
     end
 
     it 'Verify "Loved item" count displays correctly.' do
       expected_count = page.find(:xpath, "//div[@id = 'mc-header-loved-items']/a", :visible => true).text
       page.find(:xpath, "//div[@id = 'mc-header-loved-items']/a").click
       #actual_count = page.evaluate_script("$('.product_cat_view').length").to_s
-      #a_var = page.find(:xpath, "//div[@id = 'mc-header-loved-items']/a").text
-      actual_count = page.find(:xpath, "//a[@id = 'header-loved-items-link-with-count']", :visible => true).text
+      actual_count = page.find(:xpath, "//div[@id = 'mc-header-loved-items']/a").text
+      #actual_count = page.find(:xpath, "//a[@id = 'header-loved-items-link-with-count']", :visible => true).text
       #actual_love_count = a_var[1..-1].chomp(')')
       expected_count.should == actual_count
     end
@@ -203,7 +204,7 @@ describe 'Header - header_tablet', :no_desktop => true, :no_phone => true do
         click_button('GO')
         wait_for_script
         page.find(:xpath, "//div[@id = 'grid-page-view']/h1", :visible => true)
-        page.find(:xpath, "//ul[@id = 'product-grid']/a/div[1]").text.should == get_product.strip
+        page.find(:xpath, "//div[@id = 'product-grid']/a/div[1]").text.should == get_product.strip
       end
     end
 
